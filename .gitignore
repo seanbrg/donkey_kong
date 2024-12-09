@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+/Donkey_Kong.vcxproj.user
+/Donkey_Kong.vcxproj.filters
+/Donkey_Kong.vcxproj
+/nui
+/x64/Debug
+/Donkey_Kong/x64/Debug
+/.vs

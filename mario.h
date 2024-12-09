@@ -14,22 +14,19 @@ class Mario
 
 	Point pos;
 	Direction dir = { 0 , 0 };
-	char ch;
+	Direction jump_dir;
+	char ch = '@';
+	int jump_spaces = 0;
 	Board* pBoard = nullptr;
-	
-	void draw(char c) const {
-		gotoxy(pos.x, pos.y );
-		std::cout << c;
-	}
 
 public:
-	Mario(Point _pos = { 7, 21 }, char _ch = '@') : ch(_ch), pos(_pos) {}
+	Mario(Point _pos = { 6, 21 }) : pos(_pos) {}
 
 	void draw() const {
-		draw(ch);
+		pBoard->drawChar(ch, pos);
 	}
 	void erase() {
-		draw(' ');
+		pBoard->drawChar(' ', pos);
 	}
 	void keyPressed(char key);
 	void move();

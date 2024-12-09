@@ -9,6 +9,11 @@ void ShowConsoleCursor(bool showFlag);
 
 enum class eKeys { LEFT = 'a', RIGHT = 's', UP = 'w', DOWN = 'z', ESC = 27 };
 
+static constexpr int MIN_X = 3;
+static constexpr int MIN_Y = 1;
+static constexpr int MAX_X = 77;
+static constexpr int MAX_Y = 26;
+
 class Point {
 public:
 	int x, y;

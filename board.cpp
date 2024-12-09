@@ -2,29 +2,48 @@
 #include <iostream>
 
 #include "board.h"
+#include "stage.h"
 
 
-Board::Board()
+Board::Board(Stage* _stage) : stage(_stage)
 {
-	floors = new Floor[NUM_FLOORS];
+	for (int x = 0; x <= MAX_X - MIN_X; x++)
+		blankBoard[0][x] = border;
 
-	for (int i = 0; i < NUM_FLOORS; i++) {
-
+	for (int y = 1; y < MAX_Y - MIN_Y - 1; y++) {
+		blankBoard[y][0] = border;
+		for (int x = 1; x < MAX_X - MIN_X; x++) {
+			blankBoard[y][x] = ' ';
+		}
+		blankBoard[y][MAX_X - MIN_X] = border;
 	}
 
-	for (int i = 0; i < MAX_Y; i++) {
-		memcpy(currentBoard[i], originalBoard[i], MAX_X + 1);
-	}
+	for (int x = 0; x <= MAX_X - MIN_X; x++)
+		blankBoard[MAX_Y - MIN_Y - 1][x] = border;
+
+	this->reset(stage);
 }
 
-Board::~Board()
+void Board::reset(Stage* _stage)
 {
-	delete[] floors;
+	if (_stage != nullptr) {
+		for (int y = 0; y < MAX_Y; y++) {
+			memcpy(originalStageBoard[y], blankBoard[y], MAX_X + 1);
+		}
+		this->stage->load(originalStageBoard);
+	}
+
+	for (int y = 0; y < MAX_Y; y++) {
+		memcpy(currentBoard[y], originalStageBoard[y], MAX_X + 1);
+	}
 }
 
 void Board::print() const {
 	for (int i = 0; i < MAX_Y - 1; i++) {
+		gotoxy(MIN_X, MIN_Y + i);
 		std::cout << currentBoard[i] << '\n';
 	}
 	std::cout << currentBoard[MAX_Y - 1];
 }
+
+

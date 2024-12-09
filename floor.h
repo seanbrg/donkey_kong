@@ -10,11 +10,9 @@ class Floor
 	char type;
 	int len;
 public:
-	Floor() : start(Point(0, 0)), type('='), len(0) {} // default constructor
-	Floor(Point _start, char _type, int _len) : start(_start), type(_type), len(_len) {}
-	
-	// TODO: draw() and isOn()
-	void draw();
-	bool isOn(Point pos);
+	Floor(Point _start=Point(0, 0), char _type='=', int _len=0) : start(_start), type(_type), len(_len) {}
+	Point getStart() { return start; }
+	char getType() { return type; }
+	int getLen() { return len; }
 };
 

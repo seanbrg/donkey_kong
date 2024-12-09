@@ -14,29 +14,39 @@ void Mario::keyPressed(char key)
 		case('d'):
 			dir = { 1, 0 };
 			break;
+		case('w'):
+			if (pBoard->getChar(pos) != 'H' && pBoard->getChar({pos.x , pos.y + 1}) != ' ') {
+				jump_spaces = 2;
+				jump_dir = dir;
+			}
+			break;
 		}
-		return;
-		//if (std::tolower(key) == keys[i]) {
-		//	dir = directions[i];
-		//	return;
-		//}
 	}
+	return;
 }
 
 void Mario::move()
 {
-	int newX = pos.x + dir.x;
-	int newY = pos.y + dir.y;
-	// TODO: add a function in Board to check if the new position is valid by asking the floors
-	//		+ use a constant for the wall character
-	// TODO: add parameter for falling down, disable move while falling down until standing on floor again
-	// TODO: figure out how to jump
-	if (pBoard->getChar(newX, newY) == 'Q') {
-		dir = { 0, 0 };
+	Point newPos;
+
+	if (jump_spaces > 0) {
+		if (jump_dir.x == 0 || jump_spaces > 1) // jump in place or first stage of side jump
+			jump_dir = { jump_dir.x, -1 };
+		else jump_dir = { jump_dir.x, 1 }; // second stage of side jump
+
+		jump_spaces--;
+		newPos = { pos.x + jump_dir.x, pos.y + jump_dir.y };
 	}
 	else {
-		pos.x = newX;
-		pos.y = newY;
+		if (pBoard->getChar({ pos.x, pos.y + 1 }) == ' ') {
+			dir = { 0, 1 };
+		}
+		else {
+            dir = { dir.x, 0 }; // end fall when floor is reached
+        }
+		newPos = { pos.x + dir.x , pos.y + dir.y };
 	}
-
+	if (pBoard->getChar(newPos) != 'Q') 
+		pos = newPos;
+	
 }
