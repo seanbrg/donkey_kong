@@ -2,7 +2,6 @@
 
 void Stage::load(char board[MAX_Y][MAX_X + 1])
 {
-	
 	for (auto& floor : floors) {
 		Point start = floor.getStart();
 		int len = floor.getLen();
@@ -12,14 +11,13 @@ void Stage::load(char board[MAX_Y][MAX_X + 1])
 			board[start.y][i] = type;
 	}
 
-	// TO DO: a ladder should extend from one floor to the other
-	/*
 	for (auto& ladder : ladders) {
-		Point start = ladder.getStart();
-		int ch = ladder.getChar();
-
-		for (int i = start.y - height; i < start.y; i++)
-			board[i][start.x] = ch;
-	}*/
+		Point pos = ladder;
+		while (board[pos.y + 1][pos.x] == ' ') {
+			board[pos.y][pos.x] = ch_ladder;
+			pos.y++;
+		}
+		board[pos.y][pos.x] = ch_ladder;
+	}
 	
 }

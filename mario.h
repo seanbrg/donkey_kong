@@ -12,26 +12,30 @@ class Mario
 	// the directions array order is exactly the same as the keys array - must keep it that way
 	static constexpr Direction directions[] = { {0, -1}, {-1, 0}, {0, 1}, {1, 0}, {0, 0} };
 
-	Point pos;
+	Point pos; // get starting position from board
 	Direction dir = { 0 , 0 };
 	Direction jump_dir;
 	char ch = '@';
-	int jump_spaces = 0;
+	int jumps_remaining = 0;
+	bool jumping = false;
+	bool falling = false;
+	bool climbing = false;
 	Board* pBoard = nullptr;
 
 public:
-	Mario(Point _pos = { 6, 21 }) : pos(_pos) {}
-
+	void setStart(Point _pos) { pos = _pos; }
 	void draw() const {
-		pBoard->drawChar(ch, pos);
+		gotoxy(pos.x + MIN_X, pos.y + MIN_Y);
+		std::cout << ch;
 	}
 	void erase() {
-		pBoard->drawChar(' ', pos);
+		pBoard->restoreChar(pos);
 	}
 	void keyPressed(char key);
 	void move();
 	void setBoard(Board& board) {
 		pBoard = &board;
+		pos = board.startingPoint();
 	}
 };
 

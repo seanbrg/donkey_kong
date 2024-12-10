@@ -3,50 +3,72 @@
 
 void Mario::keyPressed(char key)
 {
-	for (size_t i = 0; i < numKeys; i++) {
-		switch (std::tolower(key)) {
-		case('a'):
-			dir = { -1, 0 };
-			break;
-		case('s'):
-			dir = { 0, 0 };
-			break;
-		case('d'):
-			dir = { 1, 0 };
-			break;
-		case('w'):
-			if (pBoard->getChar(pos) != 'H' && pBoard->getChar({pos.x , pos.y + 1}) != ' ') {
-				jump_spaces = 2;
-				jump_dir = dir;
-			}
-			break;
+	switch (std::tolower(key)) {
+	case((char)eKeys::LEFT):
+		dir = { -1, 0 };
+		break;
+	case((char)eKeys::STAY):
+		dir = { 0, 0 };
+		break;
+	case((char)eKeys::RIGHT):
+		dir = { 1, 0 };
+		break;
+	case((char)eKeys::UP):
+		if (pBoard->getChar(pos) == ch_ladder) {
+			dir = { 0, -1 }; // start climbing up
+			climbing = true;
 		}
+		else if (pBoard->getChar({ pos.x , pos.y + 1 }) != ' ') {
+			jumps_remaining = 2; // start jumping
+			jump_dir = dir;
+			jumping = true;
+		}
+		break;
+	case((char)eKeys::DOWN):
+		if (pBoard->getChar({ pos.x , pos.y + 1 }) == ch_ladder) {
+			dir = { 0, 1 }; // start climbing down
+			climbing = true;
+		}
+		break;
 	}
+	
 	return;
 }
 
 void Mario::move()
 {
-	Point newPos;
+	Point new_pos;
 
-	if (jump_spaces > 0) {
-		if (jump_dir.x == 0 || jump_spaces > 1) // jump in place or first stage of side jump
+	if (jumping) {
+		if (jump_dir.x == 0 || jumps_remaining > 1) // jump in place or first stage of side jump
 			jump_dir = { jump_dir.x, -1 };
 		else jump_dir = { jump_dir.x, 1 }; // second stage of side jump
 
-		jump_spaces--;
-		newPos = { pos.x + jump_dir.x, pos.y + jump_dir.y };
+		jumps_remaining--;
+		if (jumps_remaining == 0) jumping = false;
+		new_pos = { pos.x + jump_dir.x, pos.y + jump_dir.y };
 	}
 	else {
 		if (pBoard->getChar({ pos.x, pos.y + 1 }) == ' ') {
-			dir = { 0, 1 };
+			falling = true;
+			new_pos = { pos.x, pos.y + 1 }; // don't forget original dir, return to it later
 		}
 		else {
-            dir = { dir.x, 0 }; // end fall when floor is reached
-        }
-		newPos = { pos.x + dir.x , pos.y + dir.y };
+			if (falling) { // stop falling
+				dir = { dir.x, 0 };
+				falling = false;
+			}
+			new_pos = { pos.x + dir.x , pos.y + dir.y };
+		}
 	}
-	if (pBoard->getChar(newPos) != 'Q') 
-		pos = newPos;
-	
+	char new_floor = pBoard->getChar(new_pos);
+
+	if (new_floor != ch_ladder) {
+		if (climbing) {
+			climbing = false;
+			dir = { 0, 0 };
+		}
+		if (new_floor != ' ') new_pos = pos;
+	}
+	pos = new_pos;
 }

@@ -8,18 +8,18 @@
 Board::Board(Stage* _stage) : stage(_stage)
 {
 	for (int x = 0; x <= MAX_X - MIN_X; x++)
-		blankBoard[0][x] = border;
+		blankBoard[0][x] = ch_border;
 
 	for (int y = 1; y < MAX_Y - MIN_Y - 1; y++) {
-		blankBoard[y][0] = border;
+		blankBoard[y][0] = ch_border;
 		for (int x = 1; x < MAX_X - MIN_X; x++) {
 			blankBoard[y][x] = ' ';
 		}
-		blankBoard[y][MAX_X - MIN_X] = border;
+		blankBoard[y][MAX_X - MIN_X] = ch_border;
 	}
 
 	for (int x = 0; x <= MAX_X - MIN_X; x++)
-		blankBoard[MAX_Y - MIN_Y - 1][x] = border;
+		blankBoard[MAX_Y - MIN_Y - 1][x] = ch_border;
 
 	this->reset(stage);
 }
