@@ -13,10 +13,10 @@ class Mario
 	static constexpr Direction directions[] = { {0, -1}, {-1, 0}, {0, 1}, {1, 0}, {0, 0} };
 
 	Point pos; // get starting position from board
-	Direction dir = { 0 , 0 };
-	Direction jump_dir;
+	Direction dir = { 0 , 0 }; // direction of next movement
+	Direction jump_dir; // direction of jump: gets initialized when used
 	char ch = '@';
-	int jumps_remaining = 0;
+	int jumps_remaining = 0; // phase of jump ; from 2 to 0
 	bool jumping = false;
 	bool falling = false;
 	bool climbing = false;

@@ -6,9 +6,9 @@
 
 class Floor
 {
-	Point start;
-	char type;
-	int len;
+	Point start; // leftmost point
+	char type; // '<' '>' or '='
+	int len; // length
 public:
 	Floor(Point _start=Point(0, 0), char _type=ch_floor_flat, int _len=0) : start(_start), type(_type), len(_len) {}
 	Point getStart() { return start; }

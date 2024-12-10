@@ -8,7 +8,7 @@ class Game
 {
 	Mario mario;
 	Board board;
-	Stage stage1;
+	Stage stage1; // needs to be initiated with initStage1()
 	
 public:
 	Game() {}
