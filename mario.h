@@ -1,16 +1,14 @@
 #pragma once
 #include <iostream>
 #include "utils.h"
+#include "point.h"
 #include "board.h"
 
 
 
 class Mario
 {
-	static constexpr char keys[] = { 'w', 'a', 'x', 'd', 's' };
-	static constexpr size_t numKeys = sizeof(keys) / sizeof(keys[0]);
-	// the directions array order is exactly the same as the keys array - must keep it that way
-	static constexpr Direction directions[] = { {0, -1}, {-1, 0}, {0, 1}, {1, 0}, {0, 0} };
+	struct Direction { int x, y; }; // private struct for changing directions easily
 
 	Point pos; // get starting position from board
 	Direction dir = { 0 , 0 }; // direction of next movement

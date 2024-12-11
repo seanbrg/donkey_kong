@@ -24,6 +24,31 @@ Board::Board(Stage* _stage) : stage(_stage)
 	this->reset(stage);
 }
 
+void Board::addStage(Stage* _stage) {
+	if (stage == nullptr) {
+		stage = _stage;
+		reset(_stage);
+		start = _stage->startingPoint();
+	}
+	else stage->addNextStage(_stage);
+}
+char Board::getChar(Point pos) const {
+	if (0 <= pos.x <= MAX_X - MIN_X && 0 <= pos.y <= MAX_Y - MIN_Y)
+		return currentBoard[pos.y][pos.x];
+	else return NULL;
+}
+void Board::drawChar(const char c, Point pos) {
+	if (0 <= pos.x <= MAX_X - MIN_X && 0 <= pos.y <= MAX_Y - MIN_Y) {
+		gotoxy(pos.x + MIN_X, pos.y + MIN_Y);
+		std::cout << c;
+		currentBoard[pos.y][pos.x] = c;
+	}
+}
+void Board::restoreChar(Point pos) {
+	gotoxy(pos.x + MIN_X, pos.y + MIN_Y);
+	std::cout << currentBoard[pos.y][pos.x];
+}
+
 void Board::reset(Stage* _stage)
 {
 	if (_stage != nullptr) {
@@ -45,5 +70,4 @@ void Board::print() const {
 	}
 	std::cout << currentBoard[MAX_Y - 1];
 }
-
 

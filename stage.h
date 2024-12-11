@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
 #include <vector>
-
+#include "point.h"
 #include "floor.h"
 #include "utils.h"
 
 class Stage
 {
 	Point start = { 4 , 22 };
-	std::vector<Floor> floors;
+	std::vector<Floor> floors; // floor class is unnecessary, use struct instead
 	std::vector<Point> ladders;
 	Stage* next = nullptr;
 

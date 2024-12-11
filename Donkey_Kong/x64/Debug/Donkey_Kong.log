@@ -1,0 +1,11 @@
+﻿  board.cpp
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\board.cpp(36,8): warning C4804: '<=': unsafe use of type 'bool' in operation
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\board.cpp(36,39): warning C4804: '<=': unsafe use of type 'bool' in operation
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\board.cpp(41,8): warning C4804: '<=': unsafe use of type 'bool' in operation
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\board.cpp(41,39): warning C4804: '<=': unsafe use of type 'bool' in operation
+  game.cpp
+  main.cpp
+  mario.cpp
+  stage.cpp
+  Generating Code...
+  Donkey_Kong.vcxproj -> C:\Users\seanb\Documents\C++ Projects\donkey_kong\x64\Debug\Donkey_Kong.exe

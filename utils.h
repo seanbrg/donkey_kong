@@ -19,11 +19,3 @@ static const char ch_ladder = 'H';
 static const char ch_floor_flat = '=';
 static const char ch_floor_left = '<';
 static const char ch_floor_right = '>';
-
-class Point {
-public:
-	int x, y;
-	Point(int _x = 0, int _y = 0) : x(_x), y(_y) {}
-};
-
-struct Direction { int x, y; }; // used by mario and barrel

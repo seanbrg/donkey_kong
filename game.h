@@ -1,5 +1,6 @@
 #pragma once
 #include "utils.h"
+#include "point.h"
 #include "board.h"
 #include "mario.h"
 #include "stage.h"
