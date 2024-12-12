@@ -131,6 +131,7 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="mario.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="stage.h" />
     <ClInclude Include="utils.h" />
@@ -141,9 +142,13 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mario.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

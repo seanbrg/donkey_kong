@@ -1,7 +1,9 @@
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\board.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\board.obj
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\floor.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\floor.obj
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\game.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\game.obj
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\ladder.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\ladder.obj
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\main.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\main.obj
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\mario.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\mario.obj
-C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\utils.cpp;C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\utils.obj
+C:\Users\Anna\source\repos\donkey_kong_try\barrel.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\barrel.obj
+C:\Users\Anna\source\repos\donkey_kong_try\board.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\board.obj
+C:\Users\Anna\source\repos\donkey_kong_try\game.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\game.obj
+C:\Users\Anna\source\repos\donkey_kong_try\main.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\main.obj
+C:\Users\Anna\source\repos\donkey_kong_try\mario.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\mario.obj
+C:\Users\Anna\source\repos\donkey_kong_try\menu.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\menu.obj
+C:\Users\Anna\source\repos\donkey_kong_try\point.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\point.obj
+C:\Users\Anna\source\repos\donkey_kong_try\stage.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\stage.obj
+C:\Users\Anna\source\repos\donkey_kong_try\utils.cpp;C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\utils.obj

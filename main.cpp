@@ -6,9 +6,13 @@
 #include "utils.h"
 #include "board.h"
 #include "mario.h"
+#include "menu.h"
 
 int main()
 {
+	
 	Game game;
-	game.run();
+	Menu menu;
+	menu.displayMenu();
+	//game.run();
 }

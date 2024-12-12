@@ -1,2 +1,5 @@
-﻿  mario.cpp
-  Donkey_Kong.vcxproj -> C:\Users\Anna\Desktop\donkey kong\Donkey_Kong\x64\Debug\Donkey_Kong.exe
+﻿  main.cpp
+  menu.cpp
+C:\Users\Anna\source\repos\donkey_kong_try\menu.cpp(53,28): warning C4129: '_': unrecognized character escape sequence
+  Generating Code...
+  Donkey_Kong.vcxproj -> C:\Users\Anna\Source\Repos\donkey_kong_try\x64\Debug\Donkey_Kong.exe
