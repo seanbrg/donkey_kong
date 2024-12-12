@@ -16,7 +16,7 @@ void Stage::load(char board[MAX_Y][MAX_X + 1])
 		int y = ladder.getY();
 		while (board[y + 1][x] == ' ') {
 			board[y][x] = ch_ladder;
-			draw = draw.down();
+			draw = draw.neighbor(DOWN);
 			x = draw.getX();
 			y = draw.getY();
 		}

@@ -5,35 +5,23 @@ using namespace keys;
 
 void Mario::keyPressed(char key)
 {
-	switch (std::tolower(key)) {
-	case((char)LEFT):
-		if (!climbing) dir = LEFT;
-		break;
-	case((char)RIGHT):
-		if (!climbing) dir = RIGHT;
-		break;
-	case((char)STAY):
-		dir = STAY;
-		break;
-	case((char)UP):
-		if (pBoard->getChar(pos) == ch_ladder) {
-			dir = UP; // start climbing up
-			climbing = true;
-		}
-		else if (pBoard->getChar(pos.down()) != ' ') {
-			jump_counter = 2; // start jumping
-			jump_dir = (dir == STAY) ? UP : dir; // set direction of jump
-			jumping = true;
-		}
-		break;
-	case((char)DOWN):
-		if (pBoard->getChar(pos.down()) == ch_ladder) {
-			dir = DOWN; // start climbing down
-			climbing = true;
-		}
-		break;
+	char lowkey = std::tolower(key);
+
+	if (lowkey == UP && pBoard->getChar(pos) == ch_ladder) {
+		climbing = true; // climb up
+		dir = (Key)lowkey;
 	}
-	return;
+	else if (lowkey == DOWN && pBoard->getChar(pos.neighbor(DOWN)) == ch_ladder) {
+		climbing = true; // climb down
+		dir = (Key)lowkey;
+	}
+	else if (lowkey == UP && pBoard->getChar(pos.neighbor(DOWN)) != ' ') {
+		jump_counter = 2; // jump
+		jump_dir = (dir == STAY) ? UP : dir; // set direction of jump
+		jumping = true;
+	}
+	else if (lowkey == RIGHT || lowkey == LEFT || lowkey == STAY)
+		dir = (Key)lowkey;
 }
 
 bool Mario::move()
@@ -41,42 +29,27 @@ bool Mario::move()
 	Point new_pos;
 	bool alive = true;
 
-	if (jumping) {
-		if (jump_dir == UP) new_pos = pos.up();
-		else {
-			new_pos = (jump_dir == RIGHT) ? pos.right() : pos.left();
-			new_pos = (jump_counter == 2) ? new_pos.up() : new_pos.down();
-		}
+	if (jumping) { // jumping logic
+		new_pos = pos.neighbor(jump_dir);
+		if (jump_dir != UP)
+			new_pos = (jump_counter == 2) ? new_pos.neighbor(UP) : new_pos.neighbor(DOWN);
 		jump_counter--;
 		if (jump_counter == 0) jumping = false;
 	}
 	else {
-		if (pBoard->getChar(pos.down()) == ' ') {  // fall
+		if (pBoard->getChar(pos.neighbor(DOWN)) == ' ') {  // fall
 			fall_counter++;
-			new_pos = pos.down();
+			new_pos = pos.neighbor(DOWN);
 		}
 		else {
-			if (fall_counter >= 5) alive = false;
+			if (fall_counter >= 5)
+				alive = false;
 			fall_counter = 0;
-			switch (dir) {
-			case(LEFT): 
-				new_pos = pos.left();
-				break;
-			case(RIGHT):
-				new_pos = pos.right();
-				break;
-			case(STAY):
-				new_pos = pos;
-				break;
-			case(UP): 
-				new_pos = pos.up();
-				break;
-			case(DOWN):
-				new_pos = pos.down();
-				break;
-			}
+
+			new_pos = pos.neighbor(dir);
 		}
 	}
+
 	char new_tile = pBoard->getChar(new_pos);
 
 	if (new_tile != ch_ladder) {
@@ -89,6 +62,7 @@ bool Mario::move()
 			if (new_tile == 'O') alive = false;
 		}
 	}
+
 	pos = new_pos;
 	return alive;
 }

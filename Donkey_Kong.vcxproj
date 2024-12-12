@@ -139,6 +139,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mario.cpp" />
+    <ClCompile Include="point.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>

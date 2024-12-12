@@ -1,4 +1,6 @@
 #pragma once
+#include "utils.h"
+using namespace keys;
 
 class Point {
 	int x, y;
@@ -7,8 +9,5 @@ public:
 
 	int getX() const { return x; }
 	int getY() const { return y; }
-	Point down() { return Point(x, y + 1); }
-	Point left() { return Point(x - 1, y); }
-	Point right() { return Point(x + 1, y); }
-	Point up() { return Point(x, y - 1); }
+	Point neighbor(Key dir);
 };
