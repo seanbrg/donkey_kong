@@ -13,8 +13,7 @@ void Game::run()
 	
 	mario.setBoard(board);
 
-	bool game_running = true;
-	while (game_running) {
+	while (lives > 0) {
 		mario.draw();
 		if (_kbhit()) {
 			char key = _getch();
@@ -24,7 +23,13 @@ void Game::run()
 		}
 		Sleep(100);
 		mario.erase();
-		mario.move();
+		bool alive = mario.move();
+		if (!alive) {
+			lives--;
+			board.reset();
+			mario.reset();
+		}
+		printStatus();
 	}
 	gotoxy(0, MAX_Y);
 }
@@ -53,4 +58,10 @@ void Game::initStage1() // custom built stage 1
 
 	for (int i = 0; i < NUM_LADDERS; i++)
 		stage1.addLadder(ladders[i]);
+}
+
+void Game::printStatus()
+{
+	gotoxy(MIN_X + 2, MIN_Y + 1);
+	std::cout << "LIVES: " << lives;
 }

@@ -7,13 +7,14 @@
 
 class Game
 {
+	int lives = 3;
 	Mario mario;
 	Board board;
 	Stage stage1; // needs to be initiated with initStage1()
-	
+	// TO DO: rename 'stage' to 'level' everywhere
 public:
-	Game() {}
 	void run();
 	void initStage1();
+	void printStatus();
 };
 

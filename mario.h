@@ -15,6 +15,7 @@ class Mario
 	Key jump_dir = STAY; // direction of jump: gets initialized when used
 	char ch = '@';
 	int jump_counter = 0; // phase of jump ; from 2 to 0
+	int fall_counter = 0; // height fallen
 	bool jumping = false;
 	bool climbing = false;
 	Board* pBoard = nullptr;
@@ -29,7 +30,11 @@ public:
 		pBoard->restoreChar(pos);
 	}
 	void keyPressed(char key);
-	void move();
+	bool move();
+	void reset() {
+		pos = pBoard->startingPoint();
+		dir = STAY;
+	}
 	void setBoard(Board& board) {
 		pBoard = &board;
 		pos = board.startingPoint();

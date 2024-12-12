@@ -7,13 +7,13 @@ void Mario::keyPressed(char key)
 {
 	switch (std::tolower(key)) {
 	case((char)LEFT):
-		dir = LEFT;
+		if (!climbing) dir = LEFT;
+		break;
+	case((char)RIGHT):
+		if (!climbing) dir = RIGHT;
 		break;
 	case((char)STAY):
 		dir = STAY;
-		break;
-	case((char)RIGHT):
-		dir = RIGHT;
 		break;
 	case((char)UP):
 		if (pBoard->getChar(pos) == ch_ladder) {
@@ -36,9 +36,10 @@ void Mario::keyPressed(char key)
 	return;
 }
 
-void Mario::move()
+bool Mario::move()
 {
 	Point new_pos;
+	bool alive = true;
 
 	if (jumping) {
 		if (jump_dir == UP) new_pos = pos.up();
@@ -50,8 +51,13 @@ void Mario::move()
 		if (jump_counter == 0) jumping = false;
 	}
 	else {
-		if (pBoard->getChar(pos.down()) == ' ') new_pos = pos.down(); // fall
+		if (pBoard->getChar(pos.down()) == ' ') {  // fall
+			fall_counter++;
+			new_pos = pos.down();
+		}
 		else {
+			if (fall_counter >= 5) alive = false;
+			fall_counter = 0;
 			switch (dir) {
 			case(LEFT): 
 				new_pos = pos.left();
@@ -78,7 +84,11 @@ void Mario::move()
 			climbing = false;
 			dir = STAY;
 		}
-		if (new_tile != ' ') new_pos = pos;
+		if (new_tile != ' ') {
+			new_pos = pos;
+			if (new_tile == 'O') alive = false;
+		}
 	}
 	pos = new_pos;
+	return alive;
 }

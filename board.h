@@ -12,7 +12,7 @@ class Board {
 	
 public:
 	Board(Stage* _stage = nullptr);
-	void reset(Stage* _stage);
+	void reset(Stage* _stage = nullptr);
 	void print() const;
 	void addStage(Stage* _stage);
 	char getChar(Point pos) const;
