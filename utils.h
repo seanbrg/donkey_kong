@@ -28,3 +28,4 @@ static const char ch_ladder = 'H';
 static const char ch_floor_flat = '=';
 static const char ch_floor_left = '<';
 static const char ch_floor_right = '>';
+static const char ch_pauline = '$';

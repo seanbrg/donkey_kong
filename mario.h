@@ -22,6 +22,7 @@ class Mario
 
 public:
 	void setStart(Point _pos) { pos = _pos; }
+	Point getPos() { return pos; }
 	void draw() const {
 		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
 		std::cout << ch;

@@ -23,4 +23,5 @@ void Stage::load(char board[MAX_Y][MAX_X + 1])
 		board[y][x] = ch_ladder;
 	}
 	
+	board[win_pos.getY()][win_pos.getX()] = ch_pauline;
 }

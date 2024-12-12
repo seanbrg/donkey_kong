@@ -6,14 +6,17 @@ using namespace keys;
 void Game::run()
 {
 	initStage1();
-	board.addStage(&stage1);
+	board.addStage(&stage);
 
 	ShowConsoleCursor(false);
 	board.print();
 	
 	mario.setBoard(board);
 
-	while (lives > 0) {
+	bool victory = false;
+	Point pauline = stage.winPoint();
+
+	while (lives > 0 && !victory) {
 		mario.draw();
 		if (_kbhit()) {
 			char key = _getch();
@@ -22,8 +25,13 @@ void Game::run()
 			mario.keyPressed(key);
 		}
 		Sleep(100);
-		mario.erase();
+		
+		if (mario.getPos() == pauline.neighbor(LEFT) || mario.getPos() == pauline.neighbor(RIGHT)) {
+			victory = true;
+		}
+		else mario.erase();
 		bool alive = mario.move();
+
 		if (!alive) {
 			lives--;
 			board.reset();
@@ -36,16 +44,18 @@ void Game::run()
 
 void Game::initStage1() // custom built stage 1
 {
+	stage = Stage({ 4, 22 }, { 35, 4 }, { 30, 4 });
+
 	static constexpr int NUM_LADDERS = 7;
 	Point ladders[NUM_LADDERS]; 
 	// format: { (leftmost point), floor type, floor length }
-	stage1.addFloor({1, 23}, ch_floor_flat, 79);
-	stage1.addFloor({58, 18}, ch_floor_flat, 14);
-	stage1.addFloor({55, 10}, ch_floor_left, 17);
-	stage1.addFloor({8, 19}, ch_floor_right, 32);
-	stage1.addFloor({13, 15}, ch_floor_left, 32);
-	stage1.addFloor({3, 9}, ch_floor_right, 36);
-	stage1.addFloor({8, 5}, ch_floor_flat, 59);
+	stage.addFloor({1, 23}, ch_floor_flat, 79);
+	stage.addFloor({58, 18}, ch_floor_flat, 14);
+	stage.addFloor({55, 10}, ch_floor_left, 17);
+	stage.addFloor({8, 19}, ch_floor_right, 32);
+	stage.addFloor({13, 15}, ch_floor_left, 32);
+	stage.addFloor({3, 9}, ch_floor_right, 36);
+	stage.addFloor({8, 5}, ch_floor_flat, 59);
 
 	// the point saved in a ladder must be its highest point (on a floor)
 	ladders[0] = { 68, 18 };
@@ -57,7 +67,7 @@ void Game::initStage1() // custom built stage 1
 	ladders[6] = { 10 , 5 };
 
 	for (int i = 0; i < NUM_LADDERS; i++)
-		stage1.addLadder(ladders[i]);
+		stage.addLadder(ladders[i]);
 }
 
 void Game::printStatus()
