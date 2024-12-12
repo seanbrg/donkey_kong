@@ -94,12 +94,12 @@ void Game::spawnBarrels(Point dk, bool thrown_twice)
 {
 	static Key next = LEFT;
 	if (thrown_twice) { // option for harder difficulty
-		barrels.push_back({ dk.neighbor(LEFT), LEFT, &board });
-		barrels.push_back({ dk.neighbor(RIGHT), RIGHT, &board });
+		barrels.push_back({ dk, LEFT, &board });
+		barrels.push_back({ dk, RIGHT, &board });
 		num_barrels += 2;
 	}
 	else { // default
-		barrels.push_back({ dk.neighbor(next), next, &board });
+		barrels.push_back({ dk, next, &board });
 		next = (next == LEFT) ? RIGHT : LEFT;
 		num_barrels++;
 	}
