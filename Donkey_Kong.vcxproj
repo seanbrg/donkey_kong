@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="barrel.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="mario.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="barrel.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />

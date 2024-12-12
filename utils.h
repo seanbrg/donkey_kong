@@ -31,3 +31,4 @@ static const char ch_floor_right = '>';
 static const char ch_pauline = '$';
 static const char ch_dk = '&';
 static const char ch_mario = '@';
+static const char ch_barrel = 'O';

@@ -34,10 +34,11 @@ public:
 	void reset() {
 		pos = pBoard->startingPoint();
 		dir = STAY;
+		fall_counter = 0;
 	}
-	void setBoard(Board& board) {
-		pBoard = &board;
-		pos = board.startingPoint();
+	void setBoard(Board* board) {
+		pBoard = board;
+		pos = pBoard->startingPoint();
 	}
 };
 

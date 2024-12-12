@@ -1,5 +1,7 @@
 #include "game.h"
 #include <Windows.h>
+#include <iostream>
+
 
 using namespace keys;
 
@@ -10,11 +12,13 @@ void Game::run()
 
 	ShowConsoleCursor(false);
 	board.print();
-	
-	mario.setBoard(board);
+	printStatus();
+
+	mario.setBoard(&board);
 
 	bool victory = false;
 	Point pauline = stage.winPoint();
+	int frame = 0;
 
 	while (lives > 0 && !victory) {
 		mario.draw();
@@ -24,21 +28,27 @@ void Game::run()
 			if (key == ESC) break;
 			mario.keyPressed(key);
 		}
-		Sleep(100);
+		Sleep(150);
 		
 		if (mario.getPos() == pauline.neighbor(LEFT) || mario.getPos() == pauline.neighbor(RIGHT)) {
 			victory = true;
 		}
 		else {
-			mario.erase();
-			bool alive = mario.move();
+			mario.erase(); // move mario, reset board if he dies
+			bool alive;
+			alive = mario.move();
+
+			if (frame % 15 == 0)
+				spawnBarrels(stage.dkPoint());
+			//if (frame % 2 == 0)
+			rollBarrels(alive);
+
 			if (!alive) {
 				lives--;
-				board.reset();
-				mario.reset();
+				reset();
 			}
+			frame++;
 		}
-		printStatus();
 	}
 	gotoxy(0, MAX_Y);
 }
@@ -78,4 +88,49 @@ void Game::printStatus()
 {
 	gotoxy(MIN_X + 2, MIN_Y + 1);
 	std::cout << "LIVES: " << lives;
+}
+
+void Game::spawnBarrels(Point dk, bool thrown_twice)
+{
+	static Key next = LEFT;
+	if (thrown_twice) { // option for harder difficulty
+		barrels.push_back({ dk.neighbor(LEFT), LEFT, &board });
+		barrels.push_back({ dk.neighbor(RIGHT), RIGHT, &board });
+		num_barrels += 2;
+	}
+	else { // default
+		barrels.push_back({ dk.neighbor(next), next, &board });
+		next = (next == LEFT) ? RIGHT : LEFT;
+		num_barrels++;
+	}
+}
+
+void Game::rollBarrels(bool &alive)
+{
+	for (int i = 0; i < num_barrels; i++) {
+		barrels[i].erase();
+		barrels[i].move();
+
+		if (barrels[i].exists()) {
+			barrels[i].draw();
+			if (barrels[i].getPos() == mario.getPos()) {
+				alive = false;
+				break;
+			}
+		}
+		else {
+			barrels.erase(barrels.begin() + i);
+			num_barrels--;
+		}
+	}
+}
+
+void Game::reset()
+{
+	board.reset();
+	mario.reset();
+	num_barrels = 0;
+	barrels.clear();
+	board.print();
+	printStatus();
 }

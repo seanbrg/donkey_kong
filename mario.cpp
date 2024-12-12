@@ -20,14 +20,20 @@ void Mario::keyPressed(char key)
 		jump_dir = (dir == STAY) ? UP : dir; // set direction of jump
 		jumping = true;
 	}
-	else if (lowkey == RIGHT || lowkey == LEFT || lowkey == STAY)
-		dir = (Key)lowkey;
+	else if (lowkey == RIGHT || lowkey == LEFT || lowkey == STAY) {
+		dir = (!climbing) ? (Key)lowkey : STAY;
+	}
 }
 
 bool Mario::move()
 {
 	Point new_pos;
-	bool alive = true;
+
+	if (pBoard->getChar(pos.neighbor(DOWN)) != ' ' && fall_counter > 0) {
+		if (fall_counter >= 5)
+			return false;
+		fall_counter = 0;
+	}
 
 	if (jumping) { // jumping logic
 		new_pos = pos.neighbor(jump_dir);
@@ -42,10 +48,6 @@ bool Mario::move()
 			new_pos = pos.neighbor(DOWN);
 		}
 		else {
-			if (fall_counter >= 5)
-				alive = false;
-			fall_counter = 0;
-
 			new_pos = pos.neighbor(dir);
 		}
 	}
@@ -59,10 +61,9 @@ bool Mario::move()
 		}
 		if (new_tile != ' ') {
 			new_pos = pos;
-			if (new_tile == 'O') alive = false;
 		}
 	}
 
 	pos = new_pos;
-	return alive;
+	return true;
 }
