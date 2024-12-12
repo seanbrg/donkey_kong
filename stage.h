@@ -2,19 +2,25 @@
 #include <iostream>
 #include <vector>
 #include "point.h"
-#include "floor.h"
 #include "utils.h"
 
 class Stage
 {
+	struct Floor
+	{
+		Point start; // leftmost point
+		char type; // '<' '>' or '='
+		int len; // length
+	};
+
 	Point start = { 4 , 22 };
-	std::vector<Floor> floors; // floor class is unnecessary, use struct instead
+	std::vector<Floor> floors;
 	std::vector<Point> ladders;
 	Stage* next = nullptr;
 
 public:
-	void addFloor(const Floor _floor) {
-		floors.push_back(_floor);
+	void addFloor(Point _start, char _type, int _len) {
+		floors.push_back({ _start, _type, _len });
 	}
 	void addLadder(const Point _ladder) {
 		ladders.push_back(_ladder);

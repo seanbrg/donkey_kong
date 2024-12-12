@@ -1,6 +1,8 @@
 #include "game.h"
 #include <Windows.h>
 
+using namespace keys;
+
 void Game::run()
 {
 	initStage1();
@@ -17,7 +19,7 @@ void Game::run()
 		if (_kbhit()) {
 			char key = _getch();
 
-			if (key == (char)eKeys::ESC) break;
+			if (key == ESC) break;
 			mario.keyPressed(key);
 		}
 		Sleep(100);
@@ -29,19 +31,18 @@ void Game::run()
 
 void Game::initStage1() // custom built stage 1
 {
-	static constexpr int NUM_FLOORS = 7;
 	static constexpr int NUM_LADDERS = 7;
-	Floor floors[NUM_FLOORS]; // format: { (leftmost point), floor type, floor length }
-	Point ladders[NUM_LADDERS]; // the point saved in a ladder must be its highest point (on a floor)
+	Point ladders[NUM_LADDERS]; 
+	// format: { (leftmost point), floor type, floor length }
+	stage1.addFloor({1, 23}, ch_floor_flat, 79);
+	stage1.addFloor({58, 18}, ch_floor_flat, 14);
+	stage1.addFloor({55, 10}, ch_floor_left, 17);
+	stage1.addFloor({8, 19}, ch_floor_right, 32);
+	stage1.addFloor({13, 15}, ch_floor_left, 32);
+	stage1.addFloor({3, 9}, ch_floor_right, 36);
+	stage1.addFloor({8, 5}, ch_floor_flat, 59);
 
-	floors[0] = {{1, 23}, ch_floor_flat, 79};
-	floors[1] = {{58, 18}, ch_floor_flat, 14};
-	floors[2] = {{55, 10}, ch_floor_left, 17};
-	floors[3] = {{8, 19}, ch_floor_right, 32};
-	floors[4] = {{13, 15}, ch_floor_left, 32};
-	floors[5] = {{3, 9}, ch_floor_right, 36};
-	floors[6] = {{8, 5}, ch_floor_flat, 59};
-
+	// the point saved in a ladder must be its highest point (on a floor)
 	ladders[0] = { 68, 18 };
 	ladders[1] = { 59 , 10 };
 	ladders[2] = { 65 , 5 };
@@ -49,10 +50,6 @@ void Game::initStage1() // custom built stage 1
 	ladders[4] = { 14 , 15 };
 	ladders[5] = { 37 , 9 };
 	ladders[6] = { 10 , 5 };
-
-
-	for (int i = 0; i < NUM_FLOORS; i++)
-		stage1.addFloor(floors[i]);
 
 	for (int i = 0; i < NUM_LADDERS; i++)
 		stage1.addLadder(ladders[i]);

@@ -7,7 +7,16 @@ void gotoxy(int x, int y);
 
 void ShowConsoleCursor(bool showFlag);
 
-enum class eKeys { LEFT = 'a', RIGHT = 'd', UP = 'w', DOWN = 'x', STAY = 's', ESC = 27 };
+namespace keys {
+	enum Key {
+		LEFT = 'a',
+		RIGHT = 'd',
+		UP = 'w',
+		DOWN = 'x',
+		STAY = 's',
+		ESC = 27
+	};
+};
 
 static constexpr int MIN_X = 3;
 static constexpr int MIN_Y = 1;

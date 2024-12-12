@@ -2,22 +2,25 @@
 
 void Stage::load(char board[MAX_Y][MAX_X + 1])
 {
-	for (auto& floor : floors) {
-		Point start = floor.getStart();
-		int len = floor.getLen();
-		char type = floor.getType();
+	for (Floor& floor : floors) {
+		int x = floor.start.getX();
+		int y = floor.start.getY();
 
-		for (int i = start.x; i < start.x + len; i++)
-			board[start.y][i] = type;
+		for (int i = x; i < x + floor.len; i++)
+			board[y][i] = floor.type;
 	}
 
-	for (auto& ladder : ladders) {
-		Point pos = ladder;
-		while (board[pos.y + 1][pos.x] == ' ') {
-			board[pos.y][pos.x] = ch_ladder;
-			pos.y++;
+	for (Point& ladder : ladders) {
+		Point draw = ladder;
+		int x = ladder.getX();
+		int y = ladder.getY();
+		while (board[y + 1][x] == ' ') {
+			board[y][x] = ch_ladder;
+			draw = draw.down();
+			x = draw.getX();
+			y = draw.getY();
 		}
-		board[pos.y][pos.x] = ch_ladder;
+		board[y][x] = ch_ladder;
 	}
 	
 }
