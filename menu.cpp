@@ -28,7 +28,7 @@ void Menu::handlePresentInstructions() {
 
 
 void Menu::handleExit() {
-    std::cout << "exit...\n"; //?
+    std::cout << "\nexit...\n"; //?
 }
 
 
@@ -85,4 +85,5 @@ void Menu::displayMenu() {
             break;
         }
     }
+    
 }

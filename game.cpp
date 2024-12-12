@@ -7,7 +7,7 @@ using namespace keys;
 
 void Game::run()
 {
-	
+	system("cls");
 	initStage1();
 	board.addStage(&stage);
 
