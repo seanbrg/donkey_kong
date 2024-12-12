@@ -29,3 +29,5 @@ static const char ch_floor_flat = '=';
 static const char ch_floor_left = '<';
 static const char ch_floor_right = '>';
 static const char ch_pauline = '$';
+static const char ch_dk = '&';
+static const char ch_mario = '@';

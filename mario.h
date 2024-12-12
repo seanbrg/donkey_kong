@@ -13,7 +13,6 @@ class Mario
 	Point pos; // get starting position from board
 	Key dir = STAY; // direction of next movement
 	Key jump_dir = STAY; // direction of jump: gets initialized when used
-	char ch = '@';
 	int jump_counter = 0; // phase of jump ; from 2 to 0
 	int fall_counter = 0; // height fallen
 	bool jumping = false;
@@ -25,7 +24,7 @@ public:
 	Point getPos() { return pos; }
 	void draw() const {
 		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-		std::cout << ch;
+		std::cout << ch_mario;
 	}
 	void erase() {
 		pBoard->restoreChar(pos);

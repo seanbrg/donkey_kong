@@ -35,7 +35,8 @@ public:
 	}
 	void load(char board[MAX_Y][MAX_X + 1]);
 	Stage* getNext() { return next; }
-	Point startingPoint() { return start_pos; }
-	Point winPoint() { return win_pos; }
+	Point startingPoint() const { return start_pos; }
+	Point winPoint() const { return win_pos; }
+	Point dkPoint() const { return dk_pos; }
 };
 
