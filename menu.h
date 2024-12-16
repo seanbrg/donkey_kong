@@ -3,13 +3,14 @@
 
 
 class Menu {
-
+    int difficulty = 2;
+    bool colors = false;
 public:
     
     void handleStartGame();
+    void handeOptions();
     void handlePresentInstructions();
     void handleExit();
-    char handleInputKey();
     void displayMenu();
 };
 

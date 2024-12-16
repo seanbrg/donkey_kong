@@ -18,6 +18,7 @@ void Game::run()
 	mario.setBoard(&board);
 
 	bool victory = false;
+	bool skip_ending = false;
 	Point pauline = stage.winPoint();
 	int frame = 0;
 
@@ -28,13 +29,19 @@ void Game::run()
 
 			if (key == ESC) { // pause game
 				key = 0;
-				while (key != ESC) {
+				printPauseWindow();
+				while (key != ESC && key != '1') {
 					key = _getch();
 				}
+				if (key == '1') {
+					skip_ending = true;
+					break;
+				}
+				unpause();
 			}
 			mario.keyPressed(key);
 		}
-		Sleep(135);
+		Sleep(240 - difficulty * 40);
 		
 		if (mario.getPos() == pauline.neighbor(LEFT) || mario.getPos() == pauline.neighbor(RIGHT)) {
 			victory = true;
@@ -45,8 +52,11 @@ void Game::run()
 			if (alive) {
 				alive = checkMarioBarrel();
 				if (alive) {
-					if (frame % 15 == 0)
-						spawnBarrels(stage.dkPoint());
+					if (frame % (20 - difficulty * 3) == 0) {
+						if (difficulty != 4)
+							spawnBarrels(stage.dkPoint());
+						else spawnBarrels(stage.dkPoint(), true);
+					}
 
 					rollBarrels();
 					alive = checkMarioBarrel();
@@ -56,14 +66,15 @@ void Game::run()
 			if (!alive) {
 				lives--;
 				mario.drawDead();
-				Sleep(2000);
+				Sleep(1400);
 				reset();
 				frame = 0;
 			}
 			frame++;
 		}
 	}
-	gotoxy(0, MAX_Y);
+	if (!skip_ending)
+		printEndGameWindow(victory);
 }
 
 void Game::initStage1() // custom built stage 1
@@ -73,17 +84,19 @@ void Game::initStage1() // custom built stage 1
 	static constexpr int NUM_LADDERS = 9;
 	Point ladders[NUM_LADDERS]; 
 	// format: { (leftmost point), floor type, floor length }
-	stage.addFloor({1, 23}, ch_floor_flat, 78);
-	stage.addFloor({58, 18}, ch_floor_flat, 14);
-	stage.addFloor({55, 11}, ch_floor_left, 17);
-	stage.addFloor({8, 19}, ch_floor_right, 32);
-	stage.addFloor({13, 15}, ch_floor_left, 32);
-	stage.addFloor({3, 10}, ch_floor_right, 36);
-	stage.addFloor({8, 6}, ch_floor_flat, 59);
-	stage.addFloor({ 35, 3 }, ch_floor_flat, 10);
+	stage.addFloor({ 1, 23}, ch_floor_flat, 78);
+	stage.addFloor({ 69, 18 }, ch_floor_flat, 7);
+	stage.addFloor({ 65, 18 }, ch_floor_flat, 3);
+	stage.addFloor({ 58, 18 }, ch_floor_flat, 6);
+	stage.addFloor({ 55, 11}, ch_floor_left, 17);
+	stage.addFloor({ 8, 19}, ch_floor_right, 32);
+	stage.addFloor({ 13, 15}, ch_floor_left, 32);
+	stage.addFloor({ 3, 10}, ch_floor_right, 36);
+	stage.addFloor({ 8, 6}, ch_floor_flat, 60);
+	stage.addFloor({ 35, 3 }, ch_floor_flat, 11);
 
 	// the point saved in a ladder must be its highest point (on a floor)
-	ladders[0] = { 68, 18 };
+	ladders[0] = { 72, 18 };
 	ladders[1] = { 59 , 11 };
 	ladders[2] = { 65 , 6 };
 	ladders[3] = { 38, 19 };
@@ -152,4 +165,66 @@ bool Game::checkMarioBarrel()
 			return false;
 	}
 	return true;
+}
+
+void Game::printPauseWindow()
+{
+	int center_x = (MAX_X - MIN_X) / 2;
+	int center_y = (MAX_Y - MIN_Y) / 2;
+
+	gotoxy(center_x - 22, center_y - 3);
+	std::cout << " +-------------------------------------------+ ";
+	gotoxy(center_x - 22, center_y - 2);
+	std::cout << " |                                           | ";
+	gotoxy(center_x - 22, center_y - 1);
+	std::cout << " |                Game Paused!               | ";
+	gotoxy(center_x - 22, center_y);
+	std::cout << " |           Press ESC to continue           | ";
+	gotoxy(center_x - 22, center_y + 1);
+	std::cout << " |      Or (1) to return to the main menu.   | ";
+	gotoxy(center_x - 22, center_y + 2);
+	std::cout << " |                                           | ";
+	gotoxy(center_x - 22, center_y + 3);
+	std::cout << " +-------------------------------------------+ ";
+}
+
+void Game::printEndGameWindow(bool victory)
+{
+	int center_x = (MAX_X - MIN_X) / 2;
+	int center_y = (MAX_Y - MIN_Y) / 2;
+
+	gotoxy(center_x - 22, center_y - 3);
+	std::cout << " +-----------------------------------------+ ";
+	gotoxy(center_x - 22, center_y - 2);
+	std::cout << " |                                         | ";
+
+	gotoxy(center_x - 22, center_y - 1);
+	if (victory)
+		std::cout << " |   Congratulations, you won the game!    | ";
+	else
+		std::cout << " |                You died.                | ";
+
+	gotoxy(center_x - 22, center_y);
+	std::cout << " |                                         | ";
+	gotoxy(center_x - 22, center_y + 1);
+	std::cout << " |  Press ESC to return to the main menu.  | ";
+	gotoxy(center_x - 22, center_y + 2);
+	std::cout << " |                                         | ";
+	gotoxy(center_x - 22, center_y + 3);
+	std::cout << " +-----------------------------------------+ ";
+
+
+	char key = 0;
+	while (key != ESC) {
+		key = _getch();
+	}
+}
+
+void Game::unpause()
+{
+	board.print();
+	printStatus();
+	mario.draw();
+	for (auto& barrel : barrels)
+		barrel.draw();
 }
