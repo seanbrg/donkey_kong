@@ -32,3 +32,4 @@ static const char ch_pauline = '$';
 static const char ch_dk = '&';
 static const char ch_mario = '@';
 static const char ch_barrel = 'O';
+static const char ch_dead_mario = 'X';

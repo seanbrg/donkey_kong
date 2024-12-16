@@ -29,24 +29,31 @@ void Game::run()
 			if (key == ESC) break;
 			mario.keyPressed(key);
 		}
-		Sleep(150);
+		Sleep(135);
 		
 		if (mario.getPos() == pauline.neighbor(LEFT) || mario.getPos() == pauline.neighbor(RIGHT)) {
 			victory = true;
 		}
 		else {
 			mario.erase(); // move mario, reset board if he dies
-			bool alive;
-			alive = mario.move();
+			bool alive = mario.move();
+			if (alive) {
+				alive = checkMarioBarrel();
+				if (alive) {
+					if (frame % 15 == 0)
+						spawnBarrels(stage.dkPoint());
 
-			if (frame % 15 == 0)
-				spawnBarrels(stage.dkPoint());
-			//if (frame % 2 == 0)
-			rollBarrels(alive);
+					rollBarrels();
+					alive = checkMarioBarrel();
+				}
+			}
 
 			if (!alive) {
 				lives--;
+				mario.drawDead();
+				Sleep(2000);
 				reset();
+				frame = 0;
 			}
 			frame++;
 		}
@@ -106,7 +113,7 @@ void Game::spawnBarrels(Point dk, bool thrown_twice)
 	}
 }
 
-void Game::rollBarrels(bool &alive)
+void Game::rollBarrels()
 {
 	for (int i = 0; i < num_barrels; i++) {
 		barrels[i].erase();
@@ -114,10 +121,6 @@ void Game::rollBarrels(bool &alive)
 
 		if (barrels[i].exists()) {
 			barrels[i].draw();
-			if (barrels[i].getPos() == mario.getPos()) {
-				alive = false;
-				break;
-			}
 		}
 		else {
 			barrels.erase(barrels.begin() + i);
@@ -134,4 +137,14 @@ void Game::reset()
 	barrels.clear();
 	board.print();
 	printStatus();
+}
+
+bool Game::checkMarioBarrel()
+{
+	Point mario_pos = mario.getPos();
+	for (auto& barrel : barrels) {
+		if (mario_pos == barrel.getPos())
+			return false;
+	}
+	return true;
 }

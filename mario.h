@@ -22,9 +22,12 @@ class Mario
 public:
 	void setStart(Point _pos) { pos = _pos; }
 	Point getPos() { return pos; }
-	void draw() const {
+	void draw(char ch = ch_mario) const {
 		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-		std::cout << ch_mario;
+		std::cout << ch;
+	}
+	void drawDead() {
+		draw(ch_dead_mario);
 	}
 	void erase() {
 		pBoard->restoreChar(pos);
