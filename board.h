@@ -18,6 +18,7 @@ public:
 	char getChar(Point pos) const;
 	void drawChar(const char c, Point pos);
 	void restoreChar(Point pos);
+	void restoreBoardExplosion(Point explosion);
 	Point startingPoint() const { return stage->startingPoint(); }
 };
 

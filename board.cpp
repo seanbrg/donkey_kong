@@ -51,6 +51,17 @@ void Board::restoreChar(Point pos) {
 	std::cout << currentBoard[pos.getY()][pos.getX()];
 }
 
+void Board::restoreBoardExplosion(Point explosion)
+{
+	for (int x = 0 - explosion_range; x <= explosion_range; x++) {
+		for (int y = 0 - explosion_range; y <= explosion_range; y++) {
+			int explosion_x = explosion.getX() + x;
+			int explosion_y = explosion.getY() + y;
+			restoreChar({ explosion_x, explosion_y });
+		}
+	}
+}
+
 void Board::reset(Stage* _stage)
 {
 	if (_stage != nullptr) {

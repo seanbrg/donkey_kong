@@ -11,8 +11,7 @@ class Barrel
 	Key dir;
 	Board* pBoard = nullptr;
 	bool active = true;
-	bool exploding = false;
-	int explosion_range = 0;
+	bool explode = false;
 	int fall_counter = 0;
 public:
 	Barrel(Point _pos, Key _dir, Board* _board) : pos(_pos), dir(_dir), pBoard(_board) {}
@@ -24,9 +23,11 @@ public:
 		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
 		std::cout << ch_barrel;
 	}
+	void drawExplosion() const;
 	void erase() {
 		pBoard->restoreChar(pos);
 	}
+	bool exploding() { return explode; }
 	bool exists() { return active; }
 };
 

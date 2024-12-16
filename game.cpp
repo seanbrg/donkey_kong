@@ -18,9 +18,9 @@ void Game::run()
 	mario.setBoard(&board);
 
 	bool victory = false;
-	bool skip_ending = false;
+	bool skip_ending = false; // for immediately ending the game if needed
 	Point pauline = stage.winPoint();
-	int frame = 0;
+	int frame = 0; // for controlling when a barrel spawns
 
 	while (lives > 0 && !victory) {
 		mario.draw();
@@ -58,8 +58,9 @@ void Game::run()
 						else spawnBarrels(stage.dkPoint(), true);
 					}
 
-					rollBarrels();
-					alive = checkMarioBarrel();
+					rollBarrels(alive);
+					if (alive)
+						alive = checkMarioBarrel();
 				}
 			}
 
@@ -131,16 +132,33 @@ void Game::spawnBarrels(Point dk, bool thrown_twice)
 	}
 }
 
-void Game::rollBarrels()
+void Game::rollBarrels(bool& alive)
 {
 	for (int i = 0; i < num_barrels; i++) {
 		barrels[i].erase();
 		barrels[i].move();
+		if (barrels[i].exploding()) {
+			barrels[i].drawExplosion();
+
+			int mario_x = mario.getPos().getX();
+			int mario_y = mario.getPos().getY();
+			int explosion_x = barrels[i].getPos().getX();
+			int explosion_y = barrels[i].getPos().getY();
+			if (explosion_x - explosion_range <= mario_x && mario_x <= explosion_x + explosion_range) {
+				if (explosion_y - explosion_range <= mario_y && mario_y <= explosion_y + explosion_range) {
+					alive = false;
+					break;
+				}
+			}
+		}
 
 		if (barrels[i].exists()) {
 			barrels[i].draw();
 		}
 		else {
+			if (barrels[i].exploding())
+				board.restoreBoardExplosion(barrels[i].getPos());
+
 			barrels.erase(barrels.begin() + i);
 			num_barrels--;
 		}

@@ -22,6 +22,7 @@ static constexpr int MIN_X = 1;
 static constexpr int MIN_Y = 0;
 static constexpr int MAX_X = 80;
 static constexpr int MAX_Y = 25;
+static const int explosion_range = 2;
 
 static const char ch_border = 'Q';
 static const char ch_ladder = 'H';
@@ -33,3 +34,4 @@ static const char ch_dk = '&';
 static const char ch_mario = '@';
 static const char ch_barrel = 'O';
 static const char ch_dead_mario = 'X';
+static const char ch_explosion = '*';

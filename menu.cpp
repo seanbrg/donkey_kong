@@ -85,6 +85,7 @@ void Menu::handlePresentInstructions() {
     std::cout << "Donkey Kong is throwing barrels! Avoid them as you climb your way to the top.\n";
     std::cout << "Your objective is to reach Princess Pauline and rescue her to win the game.\n";
     std::cout << "******************************************************************************\n\n";
+    std::cout << "Important: Your language must be set to English for the keys to register.\n\n";
     std::cout << "Movement keys:\n" << "**************\n";
     std::cout << " - Press 'a' to move left.\n";
     std::cout << " - Press 'd' to move right.\n";

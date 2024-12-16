@@ -28,7 +28,7 @@ public:
 	void initStage1();
 	void printStatus();
 	void spawnBarrels(Point dk, bool thrown_twice = false);
-	void rollBarrels();
+	void rollBarrels(bool &alive);
 	void reset();
 	bool checkMarioBarrel();
 	void printPauseWindow();
