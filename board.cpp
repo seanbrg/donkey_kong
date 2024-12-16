@@ -32,11 +32,12 @@ void Board::addStage(Stage* _stage) {
 	}
 	else stage->addNextStage(_stage);
 }
+
 char Board::getChar(Point pos) const {
 	if (0 <= pos.getX() <= MAX_X - MIN_X && 0 <= pos.getY() <= MAX_Y - MIN_Y)
 		return currentBoard[pos.getY()][pos.getX()];
-	// TO DO: else make an exception and exit
 }
+
 void Board::drawChar(const char c, Point pos) {
 	if (0 <= pos.getX() <= MAX_X - MIN_X && 0 <= pos.getY() <= MAX_Y - MIN_Y) {
 		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
@@ -44,6 +45,7 @@ void Board::drawChar(const char c, Point pos) {
 		currentBoard[pos.getY()][pos.getX()] = c;
 	}
 }
+
 void Board::restoreChar(Point pos) {
 	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
 	std::cout << currentBoard[pos.getY()][pos.getX()];
@@ -64,10 +66,9 @@ void Board::reset(Stage* _stage)
 }
 
 void Board::print() const {
-	for (int i = 0; i < MAX_Y - 1; i++) {
+	for (int i = 0; i < MAX_Y; i++) {
 		gotoxy(MIN_X, MIN_Y + i);
 		std::cout << currentBoard[i] << '\n';
 	}
-	std::cout << currentBoard[MAX_Y - 1];
 }
 

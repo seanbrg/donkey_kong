@@ -26,7 +26,12 @@ void Game::run()
 		if (_kbhit()) {
 			char key = _getch();
 
-			if (key == ESC) break;
+			if (key == ESC) { // pause game
+				key = 0;
+				while (key != ESC) {
+					key = _getch();
+				}
+			}
 			mario.keyPressed(key);
 		}
 		Sleep(135);
@@ -68,7 +73,7 @@ void Game::initStage1() // custom built stage 1
 	static constexpr int NUM_LADDERS = 9;
 	Point ladders[NUM_LADDERS]; 
 	// format: { (leftmost point), floor type, floor length }
-	stage.addFloor({1, 23}, ch_floor_flat, 79);
+	stage.addFloor({1, 23}, ch_floor_flat, 78);
 	stage.addFloor({58, 18}, ch_floor_flat, 14);
 	stage.addFloor({55, 11}, ch_floor_left, 17);
 	stage.addFloor({8, 19}, ch_floor_right, 32);

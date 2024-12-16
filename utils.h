@@ -18,10 +18,10 @@ namespace keys {
 	};
 };
 
-static constexpr int MIN_X = 3;
-static constexpr int MIN_Y = 1;
-static constexpr int MAX_X = 83;
-static constexpr int MAX_Y = 26;
+static constexpr int MIN_X = 1;
+static constexpr int MIN_Y = 0;
+static constexpr int MAX_X = 80;
+static constexpr int MAX_Y = 25;
 
 static const char ch_border = 'Q';
 static const char ch_ladder = 'H';
