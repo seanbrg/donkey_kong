@@ -3,7 +3,9 @@
 
 #include "board.h"
 #include "stage.h"
+#include "utils.h"
 
+using namespace colors;
 
 Board::Board(Stage* _stage) : stage(_stage)
 {
@@ -46,10 +48,36 @@ void Board::drawChar(const char c, Point pos) {
 	}
 }
 
-void Board::restoreChar(Point pos) {
+
+
+/*void Board::restoreChar(Point pos) {
 	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
 	std::cout << currentBoard[pos.getY()][pos.getX()];
+}*/
+
+void Board::restoreChar(Point pos) {
+	
+	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
+
+	//get char of current pos
+	char currentChar = currentBoard[pos.getY()][pos.getX()];
+
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	//set color based on the char
+	if (currentChar == ch_ladder) {
+		SetConsoleTextAttribute(hConsole, RED);
+	}
+	else if (currentChar == ch_floor_flat || currentChar == ch_floor_left || currentChar == ch_floor_right) {
+		SetConsoleTextAttribute(hConsole, BLUE);
+	}
+	else {
+		SetConsoleTextAttribute(hConsole, WHITE);//white
+	}
+
+	std::cout << currentChar;
 }
+
+
 
 void Board::restoreBoardExplosion(Point explosion)
 {
@@ -76,10 +104,39 @@ void Board::reset(Stage* _stage)
 	}
 }
 
-void Board::print() const {
+/*void Board::print() const {
 	for (int i = 0; i < MAX_Y; i++) {
 		gotoxy(MIN_X, MIN_Y + i);
 		std::cout << currentBoard[i] << '\n';
 	}
+}*/
+
+void Board::print() const {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); 
+
+	for (int i = 0; i < MAX_Y; i++) {
+		gotoxy(MIN_X, MIN_Y + i);  
+
+		for (int j = 0; j < MAX_X; j++) {
+			char currentChar = currentBoard[i][j];
+			unsigned short color = WHITE;
+
+			if (currentChar == ch_floor_flat || currentChar == ch_floor_left || currentChar == ch_floor_right) {
+				color = BLUE;
+			}
+			else if (currentChar == ch_ladder) {
+				color = RED;
+			}
+			else {
+				color = WHITE;
+			}
+			SetConsoleTextAttribute(hConsole, color);
+
+			std::cout << currentChar;
+		}
+
+		std::cout << '\n';
+	}
+	SetConsoleTextAttribute(hConsole, WHITE);
 }
 

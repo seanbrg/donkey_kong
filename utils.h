@@ -18,6 +18,14 @@ namespace keys {
 	};
 };
 
+namespace colors {
+	enum Color {
+		RED = FOREGROUND_RED,
+		BLUE = FOREGROUND_BLUE,
+		WHITE = (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE)
+	};
+};
+
 static constexpr int MIN_X = 1;
 static constexpr int MIN_Y = 0;
 static constexpr int MAX_X = 80;
