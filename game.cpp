@@ -27,18 +27,10 @@ void Game::run()
 		if (_kbhit()) {
 			char key = _getch();
 
-			if (key == ESC) { // pause game
-				key = 0;
-				printPauseWindow();
-				while (key != ESC && key != '1') { // wait for input
-					key = _getch();
-				}
-				if (key == '1') { // return to menu
-					skip_ending = true;
-					break;
-				}
-				unpause();
-			}
+			if (key == ESC)
+				pause(skip_ending);
+			if (skip_ending) break;
+
 			mario.keyPressed(key);
 		}
 		Sleep(250 - difficulty * 50); // game speed
@@ -241,9 +233,17 @@ void Game::printEndGameWindow(bool victory) const
 	}
 }
 
-void Game::unpause() const
+void Game::pause(bool& skip_ending)
 {
-	board.print();
+	char key = 0;
+	printPauseWindow();
+	while (key != ESC && key != '1') { // wait for input
+		key = _getch();
+	}
+	if (key == '1') // return to main menu immediately
+		skip_ending = true;
+
+	board.print(); // redraw board over the pause menu
 	printStatus();
 	mario.draw();
 	for (auto& barrel : barrels)

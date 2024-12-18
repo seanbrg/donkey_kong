@@ -1,8 +1,6 @@
 #include "menu.h"
 #include "game.h"
 
-#include <Windows.h> 
-
 void Menu::startGame() { 
     Game game(colors, difficulty);
     game.run();  

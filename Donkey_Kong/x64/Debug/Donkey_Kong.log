@@ -4,7 +4,7 @@
   main.cpp
   mario.cpp
   menu.cpp
-C:\Users\seanb\Documents\C++ Projects\donkey_kong\menu.cpp(156,22): warning C4129: 'A': unrecognized character escape sequence
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\menu.cpp(154,22): warning C4129: 'A': unrecognized character escape sequence
   point.cpp
   stage.cpp
   utils.cpp
