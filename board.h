@@ -17,14 +17,14 @@ public:
 	Board(Stage* _stage, bool _colors);
 	Board() = default;
 
-	void reset(Stage* _stage = nullptr);
+	void reset(const Stage* _stage = nullptr);
 	void print() const;
-	void addStage(Stage* _stage);
-	char getChar(Point pos) const;
-	void drawChar(const char c, Point pos);
-	void restoreChar(Point pos);
-	void restoreBoardExplosion(Point explosion);
-	bool isColor() { return colors; }
+	void addStage(Stage* const _stage);
+	char getChar(const Point& pos) const;
+	void restoreChar(const Point& pos) const;
+	void restoreBoardExplosion(const Point& explosion) const;
+	bool isColor() const { return colors; }
+	void drawChar(char c, const Point& pos) const;
 	Point startingPoint() const { return stage->startingPoint(); }
 };
 

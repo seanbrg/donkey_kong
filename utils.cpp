@@ -27,6 +27,9 @@ void changeColor(char type)
 	case ch_mario:
 		color = BRIGHT_YELLOW;
 		break;
+	case ch_dead_mario:
+		color = BRIGHT_YELLOW;
+		break;
 	case ch_floor_flat:
 		color = BRIGHT_RED;
 		break;
@@ -47,6 +50,12 @@ void changeColor(char type)
 		break;
 	case ch_dk:
 		color = ORANGE;
+		break;
+	case 'e': // easy (for the menu)
+		color = GREEN;
+		break;
+	case 'h': // hard (for the menu)
+		color = RED;
 		break;
 	default:
 		color = WHITE;

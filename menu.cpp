@@ -3,46 +3,60 @@
 
 #include <Windows.h> 
 
-void Menu::handleStartGame() { 
+void Menu::startGame() { 
     Game game(colors, difficulty);
     game.run();  
 }
 
-void Menu::handeOptions()
+void Menu::settingsMenu()
 {
     system("cls");
+    if (colors)
+        changeColor(ch_dk);
     std::cout << "Game Settings:\n\n";
     std::cout << "Currently the difficulty is set to ";
     switch (difficulty) {
     case 1:
+        if (colors)
+            changeColor('e');
         std::cout << "Easy.\n";
+        if (colors)
+            changeColor(ch_dk);
         break;
     case 2:
         std::cout << "Normal.\n";
         break;
     case 3:
+        if (colors)
+            changeColor('h');
         std::cout << "Hard.\n";
+        if (colors)
+            changeColor(ch_dk);
         break;
     }
     std::cout << "This affects the game speed and the amount of barrels that will spawn.\n\n";
 
     if (colors)
-        std::cout << "The game is currently in color mode.\n\n";
+        std::cout << "The game is currently in color mode.\n";
     else
-        std::cout << "The game is currently in colorless mode.\n\n";
+        std::cout << "The game is currently in colorless mode.\n";
 
     std::cout << "******************************************************************************\n\n";
+    std::string settings = 
+        "Change Settings:\n\n"
+        "(1) Change difficulty to Easy.\n"
+        "(2) Change difficulty to Normal.\n"
+        "(3) Change difficulty to Hard.\n"
+        "(4) Switch color mode.\n"
+        "(9) Return to the main menu.\n\n";
 
-    std::cout << "Change Settings:\n\n";
-    std::cout << "(1) Change difficulty to Easy.\n";
-    std::cout << "(2) Change difficulty to Normal.\n";
-    std::cout << "(3) Change difficulty to Hard.\n";
-    std::cout << "(5) Switch color mode.\n";
-    std::cout << "(6) Return to the main menu.\n\n";
+    if (colors)
+        changeColor();
+    std::cout << settings;
 
     char choice = _getch();
 
-    switch (choice) {
+    switch (choice) { // handle changing settings through input
     case '1':
         difficulty = 1;
         break;
@@ -52,72 +66,89 @@ void Menu::handeOptions()
     case '3':
         difficulty = 3;
         break;
-    case '5':
+    case '4':
         colors = !colors;
         break;
-    case '6':
+    case '9':
         break;
     default:
-        gotoxy(0, 17);
+        gotoxy(0, 14);
         std::cout << "\nInvalid choice. Please try again.\n";
         Sleep(800);
-        gotoxy(0, 16);
+        gotoxy(0, 14);
         std::cout << "\n                                   \n";
         break;
     }
 
-    if (choice != '6')
-        handeOptions();
+    if (choice != '9')
+        settingsMenu();
 }
 
-void Menu::handlePresentInstructions() {
+void Menu::instructionsMenu() const {
     system("cls");
-    std::cout << "Instructions and Controls:\n\n";
-    std::cout << "Goal of the Game:\n";
-    std::cout << "Donkey Kong is throwing barrels! Avoid them as you climb your way to the top.\n";
-    std::cout << "Your objective is to reach Princess Pauline and rescue her to win the game.\n";
-    std::cout << "******************************************************************************\n\n";
-    std::cout << "Important: Your language must be set to English for the keys to register.\n\n";
-    std::cout << "Movement keys:\n" << "**************\n";
-    std::cout << " - Press 'a' to move left.\n";
-    std::cout << " - Press 'd' to move right.\n";
-    std::cout << " - Press 'w' to jump or climb ladders.\n";
-    std::cout << " - Press 'x' to descend ladders.\n";
-    std::cout << " - Press 's' to stay in place.\n";
-    std::cout << "\nAdditional keys:\n" << "****************\n";
-    std::cout << " - Press 'ESC' to pause the game.\n";
 
-    std::cout << "\nPress any key to return to the main menu.\n";
-    _getch();   
+    std::string instructions = 
+        "Instructions and Controls:\n\n"
+        "Goal of the Game:\n"
+        "Donkey Kong is throwing barrels! Avoid them as you climb your way to the top.\n"
+        "Your objective is to reach Princess Pauline and rescue her to win the game.\n"
+        "******************************************************************************\n\n";
+
+    std::string controls = 
+        "Important: Your language must be set to English for the keys to register.\n\n"
+        "Movement keys:\n"
+        "**************\n"
+        " - Press 'a' to move left.\n"
+        " - Press 'd' to move right.\n"
+        " - Press 'w' to jump or climb ladders.\n"
+        " - Press 'x' to descend ladders.\n"
+        " - Press 's' to stay in place.\n"
+        "\nAdditional keys:\n"
+        "****************\n"
+        " - Press 'ESC' to pause the game.\n";
+
+    if (colors)
+        changeColor(ch_dk);
+    std::cout << instructions;
+
+    if (colors)
+        changeColor();
+    std::cout << controls;
+
+    _getch(); // await input to return to main menu
 }
 
 
-void Menu::handleExit() {
+void Menu::exitMenu() const {
     gotoxy(0, 15);
     std::cout << "\nExiting game...                          \n";
 }
 
-void Menu::displayMenu() {
+void Menu::display() {
     char choice = '\0';
 
     while (choice != '9') {
         system("cls");  
-
-        
+        std::string header =
+            "    ______ _____ _   _  _   __ _______   __  _   _______ _   _ _____           \n"
+            "    |  _  \\  _  | \\ | || | / /|  ___\\ \\ / / | | / /  _  | \\ | |  __ \\    \n"
+            "    | | | | | | |  \\| || |/ / | |__  \\ V /  | |/ /| | | |  \\| | |  \\/        \n"
+            "    | | | | | | | . ` ||    \\ |  __|  \\ /   |    \\| | | | . ` | | __          \n"
+            "    | |/ /\\ \\_/ / |\\  || |\\  \\| |___  | |   | |\\  \\ \\_/ / |\\  | |_\\ \\ \n"
+            "    |___/  \\___/\\_| \\_/\\_| \\_/\\____/  \\_/   \\_| \\_/\\___/\\_| \\_/\\____/\n"
+            "    -----------------------------------------------------------------            \n"
+            "                                                                               \n";
         std::string menu =
-            "  ______ _____ _   _  _   __ _______   __  _   _______ _   _ _____             \n"
-            "  |  _  \\  _  | \\ | || | / /|  ___\\ \\ / / | | / /  _  | \\ | |  __ \\      \n"
-            "  | | | | | | |  \\| || |/ / | |__  \\ V /  | |/ /| | | |  \\| | |  \\/        \n"
-            "  | | | | | | | . ` ||    \\ |  __|  \\ /   |    \\| | | | . ` | | __          \n"
-            "  | |/ /\\ \\_/ / |\\  || |\\  \\| |___  | |   | |\\  \\ \\_/ / |\\  | |_\\ \\ \n"
-            "  |___/  \\___/\\_| \\_/\\_| \\_/\\____/  \\_/   \\_| \\_/\\___/\\_| \\_/\\____/\n"
-            "  -----------------------------------------------------------------            \n"
-            "                                                                               \n"
             "(1) Start Game                                                                 \n"
             "(2) Game Settings (colors and difficulty)                                      \n"
             "(8) Instructions and Controls                                                  \n"
             "(9) Exit                                                                       \n";
 
+        if (colors)
+            changeColor(ch_dk);
+        std::cout << header;
+        if (colors)
+            changeColor();
         std::cout << menu;
 
         gotoxy(0, 15);
@@ -125,18 +156,18 @@ void Menu::displayMenu() {
 
         choice = _getch();
 
-        switch (choice) {
+        switch (choice) { // handle choosing next menu through input
         case '1':
-            handleStartGame();
+            startGame();
             break;
         case '2':
-            handeOptions();
+            settingsMenu();
             break;
         case '8':
-            handlePresentInstructions();
+            instructionsMenu();
             break;
         case '9':
-            handleExit();
+            exitMenu();
             break;
         default:
             gotoxy(0, 15);

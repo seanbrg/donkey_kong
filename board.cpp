@@ -26,7 +26,7 @@ Board::Board(Stage* _stage, bool _colors) : stage(_stage), colors(_colors)
 	reset(stage);
 }
 
-void Board::addStage(Stage* _stage) {
+void Board::addStage(Stage* const _stage) {
 	if (stage == nullptr) {
 		stage = _stage;
 		reset(_stage);
@@ -35,25 +35,26 @@ void Board::addStage(Stage* _stage) {
 	else stage->addNextStage(_stage);
 }
 
-char Board::getChar(Point pos) const {
-	if (0 <= pos.getX() <= MAX_X - MIN_X && 0 <= pos.getY() <= MAX_Y - MIN_Y)
-		return currentBoard[pos.getY()][pos.getX()];
+char Board::getChar(const Point& pos) const {
+	return currentBoard[pos.getY()][pos.getX()];
 }
 
-void Board::drawChar(const char c, Point pos) {
-	if (0 <= pos.getX() <= MAX_X - MIN_X && 0 <= pos.getY() <= MAX_Y - MIN_Y) {
-		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-		std::cout << c;
-		currentBoard[pos.getY()][pos.getX()] = c;
-	}
-}
-
-void Board::restoreChar(Point pos) {
-	
+void Board::drawChar(char c, const Point& pos) const {
 	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
+	if (colors)
+		changeColor(c);
+
+	std::cout << c;
+}
+
+void Board::restoreChar(const Point& pos) const {
+	int x = pos.getX();
+	int y = pos.getY();
+
+	gotoxy(x + MIN_X, y + MIN_Y);
 
 	//get char of current pos
-	char current_char = currentBoard[pos.getY()][pos.getX()];
+	char current_char = currentBoard[y][x];
 
 	if (colors)
 		changeColor(current_char);
@@ -61,18 +62,17 @@ void Board::restoreChar(Point pos) {
 	std::cout << current_char;
 }
 
-void Board::restoreBoardExplosion(Point explosion)
+void Board::restoreBoardExplosion(const Point& explosion) const
 {
 	for (int x = 0 - explosion_range; x <= explosion_range; x++) {
 		for (int y = 0 - explosion_range; y <= explosion_range; y++) {
-			int explosion_x = explosion.getX() + x;
-			int explosion_y = explosion.getY() + y;
-			restoreChar({ explosion_x, explosion_y });
+			Point former_explosion = { explosion.getX() + x, explosion.getY() + y };
+			restoreChar(former_explosion);
 		}
 	}
 }
 
-void Board::reset(Stage* _stage)
+void Board::reset(const Stage* _stage)
 {
 	if (_stage != nullptr) {
 		for (int y = 0; y < MAX_Y; y++) {

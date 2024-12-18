@@ -3,15 +3,6 @@
 
 using namespace keys;
 
-void Mario::draw(char ch) const {
-	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-	if (pBoard->isColor())
-		changeColor(ch_mario);
-
-	std::cout << ch;
-}
-
-
 void Mario::keyPressed(char key)
 {
 	char lowkey = std::tolower(key);
@@ -75,4 +66,13 @@ bool Mario::move()
 
 	pos = new_pos;
 	return true;
+}
+
+void Mario::reset()
+{
+	pos = pBoard->startingPoint();
+	dir = STAY;
+	fall_counter = 0;
+	jump_counter = 0;
+	jumping = false;
 }

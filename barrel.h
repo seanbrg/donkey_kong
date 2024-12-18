@@ -15,18 +15,21 @@ class Barrel
 	bool active = true;
 	bool explode = false;
 	int fall_counter = 0;
+
 public:
-	Barrel(Point _pos, Key _dir, Board* _board) : pos(_pos), dir(_dir), pBoard(_board) {}
+	Barrel (const Point& _pos, Key _dir, Board* _board) : pos(_pos), dir(_dir), pBoard(_board) {}
 	Barrel() = default;
 
 	void move();
-	Point getPos() { return pos; }
-	void draw() const;
+	Point getPos() const { return pos; }
+	void draw(char ch = ch_barrel) const {
+		pBoard->drawChar(ch, pos);
+	}
 	void drawExplosion() const;
-	void erase() {
+	void erase() const {
 		pBoard->restoreChar(pos);
 	}
-	bool exploding() { return explode; }
-	bool exists() { return active; }
+	bool isExploding() const { return explode; }
+	bool exists() const { return active; }
 };
 

@@ -113,13 +113,13 @@ void Game::initStage1() // custom built stage 1
 		stage.addLadder(ladders[i]);
 }
 
-void Game::printStatus()
+void Game::printStatus() const
 {
-	gotoxy(MIN_X + 2, MIN_Y + 1);
+	gotoxy(MIN_X + 3, MIN_Y + 2);
 	std::cout << "LIVES: " << lives;
 }
 
-void Game::spawnBarrels(Point dk, bool thrown_twice)
+void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 {
 	static Key next = LEFT;
 	if (thrown_twice) { // option for harder difficulty
@@ -139,7 +139,7 @@ void Game::rollBarrels(bool& alive)
 	for (int i = 0; i < num_barrels; i++) {
 		barrels[i].erase();
 		barrels[i].move();
-		if (barrels[i].exploding()) {
+		if (barrels[i].isExploding()) {
 			barrels[i].drawExplosion();
 
 			int mario_x = mario.getPos().getX();
@@ -158,7 +158,7 @@ void Game::rollBarrels(bool& alive)
 			barrels[i].draw();
 		}
 		else {
-			if (barrels[i].exploding())
+			if (barrels[i].isExploding())
 				board.restoreBoardExplosion(barrels[i].getPos());
 
 			barrels.erase(barrels.begin() + i);
@@ -170,14 +170,14 @@ void Game::rollBarrels(bool& alive)
 void Game::reset()
 {
 	board.reset();
-	mario.reset();
 	num_barrels = 0;
 	barrels.clear();
 	board.print();
 	printStatus();
+	mario.reset();
 }
 
-bool Game::checkMarioBarrel()
+bool Game::checkMarioBarrel() const
 {
 	Point mario_pos = mario.getPos();
 	for (auto& barrel : barrels) {
@@ -187,7 +187,7 @@ bool Game::checkMarioBarrel()
 	return true;
 }
 
-void Game::printPauseWindow()
+void Game::printPauseWindow() const
 {
 	int center_x = (MAX_X - MIN_X) / 2;
 	int center_y = (MAX_Y - MIN_Y) / 2;
@@ -211,7 +211,7 @@ void Game::printPauseWindow()
 	std::cout << " +-------------------------------------------+ ";
 }
 
-void Game::printEndGameWindow(bool victory)
+void Game::printEndGameWindow(bool victory) const
 {
 	int center_x = (MAX_X - MIN_X) / 2;
 	int center_y = (MAX_Y - MIN_Y) / 2;
@@ -246,7 +246,7 @@ void Game::printEndGameWindow(bool victory)
 	}
 }
 
-void Game::unpause()
+void Game::unpause() const
 {
 	board.print();
 	printStatus();

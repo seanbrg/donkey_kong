@@ -6,7 +6,7 @@
 
 class Stage
 {
-	struct Floor // inner struct for saving floors...
+	struct Floor // inner struct for saving floors
 	{
 		Point start; // leftmost point
 		char type; // '<' '>' or '='
@@ -21,20 +21,18 @@ class Stage
 	Stage* next = nullptr;
 
 public:
-	Stage(Point _start, Point _win, Point _dk) : start_pos(_start), win_pos(_win), dk_pos(_dk) {}
+	Stage(const Point& _start, const Point& _win, const Point& _dk) : 
+		start_pos(_start), win_pos(_win), dk_pos(_dk) {}
 	Stage() = default;
 
-	void addFloor(Point _start, char _type, int _len) {
+	void addFloor(const Point& _start, char _type, int _len) {
 		floors.push_back({ _start, _type, _len });
 	}
-	void addLadder(const Point _ladder) {
-		ladders.push_back(_ladder);
-	}
-	void addNextStage(Stage* _next) {
-		next = _next;
-	}
+	void addLadder(const Point& _ladder) { ladders.push_back(_ladder); }
+	void addNextStage(Stage* _next) { next = _next; }
 	void load(char board[MAX_Y][MAX_X + 1]);
-	Stage* getNext() { return next; }
+
+	Stage* getNext() const { return next; }
 	Point startingPoint() const { return start_pos; }
 	Point winPoint() const { return win_pos; }
 	Point dkPoint() const { return dk_pos; }

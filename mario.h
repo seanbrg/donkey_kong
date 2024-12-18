@@ -22,22 +22,20 @@ class Mario
 	Board* pBoard = nullptr;
 
 public:
-	void setStart(Point _pos) { pos = _pos; }
-	Point getPos() { return pos; }
-	void draw(char ch = ch_mario) const;
-	void drawDead() {
-		draw(ch_dead_mario);
+	void setStart(const Point& _pos) { pos = _pos; }
+	Point getPos() const { return pos; }
+	void draw(const char ch = ch_mario) const { 
+		pBoard->drawChar(ch, pos); 
+	};
+	void drawDead() const { 
+		draw(ch_dead_mario); 
 	}
-	void erase() {
+	void erase() const {
 		pBoard->restoreChar(pos);
 	}
 	void keyPressed(char key);
 	bool move();
-	void reset() {
-		pos = pBoard->startingPoint();
-		dir = STAY;
-		fall_counter = 0;
-	}
+	void reset();
 	void setBoard(Board* board) {
 		pBoard = board;
 		pos = pBoard->startingPoint();
