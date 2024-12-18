@@ -6,7 +6,6 @@
 #include "board.h"
 
 using namespace keys;
-using namespace colors;
 
 class Mario
 {

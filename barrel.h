@@ -5,7 +5,6 @@
 #include "Board.h"
 
 using namespace keys;
-using namespace colors;
 
 class Barrel
 {

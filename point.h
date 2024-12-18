@@ -1,5 +1,6 @@
 #pragma once
 #include "utils.h"
+
 using namespace keys;
 
 class Point {

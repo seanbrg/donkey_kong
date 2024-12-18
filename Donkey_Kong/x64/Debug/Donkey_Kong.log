@@ -4,7 +4,9 @@
   main.cpp
   mario.cpp
   menu.cpp
-C:\Users\seanb\Documents\C++ Projects\donkey_kong\menu.cpp(155,22): warning C4129: 'A': unrecognized character escape sequence
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\menu.cpp(156,22): warning C4129: 'A': unrecognized character escape sequence
+  point.cpp
   stage.cpp
+  utils.cpp
   Generating Code...
   Donkey_Kong.vcxproj -> C:\Users\seanb\Documents\C++ Projects\donkey_kong\x64\Debug\Donkey_Kong.exe

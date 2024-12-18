@@ -11,6 +11,7 @@ void Menu::startGame() {
 void Menu::settingsMenu()
 {
     system("cls");
+
     if (colors)
         changeColor(ch_dk);
     std::cout << "Game Settings:\n\n";

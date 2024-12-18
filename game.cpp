@@ -2,12 +2,11 @@
 #include <Windows.h>
 #include <iostream>
 
-
 using namespace keys;
 
 void Game::run()
 {
-	system("cls");
+	system("cls"); // clear screen
 	initStage1();
 
 	board = Board(&stage, colors);
@@ -31,10 +30,10 @@ void Game::run()
 			if (key == ESC) { // pause game
 				key = 0;
 				printPauseWindow();
-				while (key != ESC && key != '1') {
+				while (key != ESC && key != '1') { // wait for input
 					key = _getch();
 				}
-				if (key == '1') {
+				if (key == '1') { // return to menu
 					skip_ending = true;
 					break;
 				}
@@ -42,31 +41,27 @@ void Game::run()
 			}
 			mario.keyPressed(key);
 		}
-		Sleep(250 - difficulty * 50);
+		Sleep(250 - difficulty * 50); // game speed
 		
-		if (mario.getPos() == pauline) {
+		if (mario.getPos() == pauline) { // victory condition
 			victory = true;
 		}
-		else {
-			mario.erase(); // move mario, reset board if he dies
-			bool alive = mario.move();
-			mario.draw(); // drawing mario twice helps prevent graphic flinching due to tiny lags
+		else { // move mario and barrels, reset board if he dies at any point
+			mario.erase(); 
+			bool alive = mario.move(); // death by fall damage?
 			if (alive) {
-				alive = checkMarioBarrel();
+				alive = checkMarioBarrel(); // death by moving into a barrel?
 				if (alive) {
-					if (frame % (20 - difficulty * 3) == 0) {
-						if (difficulty != 3)
-							spawnBarrels(stage.dkPoint());
-						else spawnBarrels(stage.dkPoint(), true);
+					if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
+						spawnBarrels(stage.dkPoint(), difficulty == 3); // double throw for hard diff
 					}
-
-					rollBarrels(alive);
+					rollBarrels(alive); // death by explosion?
 					if (alive)
-						alive = checkMarioBarrel();
+						alive = checkMarioBarrel(); // death by movement of a barrel?
 				}
 			}
 
-			if (!alive) {
+			if (!alive) { // lower life and reset board
 				lives--;
 				mario.drawDead();
 				Sleep(1400);
@@ -76,7 +71,7 @@ void Game::run()
 			frame++;
 		}
 	}
-	if (!skip_ending)
+	if (!skip_ending) // ending window
 		printEndGameWindow(victory);
 }
 
@@ -141,7 +136,7 @@ void Game::rollBarrels(bool& alive)
 		barrels[i].move();
 		if (barrels[i].isExploding()) {
 			barrels[i].drawExplosion();
-
+			// check if mario is within range of the explosion
 			int mario_x = mario.getPos().getX();
 			int mario_y = mario.getPos().getY();
 			int explosion_x = barrels[i].getPos().getX();
@@ -157,7 +152,7 @@ void Game::rollBarrels(bool& alive)
 		if (barrels[i].exists()) {
 			barrels[i].draw();
 		}
-		else {
+		else { // if barrel doesn't exist anymore is erased
 			if (barrels[i].isExploding())
 				board.restoreBoardExplosion(barrels[i].getPos());
 
@@ -189,8 +184,8 @@ bool Game::checkMarioBarrel() const
 
 void Game::printPauseWindow() const
 {
-	int center_x = (MAX_X - MIN_X) / 2;
-	int center_y = (MAX_Y - MIN_Y) / 2;
+	const int center_x = (MAX_X - MIN_X) / 2;
+	const int center_y = (MAX_Y - MIN_Y) / 2;
 
 	if (colors)
 		changeColor(); // to white
@@ -213,8 +208,8 @@ void Game::printPauseWindow() const
 
 void Game::printEndGameWindow(bool victory) const
 {
-	int center_x = (MAX_X - MIN_X) / 2;
-	int center_y = (MAX_Y - MIN_Y) / 2;
+	const int center_x = (MAX_X - MIN_X) / 2;
+	const int center_y = (MAX_Y - MIN_Y) / 2;
 
 	if (colors)
 		changeColor(); // to white
@@ -241,7 +236,7 @@ void Game::printEndGameWindow(bool victory) const
 
 
 	char key = 0;
-	while (key != ESC) {
+	while (key != ESC) { // wait for input
 		key = _getch();
 	}
 }
