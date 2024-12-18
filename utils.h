@@ -7,6 +7,8 @@ void gotoxy(int x, int y);
 
 void ShowConsoleCursor(bool showFlag);
 
+void changeColor(char type = ' ');
+
 namespace keys {
 	enum Key {
 		LEFT = 'a',
@@ -21,14 +23,20 @@ namespace keys {
 namespace colors {
 	enum Color {
 		RED = FOREGROUND_RED,
+		BRIGHT_RED = FOREGROUND_RED | FOREGROUND_INTENSITY,
+		ORANGE = FOREGROUND_RED | FOREGROUND_GREEN,
+		BRIGHT_YELLOW = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
 		BLUE = FOREGROUND_BLUE,
+		BRIGHT_BLUE = FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+		PINK = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+		GREEN = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
 		WHITE = (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE)
 	};
 };
 
-static constexpr int MIN_X = 1;
+static constexpr int MIN_X = 0;
 static constexpr int MIN_Y = 0;
-static constexpr int MAX_X = 80;
+static constexpr int MAX_X = 79;
 static constexpr int MAX_Y = 25;
 static const int explosion_range = 2;
 

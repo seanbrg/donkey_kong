@@ -9,7 +9,8 @@ void Game::run()
 {
 	system("cls");
 	initStage1();
-	board.addStage(&stage);
+
+	board = Board(&stage, colors);
 
 	ShowConsoleCursor(false);
 	board.print();
@@ -41,19 +42,20 @@ void Game::run()
 			}
 			mario.keyPressed(key);
 		}
-		Sleep(240 - difficulty * 40);
+		Sleep(250 - difficulty * 50);
 		
-		if (mario.getPos() == pauline.neighbor(LEFT) || mario.getPos() == pauline.neighbor(RIGHT)) {
+		if (mario.getPos() == pauline) {
 			victory = true;
 		}
 		else {
 			mario.erase(); // move mario, reset board if he dies
 			bool alive = mario.move();
+			mario.draw(); // drawing mario twice helps prevent graphic flinching due to tiny lags
 			if (alive) {
 				alive = checkMarioBarrel();
 				if (alive) {
 					if (frame % (20 - difficulty * 3) == 0) {
-						if (difficulty != 4)
+						if (difficulty != 3)
 							spawnBarrels(stage.dkPoint());
 						else spawnBarrels(stage.dkPoint(), true);
 					}
@@ -190,6 +192,9 @@ void Game::printPauseWindow()
 	int center_x = (MAX_X - MIN_X) / 2;
 	int center_y = (MAX_Y - MIN_Y) / 2;
 
+	if (colors)
+		changeColor(); // to white
+
 	gotoxy(center_x - 22, center_y - 3);
 	std::cout << " +-------------------------------------------+ ";
 	gotoxy(center_x - 22, center_y - 2);
@@ -210,6 +215,9 @@ void Game::printEndGameWindow(bool victory)
 {
 	int center_x = (MAX_X - MIN_X) / 2;
 	int center_y = (MAX_Y - MIN_Y) / 2;
+
+	if (colors)
+		changeColor(); // to white
 
 	gotoxy(center_x - 22, center_y - 3);
 	std::cout << " +-----------------------------------------+ ";

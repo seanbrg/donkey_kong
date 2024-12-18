@@ -12,7 +12,7 @@ class Game
 {
 	int lives = 3;
 	int num_barrels = 0;
-	bool colors;
+	bool colors = true;
 	int difficulty;
 
 	Mario mario;
@@ -20,9 +20,7 @@ class Game
 	Stage stage;
 	std::vector<Barrel> barrels;
 public:
-	Game(bool _colors = false, int _difficulty = 2) : colors(_colors), difficulty(_difficulty) {
-		if (difficulty == 4) lives = 1;
-	}
+	Game(bool _colors = false, int _difficulty = 2) : colors(_colors), difficulty(_difficulty) {}
 
 	void run();
 	void initStage1();

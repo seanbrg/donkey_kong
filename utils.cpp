@@ -1,4 +1,7 @@
 #include "utils.h"
+#include <Windows.h>
+
+using namespace colors;
 
 void gotoxy(int x, int y) {
     std::cout.flush();
@@ -14,4 +17,39 @@ void ShowConsoleCursor(bool showFlag) {
     GetConsoleCursorInfo(out, &cursorInfo);
     cursorInfo.bVisible = showFlag; // set the cursor visibility
     SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+void changeColor(char type)
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    unsigned short color;
+    switch (type) {
+	case ch_mario:
+		color = BRIGHT_YELLOW;
+		break;
+	case ch_floor_flat:
+		color = BRIGHT_RED;
+		break;
+	case ch_floor_left:
+		color = BRIGHT_RED;
+		break;
+	case ch_floor_right:
+		color = BRIGHT_RED;
+		break;
+	case ch_ladder:
+		color = BRIGHT_BLUE;
+		break;
+	case ch_pauline:
+		color = PINK;
+		break;
+	case ch_explosion:
+		color = ORANGE;
+		break;
+	case ch_dk:
+		color = ORANGE;
+		break;
+	default:
+		color = WHITE;
+	}
+		SetConsoleTextAttribute(hConsole, color);
 }

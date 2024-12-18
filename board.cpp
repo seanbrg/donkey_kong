@@ -7,7 +7,7 @@
 
 using namespace colors;
 
-Board::Board(Stage* _stage) : stage(_stage)
+Board::Board(Stage* _stage, bool _colors) : stage(_stage), colors(_colors)
 {
 	for (int x = 0; x <= MAX_X - MIN_X; x++)
 		blankBoard[0][x] = ch_border;
@@ -48,36 +48,18 @@ void Board::drawChar(const char c, Point pos) {
 	}
 }
 
-
-
-/*void Board::restoreChar(Point pos) {
-	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-	std::cout << currentBoard[pos.getY()][pos.getX()];
-}*/
-
 void Board::restoreChar(Point pos) {
 	
 	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
 
 	//get char of current pos
-	char currentChar = currentBoard[pos.getY()][pos.getX()];
+	char current_char = currentBoard[pos.getY()][pos.getX()];
 
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	//set color based on the char
-	if (currentChar == ch_ladder) {
-		SetConsoleTextAttribute(hConsole, RED);
-	}
-	else if (currentChar == ch_floor_flat || currentChar == ch_floor_left || currentChar == ch_floor_right) {
-		SetConsoleTextAttribute(hConsole, BLUE);
-	}
-	else {
-		SetConsoleTextAttribute(hConsole, WHITE);//white
-	}
+	if (colors)
+		changeColor(current_char);
 
-	std::cout << currentChar;
+	std::cout << current_char;
 }
-
-
 
 void Board::restoreBoardExplosion(Point explosion)
 {
@@ -104,38 +86,21 @@ void Board::reset(Stage* _stage)
 	}
 }
 
-/*void Board::print() const {
-	for (int i = 0; i < MAX_Y; i++) {
-		gotoxy(MIN_X, MIN_Y + i);
-		std::cout << currentBoard[i] << '\n';
-	}
-}*/
-
 void Board::print() const {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); 
 
 	for (int i = 0; i < MAX_Y; i++) {
 		gotoxy(MIN_X, MIN_Y + i);  
 
-		for (int j = 0; j < MAX_X; j++) {
-			char currentChar = currentBoard[i][j];
-			unsigned short color = WHITE;
+		for (int j = 0; j < MAX_X + 1; j++) {
+			char current_char = currentBoard[i][j];
+			if (colors)
+				changeColor(current_char);
 
-			if (currentChar == ch_floor_flat || currentChar == ch_floor_left || currentChar == ch_floor_right) {
-				color = BLUE;
-			}
-			else if (currentChar == ch_ladder) {
-				color = RED;
-			}
-			else {
-				color = WHITE;
-			}
-			SetConsoleTextAttribute(hConsole, color);
-
-			std::cout << currentChar;
+			std::cout << current_char;
 		}
-
-		std::cout << '\n';
+		if (i < MAX_Y - 1)
+			std::cout << '\n';
 	}
 	SetConsoleTextAttribute(hConsole, WHITE);
 }

@@ -42,6 +42,15 @@ void Barrel::move() // return if alive
 	}
 }
 
+void Barrel::draw() const
+{
+	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
+	if (pBoard->isColor())
+		changeColor(ch_barrel);
+
+	std::cout << ch_barrel;
+}
+
 void Barrel::drawExplosion() const
 {
 	for (int x = 0 - explosion_range; x <= explosion_range; x++) {
@@ -50,6 +59,9 @@ void Barrel::drawExplosion() const
 			int explosion_y = pos.getY() + y;
 			if (pBoard->getChar({ explosion_x, explosion_y }) == ' ') {
 				gotoxy(explosion_x + MIN_X, explosion_y + MIN_Y);
+				if (pBoard->isColor())
+					changeColor(ch_explosion);
+
 				std::cout << ch_explosion;
 			}
 		}

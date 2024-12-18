@@ -1,9 +1,11 @@
 #pragma once
+#include <Windows.h>
 #include "utils.h"
 #include "point.h"
 #include "Board.h"
 
 using namespace keys;
+using namespace colors;
 
 class Barrel
 {
@@ -19,10 +21,7 @@ public:
 
 	void move();
 	Point getPos() { return pos; }
-	void draw() const {
-		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-		std::cout << ch_barrel;
-	}
+	void draw() const;
 	void drawExplosion() const;
 	void erase() {
 		pBoard->restoreChar(pos);

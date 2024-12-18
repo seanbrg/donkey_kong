@@ -4,7 +4,7 @@
 
 class Menu {
     int difficulty = 2;
-    bool colors = false;
+    bool colors = true;
 public:
     
     void handleStartGame();

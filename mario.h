@@ -1,10 +1,12 @@
 #pragma once
+#include <Windows.h>
 #include <iostream>
 #include "utils.h"
 #include "point.h"
 #include "board.h"
 
 using namespace keys;
+using namespace colors;
 
 class Mario
 {
@@ -22,10 +24,7 @@ class Mario
 public:
 	void setStart(Point _pos) { pos = _pos; }
 	Point getPos() { return pos; }
-	void draw(char ch = ch_mario) const {
-		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-		std::cout << ch;
-	}
+	void draw(char ch = ch_mario) const;
 	void drawDead() {
 		draw(ch_dead_mario);
 	}

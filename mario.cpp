@@ -3,6 +3,15 @@
 
 using namespace keys;
 
+void Mario::draw(char ch) const {
+	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
+	if (pBoard->isColor())
+		changeColor(ch_mario);
+
+	std::cout << ch;
+}
+
+
 void Mario::keyPressed(char key)
 {
 	char lowkey = std::tolower(key);
@@ -59,8 +68,8 @@ bool Mario::move()
 			climbing = false;
 			dir = STAY;
 		}
-		if (new_tile != ' ') {
-			new_pos = pos;
+		if (new_tile != ' ' && new_tile != ch_pauline && new_tile != ch_dk) {
+			new_pos = pos; // mario is not allowed to talk into floors or walls
 		}
 	}
 
