@@ -1,6 +1,7 @@
 #include "game.h"
 #include <Windows.h>
 #include <iostream>
+#include "ghost.h"
 
 using namespace keys;
 
@@ -21,7 +22,7 @@ void Game::run()
 	bool skip_ending = false; // for immediately ending the game if needed
 	Point pauline = stage.winPoint();
 	int frame = 0; // for controlling when a barrel spawns
-
+	
 	while (lives > 0 && !victory) {
 		mario.draw();
 		if (_kbhit()) {
@@ -33,6 +34,22 @@ void Game::run()
 
 			mario.keyPressed(key);
 		}
+		/*************************************/
+		//move ghosts
+		
+		for (auto& ghost : stage.getGhosts()) {
+			ghost.move(); 
+			/*if (ghost.detectMario(mario.getPos())) { //meet mario
+				lives--; // Mario loses a life
+				mario.drawDead();
+				reset(); // Reset board
+				frame = 0;
+				break;
+			}*/
+			ghost.draw();  // Draw the ghost at its new position
+		}
+		
+		/*************************************/
 		Sleep(250 - difficulty * 50); // game speed
 		
 		if (mario.getPos() == pauline) { // victory condition
@@ -98,6 +115,10 @@ void Game::initStage1() // custom built stage 1
 
 	for (int i = 0; i < NUM_LADDERS; i++)
 		stage.addLadder(ladders[i]);
+
+
+	stage.addGhost(Ghost({ 9, 18 }, RIGHT, &board));
+
 }
 
 void Game::printStatus() const

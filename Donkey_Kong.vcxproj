@@ -130,6 +130,7 @@
     <ClInclude Include="barrel.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="ghost.h" />
     <ClInclude Include="mario.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="point.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="barrel.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="ghost.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mario.cpp" />
     <ClCompile Include="menu.cpp" />

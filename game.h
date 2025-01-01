@@ -7,7 +7,7 @@
 #include "mario.h"
 #include "stage.h"
 #include "barrel.h"
-
+#include "ghost.h"
 /**
  * holds and manages the main game logic of the donkey kong game.
  */
@@ -22,6 +22,7 @@ class Game
 	Board board;
 	Stage stage;
 	std::vector<Barrel> barrels;
+	std::vector<Ghost> ghosts;
 
 public:
 

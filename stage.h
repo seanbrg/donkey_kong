@@ -3,7 +3,7 @@
 #include <vector>
 #include "point.h"
 #include "utils.h"
-
+#include "ghost.h"
 /**
  * represents a single stage (level) in the game.
  * includes floors, ladders, and key positions such as starting, winning, and donkey kong's position.
@@ -22,6 +22,7 @@ class Stage
 	Point dk_pos;					// position from which barrels spawn
 	std::vector<Floor> floors;
 	std::vector<Point> ladders;
+	std::vector<Ghost> ghosts;
 	Stage* next = nullptr;
 
 public:
@@ -90,5 +91,13 @@ public:
 	 * @return the donkey kong position as a point.
 	 */
 	Point dkPoint() const { return dk_pos; }
+
+
+	/***************************************************************/
+	void addGhost(const Ghost& ghost) {ghosts.push_back(ghost);}
+
+	std::vector<Ghost> getGhosts() const { return ghosts; }
+
+	/***************************************************************/
 };
 

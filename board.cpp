@@ -99,6 +99,10 @@ void Board::print() const {
 
 			std::cout << current_char;
 		}
+		
+		
+
+
 		if (i < MAX_Y - 1)
 			std::cout << '\n';
 	}

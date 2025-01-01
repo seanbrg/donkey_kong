@@ -2,7 +2,7 @@
 #include "utils.h"
 #include "point.h"
 #include "stage.h"
-
+#include "ghost.h"
 /**
  * class representing the game board.
  * handles the board's state, display, and interactions with the game stage.
@@ -16,6 +16,8 @@ class Board {
 	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario)
 	char blankBoard[MAX_Y][MAX_X + 1]; // board with only borders
 	char originalStageBoard[MAX_Y][MAX_X + 1]; // board with borders, floors and ladders
+
+	
 	
 public:
 
@@ -30,6 +32,7 @@ public:
 	 */
 	Board() = default;
 
+	
 	/**
 	 * resets the board to the initial stage.
 	 * @param _stage: pointer to the stage to reset to.
