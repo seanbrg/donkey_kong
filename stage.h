@@ -94,9 +94,18 @@ public:
 
 
 	/***************************************************************/
-	void addGhost(const Ghost& ghost) {ghosts.push_back(ghost);}
 
-	std::vector<Ghost> getGhosts() const { return ghosts; }
+	/**
+	 * Adds a ghost to the stage.
+	 * @param ghost: The ghost to add.
+	 */
+	void addGhost(const Ghost& ghost) { ghosts.push_back(ghost); }
+
+	/**
+	 * Gets the list of ghosts in the stage.
+	 * @return A reference to the vector of ghosts.
+	 */
+	std::vector<Ghost>& getGhosts() { return ghosts; }
 
 	/***************************************************************/
 };

@@ -1,2 +1,13 @@
-﻿  ghost.cpp
-  Donkey_Kong.vcxproj -> C:\Users\Anna\Source\Repos\donkey_konguu\x64\Debug\Donkey_Kong.exe
+﻿  barrel.cpp
+  board.cpp
+  game.cpp
+  ghost.cpp
+  main.cpp
+  mario.cpp
+  menu.cpp
+C:\Users\Anna\source\repos\donkey_konga\menu.cpp(154,22): warning C4129: 'A': unrecognized character escape sequence
+  point.cpp
+  stage.cpp
+  utils.cpp
+  Generating Code...
+  Donkey_Kong.vcxproj -> C:\Users\Anna\Source\Repos\donkey_konga\x64\Debug\Donkey_Kong.exe

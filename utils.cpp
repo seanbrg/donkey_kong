@@ -51,6 +51,9 @@ void changeColor(char type)
 	case ch_dk:
 		color = ORANGE;
 		break;
+	case ch_ghost:
+		color = GREEN;
+		break;
 	case 'e': // easy (for the menu)
 		color = GREEN;
 		break;

@@ -13,38 +13,44 @@ class Board;
  */
 class Ghost {
 private:
-    Point pos;      
-    Key dir;       
-    Board* board;        
+    Point pos;
+    Key dir;
+    Board* pBoard;
+
+    static constexpr double SAME_DIR_PROB = 0.95;
 
 public:
     /**
-     * Constructor for the Ghost.
-     * @param pos: Initial position of the ghost.
-     * @param dir: Initial direction of the ghost.
-     * @param b: Pointer to the board.
-     */
-    Ghost(Point _pos, Key _dir, Board* _b);
+    * Constructor to initialize a ghost with position, direction, and board reference.
+    * @param _pos: Initial position of the ghost.
+    * @param _dir: Initial direction of the ghost.
+    * @param _board: Pointer to the game board.
+    */
+    Ghost(const Point& _pos, Key _dir, Board* _board)
+        : pos(_pos), dir(_dir), pBoard(_board) {}
 
     /**
      * Moves the ghost 
      */
-    void move();
+    void move(const std::vector<Ghost>& allGhosts);
 
     /**
-     * Detects if the ghost collides with Mario 
-     * @param marioPos: The position of Mario.
-     * @return true if the ghost collides with Mario, false otherwise.
+     * Draws the ghost on the board.
      */
-    bool detectMario(Point marioPos);
+    void draw(char ch = ch_ghost) const;
 
     /**
-     * Reverses the ghost's direction.
+     * Erases the ghost from the board.
      */
-    void reverseDirection();
+    void erase() const;
 
     /**
-     * Draws the ghost on the board at its current position.
+     * Gets the current position of the ghost.
      */
-    void draw() const;
+    Point getPos() const { return pos; }
+
+    /**
+     * Sets the direction of the ghost.
+     */
+    void setDirection(Key newDir) { dir = newDir; }
 };

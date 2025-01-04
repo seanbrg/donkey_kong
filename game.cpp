@@ -38,17 +38,18 @@ void Game::run()
 		//move ghosts
 		
 		for (auto& ghost : stage.getGhosts()) {
-			ghost.move(); 
-			/*if (ghost.detectMario(mario.getPos())) { //meet mario
-				lives--; // Mario loses a life
+			ghost.erase();
+			ghost.move(stage.getGhosts());
+			ghost.draw();
+
+			if (ghost.getPos() == mario.getPos()) {
+				lives--; 
 				mario.drawDead();
-				reset(); // Reset board
-				frame = 0;
+				reset(); 
 				break;
-			}*/
-			ghost.draw();  // Draw the ghost at its new position
+			}
 		}
-		
+
 		/*************************************/
 		Sleep(250 - difficulty * 50); // game speed
 		
@@ -118,7 +119,12 @@ void Game::initStage1() // custom built stage 1
 
 
 	stage.addGhost(Ghost({ 9, 18 }, RIGHT, &board));
+	
 
+	stage.addGhost(Ghost({ 25, 9 }, RIGHT, &board));
+	stage.addGhost(Ghost({ 8, 9 }, RIGHT, &board));
+
+	stage.addGhost(Ghost({ 60, 10 }, RIGHT, &board));
 }
 
 void Game::printStatus() const

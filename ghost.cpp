@@ -1,51 +1,43 @@
-#include "Ghost.h"
-#include "Board.h"  
+#include "ghost.h"
+#include "board.h"
+#include "stage.h" 
+#include <cstdlib>
 
-Ghost::Ghost(Point _pos, Key _dir, Board* _b)
-    : pos(_pos), dir(_dir), board(_b) {}
 
-void Ghost::move() {
-    
-    /*if (rand() % 100 < 5) {  // 5% chance to change direction
-        dir = LEFT;
-    }*/
 
-    /*Point new_pos = pos.neighbor(dir);//pos based on current direction
-    char tileAtNewPos = board->getChar(newPos);
+void Ghost::move(const std::vector<Ghost>& allGhosts) {
 
-    
-    if (tileAtNewPos == ' ') {
-        pos = new_pos;
+    double random = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    if (random > SAME_DIR_PROB) {
+        dir = (dir == LEFT) ? RIGHT : LEFT;
+    }
+
+    Point next_pos = pos.neighbor(dir);
+    char next_tile = pBoard->getChar(next_pos);
+    char below_tile = pBoard->getChar(next_pos.neighbor(DOWN));
+
+    for (const Ghost& ghost : allGhosts) {
+        if (&ghost != this && ghost.getPos() == next_pos) {
+            
+            dir = (dir == LEFT) ? RIGHT : LEFT;
+            return;
+        }
+    }
+
+    if ( below_tile == ch_floor_left || below_tile == ch_floor_right || below_tile == ch_floor_flat || below_tile == ch_ladder) {
+        pos = next_pos;
     }
     else {
-        reverseDirection();
-    }*/
-	
-	
-    Point new_pos = pos.neighbor(dir);
-
-	pos = new_pos;
-
-	
-
-}
-
-
-bool Ghost::detectMario(Point marioPos) {
-    return pos == marioPos; 
-}
-
-void Ghost::reverseDirection() {
-    
-    if (dir == LEFT) {
-        dir = RIGHT;
-    }
-    else if (dir == RIGHT) {
-        dir = LEFT;
+        //change direction 
+        dir = (dir == LEFT) ? RIGHT : LEFT;
     }
 }
 
 
-void Ghost::draw() const {
-    board->drawChar('X', pos);
+void Ghost::draw(char ch) const { 
+    pBoard->drawChar(ch, pos);
+}
+
+void Ghost::erase() const { 
+    pBoard->restoreChar(pos); 
 }
