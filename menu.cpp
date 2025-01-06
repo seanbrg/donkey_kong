@@ -6,6 +6,32 @@ void Menu::startGame() {
     game.run();  
 }
 
+void Menu::display() {
+    system("cls"); // clear screen
+
+    while (current_menu != 9) {
+        switch (current_menu) { // display the current menu
+        case 1:
+            startGame();
+            break;
+        case 2:
+            settingsMenu();
+            break;
+        case 8:
+            instructionsMenu();
+            break;
+        case 9: // exit
+            break;
+        default:
+            mainMenu();
+            break;
+        }
+    }
+
+    gotoxy(0, 15);
+    std::cout << "\nExiting game...                          \n"; // exit message
+}
+
 void Menu::settingsMenu()
 {
     system("cls");
@@ -14,7 +40,7 @@ void Menu::settingsMenu()
         changeColor(ch_dk);
     std::cout << "Game Settings:\n\n";
     std::cout << "Currently the difficulty is set to ";
-    switch (difficulty) {
+    switch (difficulty) { // print difficulty level
     case 1:
         if (colors)
             changeColor('e');
@@ -69,6 +95,7 @@ void Menu::settingsMenu()
         colors = !colors;
         break;
     case '9':
+        current_menu = 0; // return to main menu
         break;
     default:
         gotoxy(0, 14);
@@ -78,12 +105,9 @@ void Menu::settingsMenu()
         std::cout << "\n                                   \n";
         break;
     }
-
-    if (choice != '9')
-        settingsMenu();
 }
 
-void Menu::instructionsMenu() const {
+void Menu::instructionsMenu() {
     system("cls");
 
     std::string instructions = 
@@ -104,7 +128,8 @@ void Menu::instructionsMenu() const {
         " - Press 's' to stay in place.\n"
         "\nAdditional keys:\n"
         "****************\n"
-        " - Press 'ESC' to pause the game.\n";
+        " - Press 'ESC' to pause the game.\n"
+        "\nPress any key to return to the main menu.\n";
 
     if (colors)
         changeColor(ch_dk);
@@ -115,65 +140,43 @@ void Menu::instructionsMenu() const {
     std::cout << controls;
 
     _getch(); // await input to return to main menu
+    current_menu = 0;
 }
 
-
-void Menu::exitMenu() const {
-    gotoxy(0, 15);
-    std::cout << "\nExiting game...                          \n";
-}
-
-void Menu::display() {
+void Menu::mainMenu() {
     char choice = '\0';
+    system("cls");  
+    std::string header =
+        "    ______ _____ _   _  _   __ _______   __  _   _______ _   _ _____           \n"
+        "    |  _  \\  _  | \\ | || | / /|  ___\\ \\ / / | | / /  _  | \\ | |  __ \\    \n"
+        "    | | | | | | |  \\| || |/ / | |__  \\ V /  | |/ /| | | |  \\| | |  \\/        \n"
+        "    | | | | | | | . ` ||    \\ |  __|  \\ /   |    \\| | | | . ` | | __          \n"
+        "    | |/ /\\ \\_/ / |\\  || |\\  \\| |___  | |   | |\\  \\ \\_/ / |\\  | |_\\ \\ \n"
+        "    |___/  \\___/\\_| \\_/\\_| \\_/\\____/  \\_/   \\_| \\_/\\___/\\_| \\_/\\____/\n"
+        "    -----------------------------------------------------------------            \n"
+        "                                                                               \n";
+    std::string menu =
+        "(1) Start Game                                                                 \n"
+        "(2) Game Settings (colors and difficulty)                                      \n"
+        "(8) Instructions and Controls                                                  \n"
+        "(9) Exit                                                                       \n";
 
-    while (choice != '9') {
-        system("cls");  
-        std::string header =
-            "    ______ _____ _   _  _   __ _______   __  _   _______ _   _ _____           \n"
-            "    |  _  \\  _  | \\ | || | / /|  ___\\ \\ / / | | / /  _  | \\ | |  __ \\    \n"
-            "    | | | | | | |  \\| || |/ / | |__  \\ V /  | |/ /| | | |  \\| | |  \\/        \n"
-            "    | | | | | | | . ` ||    \\ |  __|  \\ /   |    \\| | | | . ` | | __          \n"
-            "    | |/ /\\ \\_/ / |\\  || |\\  \\| |___  | |   | |\\  \\ \\_/ / |\\  | |_\\ \\ \n"
-            "    |___/  \\___/\\_| \\_/\\_| \\_/\\____/  \\_/   \\_| \\_/\\___/\\_| \\_/\\____/\n"
-            "    -----------------------------------------------------------------            \n"
-            "                                                                               \n";
-        std::string menu =
-            "(1) Start Game                                                                 \n"
-            "(2) Game Settings (colors and difficulty)                                      \n"
-            "(8) Instructions and Controls                                                  \n"
-            "(9) Exit                                                                       \n";
+    if (colors)
+        changeColor(ch_dk);
+    std::cout << header; // print header
+    if (colors)
+        changeColor();
+    std::cout << menu; // print menu
 
-        if (colors)
-            changeColor(ch_dk);
-        std::cout << header;
-        if (colors)
-            changeColor();
-        std::cout << menu;
+    gotoxy(0, 15);
+    std::cout << "\n\Awaiting input:                         \n";
 
+    choice = _getch();
+
+    while (choice != '1' && choice != '2' && choice != '8' && choice != '9') { // wait for correct input
         gotoxy(0, 15);
-        std::cout << "\n\Awaiting input:                         \n";
-
+        std::cout << "\nInvalid choice. Please try again.\n";
         choice = _getch();
-
-        switch (choice) { // handle choosing next menu through input
-        case '1':
-            startGame();
-            break;
-        case '2':
-            settingsMenu();
-            break;
-        case '8':
-            instructionsMenu();
-            break;
-        case '9':
-            exitMenu();
-            break;
-        default:
-            gotoxy(0, 15);
-            std::cout << "\nInvalid choice. Please try again.\n";
-            Sleep(800);
-            break;
-        }
     }
-    
+    current_menu = choice - '0'; // update menu
 }
