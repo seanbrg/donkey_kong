@@ -24,7 +24,7 @@ void Ghost::move(const std::vector<Ghost>& allGhosts) {
         }
     }
 
-    if ( below_tile == ch_floor_left || below_tile == ch_floor_right || below_tile == ch_floor_flat || below_tile == ch_ladder) {
+    if ( below_tile != ch_blank) {
         pos = next_pos;
     }
     else {

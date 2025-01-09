@@ -13,6 +13,7 @@ void Menu::display() {
         switch (current_menu) { // display the current menu
         case 1:
             startGame();
+            current_menu = 0;
             break;
         case 2:
             settingsMenu();

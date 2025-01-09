@@ -8,9 +8,11 @@
 #include "stage.h"
 #include "barrel.h"
 #include "ghost.h"
+
 /**
  * holds and manages the main game logic of the donkey kong game.
  */
+
 class Game
 {
 	int lives = 3;
@@ -61,6 +63,11 @@ public:
 	 * becomes false if mario dies in an explosion.
 	 */
 	void rollBarrels(bool& alive);
+
+	/**
+	 * updates the position of all ghosts.
+	 */
+	void moveGhosts();
 	
 	/**
 	 * resets the game state, including mario, barrels, and the board.
@@ -68,10 +75,10 @@ public:
 	void reset();
 	
 	/**
-	 * checks if mario is in the same position as any barrel.
-	 * @return true if mario avoids barrels, false if hit.
+	 * checks if mario is in the same position as any barrel or ghost.
+	 * @return true if mario avoids barrels or ghosts, false if hit.
 	 */
-	bool checkMarioBarrel() const;
+	bool checkMarioDeath() const;
 	
 	/**
 	 * displays the pause window with instructions to resume or quit the game.

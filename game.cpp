@@ -1,7 +1,6 @@
 #include "game.h"
 #include <Windows.h>
 #include <iostream>
-#include "ghost.h"
 
 using namespace keys;
 
@@ -11,6 +10,7 @@ void Game::run()
 	initStage1();
 
 	board = Board(&stage, colors);
+	ghosts = stage.getGhosts();
 
 	ShowConsoleCursor(false);
 	board.print();
@@ -34,21 +34,6 @@ void Game::run()
 
 			mario.keyPressed(key);
 		}
-		/*************************************/
-		//move ghosts
-		
-		for (auto& ghost : stage.getGhosts()) {
-			ghost.erase();
-			ghost.move(stage.getGhosts());
-			ghost.draw();
-
-			if (ghost.getPos() == mario.getPos()) {
-				lives--; 
-				mario.drawDead();
-				reset(); 
-				break;
-			}
-		}
 
 		/*************************************/
 		Sleep(250 - difficulty * 50); // game speed
@@ -60,14 +45,17 @@ void Game::run()
 			mario.erase(); 
 			bool alive = mario.move(); // death by fall damage?
 			if (alive) {
-				alive = checkMarioBarrel(); // death by moving into a barrel?
+				alive = checkMarioDeath(); // death by moving into a barrel?
 				if (alive) {
 					if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
 						spawnBarrels(stage.dkPoint(), difficulty == 3); // double throw for hard diff
 					}
+
 					rollBarrels(alive); // death by explosion?
+					moveGhosts();
+
 					if (alive)
-						alive = checkMarioBarrel(); // death by movement of a barrel?
+						alive = checkMarioDeath(); // death by movement of a barrel?
 				}
 			}
 
@@ -181,6 +169,15 @@ void Game::rollBarrels(bool& alive)
 	}
 }
 
+void Game::moveGhosts()
+{
+	for (auto& ghost : ghosts) {
+		ghost.erase();
+		ghost.move(ghosts);
+		ghost.draw();
+	}
+}
+
 void Game::reset()
 {
 	board.reset();
@@ -191,11 +188,15 @@ void Game::reset()
 	mario.reset();
 }
 
-bool Game::checkMarioBarrel() const
+bool Game::checkMarioDeath() const
 {
 	Point mario_pos = mario.getPos();
 	for (auto& barrel : barrels) {
 		if (mario_pos == barrel.getPos())
+			return false;
+	}
+	for (auto& ghost : ghosts) {
+		if (mario_pos == ghost.getPos())
 			return false;
 	}
 	return true;

@@ -56,6 +56,7 @@ static constexpr int MAX_Y = 25;
 static const int explosion_range = 2;
 
 // printed characters of all game elements:
+static const char ch_blank = ' ';
 static const char ch_border = 'Q';
 static const char ch_ladder = 'H';
 static const char ch_floor_flat = '=';
