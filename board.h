@@ -87,5 +87,11 @@ public:
 	* @return the starting point as a Point object.
 	*/
 	Point startingPoint() const { return stage->startingPoint(); }
+
+	/**
+	* gets the first location of the hammer.
+	* @return the hammer location as a Point object.
+	*/
+	Point hammerPoint() const { return stage->hammerPoint(); }
 };
 

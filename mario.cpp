@@ -7,15 +7,15 @@ void Mario::keyPressed(char key)
 {
 	char lowkey = std::tolower(key);
 
-	if (lowkey == UP && pBoard->getChar(pos) == ch_ladder) {
+	if (lowkey == UP && board->getChar(pos) == ch_ladder) {
 		climbing = true; // climb up
 		dir = (Key)lowkey;
 	}
-	else if (lowkey == DOWN && pBoard->getChar(pos.neighbor(DOWN)) == ch_ladder) {
+	else if (lowkey == DOWN && board->getChar(pos.neighbor(DOWN)) == ch_ladder) {
 		climbing = true; // climb down
 		dir = (Key)lowkey;
 	}
-	else if (lowkey == UP && pBoard->getChar(pos.neighbor(DOWN)) != ' ') {
+	else if (lowkey == UP && board->getChar(pos.neighbor(DOWN)) != ' ') {
 		jump_counter = 2; // jump
 		jump_dir = (dir == STAY) ? UP : dir; // set direction of jump
 		jumping = true;
@@ -29,7 +29,7 @@ bool Mario::move()
 {
 	Point new_pos;
 
-	if (pBoard->getChar(pos.neighbor(DOWN)) != ' ' && fall_counter > 0) {
+	if (board->getChar(pos.neighbor(DOWN)) != ' ' && fall_counter > 0) {
 		if (fall_counter >= 5)
 			return false;
 		fall_counter = 0;
@@ -43,7 +43,7 @@ bool Mario::move()
 		if (jump_counter == 0) jumping = false;
 	}
 	else {
-		if (pBoard->getChar(pos.neighbor(DOWN)) == ' ') {  // fall
+		if (board->getChar(pos.neighbor(DOWN)) == ' ') {  // fall
 			fall_counter++;
 			new_pos = pos.neighbor(DOWN);
 		}
@@ -52,7 +52,7 @@ bool Mario::move()
 		}
 	}
 
-	char new_tile = pBoard->getChar(new_pos);
+	char new_tile = board->getChar(new_pos);
 
 	if (new_tile != ch_ladder) {
 		if (climbing) {
@@ -70,7 +70,7 @@ bool Mario::move()
 
 void Mario::reset()
 {
-	pos = pBoard->startingPoint();
+	pos = board->startingPoint();
 	dir = STAY;
 	fall_counter = 0;
 	jump_counter = 0;

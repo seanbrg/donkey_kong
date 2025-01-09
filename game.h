@@ -6,6 +6,7 @@
 #include "board.h"
 #include "mario.h"
 #include "stage.h"
+#include "hammer.h"
 #include "barrel.h"
 #include "ghost.h"
 
@@ -16,11 +17,14 @@
 class Game
 {
 	int lives = 3;
+	int score = 0;
 	int num_barrels = 0;
 	bool colors = true;
 	int difficulty = 2;
+	bool debug_mode = false; // turn on to make mario immortal
 
 	Mario mario;
+	Hammer hammer;
 	Board board;
 	Stage stage;
 	std::vector<Barrel> barrels;
@@ -33,7 +37,7 @@ public:
 	 * @param _colors: indicates if colors are being used.
 	 * @param _difficulty: specifies the difficulty level of the game.
 	 */
-	Game(bool _colors, int _difficulty) : colors(_colors), difficulty(_difficulty) {}
+	Game(bool _clr, int _dif) : colors(_clr), difficulty(_dif) {}
 
 	/**
 	 * runs the main game loop.
@@ -46,9 +50,9 @@ public:
 	void initStage1();
 
 	/**
-	 * prints the current game status: mario's remaining lives.
+	 * prints the legend containing Mario's remaining lives and the current score.
 	 */
-	void printStatus() const;
+	void printLegend() const;
 
 	/**
 	 * spawns barrels near donkey kong with specific behavior based on difficulty.
@@ -96,5 +100,11 @@ public:
 	 * @param skip_ending: becomes true if 1 was hit.
 	 */
 	void pause(bool& skip_ending);
+
+	/**
+	* resets the input from the player and flushes the input buffer.
+	* needed to "forget" any unused input from the previous screen/before reset.
+	*/
+	void flushInput(char& input);
 };
 

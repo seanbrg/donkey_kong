@@ -54,11 +54,17 @@ void changeColor(char type)
 	case ch_ghost:
 		color = GREEN;
 		break;
+	case ch_hammer:
+		color = BRIGHT_YELLOW;
+		break;
 	case 'e': // easy (for the menu)
 		color = GREEN;
 		break;
 	case 'h': // hard (for the menu)
 		color = RED;
+		break;
+	case 'l': // for label
+		color = BRIGHT_YELLOW;
 		break;
 	default:
 		color = WHITE;

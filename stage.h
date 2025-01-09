@@ -4,10 +4,12 @@
 #include "point.h"
 #include "utils.h"
 #include "ghost.h"
+
 /**
  * represents a single stage (level) in the game.
  * includes floors, ladders, and key positions such as starting, winning, and donkey kong's position.
  */
+
 class Stage
 {
 	struct Floor		// inner struct for saving floors
@@ -20,6 +22,7 @@ class Stage
 	Point start_pos;				// player's starting position
 	Point win_pos;					// position that must be reached to win
 	Point dk_pos;					// position from which barrels spawn
+	Point hammer_pos;				// position of a hammer to be picked up
 	std::vector<Floor> floors;
 	std::vector<Point> ladders;
 	std::vector<Ghost> ghosts;
@@ -32,8 +35,8 @@ public:
 	 * @param _win: the winning position.
 	 * @param _dk: donkey kong's position.
 	 */
-	Stage(const Point& _start, const Point& _win, const Point& _dk) : 
-		start_pos(_start), win_pos(_win), dk_pos(_dk) {}
+	Stage(const Point& _start, const Point& _win, const Point& _dk, const Point& _hm) : 
+		start_pos(_start), win_pos(_win), dk_pos(_dk), hammer_pos(_hm) {}
 	
 	/**
 	* default constructor with no data
@@ -79,6 +82,12 @@ public:
 	 * @return the starting position as a point.
 	 */
 	Point startingPoint() const { return start_pos; }
+
+	/**
+	 * retrieves the first position of the hammer in this stage.
+	 * @return the position of the hammer as a point.
+	 */
+	Point hammerPoint() const { return hammer_pos; }
 	
 	/**
 	 * retrieves the winning position of this stage.
@@ -91,7 +100,7 @@ public:
 	 * @return the donkey kong position as a point.
 	 */
 	Point dkPoint() const { return dk_pos; }
-
+	
 
 	/***************************************************************/
 

@@ -19,7 +19,7 @@ void ShowConsoleCursor(bool showFlag);
 /**
 * changes the console writing color to a color appropriate for the char specified.
 * @param type: a type of char that is specified to have a unique color.
-* this includes floors, ladders, mario, donkey kong, pauline and more.
+* this currently includes all floors, ladders, walls, mario, donkey kong, pauline, ghosts and hammer.
 */
 void changeColor(char type = ' ');
 
@@ -66,6 +66,7 @@ static const char ch_pauline = '$';
 static const char ch_dk = '&';
 static const char ch_mario = '@';
 static const char ch_barrel = 'O';
-static const char ch_dead_mario = 'x';
+static const char ch_dead_mario = '_';
 static const char ch_explosion = '*';
-static const char ch_ghost = 'X';
+static const char ch_ghost = 'x';
+static const char ch_hammer = 'p';

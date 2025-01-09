@@ -14,12 +14,13 @@ class Mario
 {
 	Point pos;				// current position
 	Key dir = STAY;			// direction of next movement
+	Key x_axis_dir = RIGHT; // direction of movement in the x-axis, has to be LEFT or RIGHT
 	Key jump_dir = STAY;	// direction of jump
 	int jump_counter = 0;	// phase of jump (from 2 to 0)
 	int fall_counter = 0;	// height of current fall
 	bool jumping = false;
 	bool climbing = false;
-	Board* pBoard = nullptr;
+	Board* board = nullptr;
 
 public:
 	
@@ -34,12 +35,18 @@ public:
 	 * @return the current position of mario.
 	 */
 	Point getPos() const { return pos; }
+
+	/**
+	 * retrieves Mario's next position according to current movement direction.
+	 * @return the current position of mario.
+	 */
+	Point getNext() { return pos.neighbor(x_axis_dir); }
 	
 	/**
 	 * draws mario at his current position.
 	 * @param ch: the character used to represent mario on the board.
 	 */
-	void draw(char ch = ch_mario) const { pBoard->drawChar(ch, pos);  }
+	void draw(char ch = ch_mario) const { board->drawChar(ch, pos);  }
 	
 	/**
 	 * draws mario in his "dead" state.
@@ -49,7 +56,7 @@ public:
 	/**
 	 * erases mario from his current position on the board.
 	 */
-	void erase() const { pBoard->restoreChar(pos); }
+	void erase() const { board->restoreChar(pos); }
 	
 	/**
 	 * processes a key press to change mario's movement direction.
@@ -73,9 +80,9 @@ public:
 	 * assigns the board to mario and initializes his position.
 	 * @param board: the game board.
 	 */
-	void setBoard(Board* board) {
-		pBoard = board;
-		pos = pBoard->startingPoint();
+	void setBoard(Board* pboard) {
+		board = pboard;
+		pos = board->startingPoint();
 	}
 };
 

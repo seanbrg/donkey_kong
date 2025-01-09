@@ -14,19 +14,22 @@ void Game::run()
 
 	ShowConsoleCursor(false);
 	board.print();
-	printStatus();
+	printLegend();
 
 	mario.setBoard(&board);
+	hammer.setBoard(&board);
 
 	bool victory = false;
 	bool skip_ending = false; // for immediately ending the game if needed
 	Point pauline = stage.winPoint();
 	int frame = 0; // for controlling when a barrel spawns
-	
+	char key = 0;  // for player input
+
 	while (lives > 0 && !victory) {
+		hammer.draw();
 		mario.draw();
 		if (_kbhit()) {
-			char key = _getch();
+			key = _getch();
 
 			if (key == ESC)
 				pause(skip_ending);
@@ -59,12 +62,13 @@ void Game::run()
 				}
 			}
 
-			if (!alive) { // lower life and reset board
+			if (!alive && !debug_mode) { // lower life and reset board
 				lives--;
 				mario.drawDead();
 				Sleep(1400);
 				reset();
 				frame = 0;
+				flushInput(key);
 			}
 			frame++;
 		}
@@ -75,7 +79,7 @@ void Game::run()
 
 void Game::initStage1() // custom built stage 1
 {
-	stage = Stage({ 4, 22 }, { 40, 2 }, { 40, 5 });
+	stage = Stage({ 4, 22 }, { 40, 2 }, { 40, 5 }, { 33, 22 });
 
 	static constexpr int NUM_LADDERS = 9;
 	Point ladders[NUM_LADDERS]; 
@@ -105,20 +109,23 @@ void Game::initStage1() // custom built stage 1
 	for (int i = 0; i < NUM_LADDERS; i++)
 		stage.addLadder(ladders[i]);
 
-
 	stage.addGhost(Ghost({ 9, 18 }, RIGHT, &board));
-	
-
 	stage.addGhost(Ghost({ 25, 9 }, RIGHT, &board));
 	stage.addGhost(Ghost({ 8, 9 }, RIGHT, &board));
-
 	stage.addGhost(Ghost({ 60, 10 }, RIGHT, &board));
+
 }
 
-void Game::printStatus() const
+void Game::printLegend() const
 {
-	gotoxy(MIN_X + 3, MIN_Y + 2);
+	if (colors)
+		changeColor('l');
+	gotoxy(MIN_X + 2, MIN_Y + 1);
 	std::cout << "LIVES: " << lives;
+	gotoxy(MIN_X + 2, MIN_Y + 2);
+	std::cout << "SCORE: " << score;
+	if (colors)
+		changeColor(' ');
 }
 
 void Game::spawnBarrels(const Point& dk, bool thrown_twice)
@@ -184,7 +191,7 @@ void Game::reset()
 	num_barrels = 0;
 	barrels.clear();
 	board.print();
-	printStatus();
+	printLegend();
 	mario.reset();
 }
 
@@ -272,8 +279,16 @@ void Game::pause(bool& skip_ending)
 		skip_ending = true;
 
 	board.print(); // redraw board over the pause menu
-	printStatus();
+	printLegend();
 	mario.draw();
 	for (auto& barrel : barrels)
 		barrel.draw();
+}
+
+void Game::flushInput(char& input)
+{
+	HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+	FlushConsoleInputBuffer(hInput);
+
+	input = 0;
 }
