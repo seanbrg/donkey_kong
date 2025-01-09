@@ -37,10 +37,16 @@ public:
 	Point getPos() const { return pos; }
 
 	/**
-	 * retrieves Mario's next position according to current movement direction.
-	 * @return the current position of mario.
+	 * retrieves mario's direction of movement in the x axis.
+	 * @return the current direction in x axis (or last direction that existed).
 	 */
-	Point getNext() { return pos.neighbor(x_axis_dir); }
+	Key getXaxisDir() const { return x_axis_dir; }
+
+	/**
+	 * retrieves Mario's next position according to current movement direction.
+	 * @return the next position of mario.
+	 */
+	Point getNext() const { return pos.neighbor(x_axis_dir); }
 	
 	/**
 	 * draws mario at his current position.
@@ -78,7 +84,7 @@ public:
 	
 	/**
 	 * assigns the board to mario and initializes his position.
-	 * @param board: the game board.
+	 * @param pboard: the game board.
 	 */
 	void setBoard(Board* pboard) {
 		board = pboard;

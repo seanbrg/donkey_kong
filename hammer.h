@@ -22,20 +22,34 @@ public:
 
 	/**
 	 * assigns the board to the hammer and initializes its position.
-	 * @param board: the game board.
+	 * @param pboard: the game board.
 	 */
 	void setBoard(Board* pboard) {
 		board = pboard;
 		pos = board->hammerPoint();
 	}
 
+	/**
+	 * assigns mario to the hammer.
+	 * @param pmario: pointer to the mario instance.
+	 */
 	void setMario(Mario* pmario) { mario = pmario; }
 
 	/*
-	* switches whether the hammer is currently held or not.
+	* sets the hammer to be equipped by mario.
 	*/
-	void equip() { equipped = !equipped; }
+	void equip() { equipped = true; }
 
-	void draw(char ch = ch_hammer) const;
+	/*
+	* sets the hammer to be not equipped by mario.
+	*/
+	void unequip() { 
+		equipped = false; 
+		pos = board->hammerPoint();
+	}
+
+	void draw();
+
+	void erase() const;
 };
 

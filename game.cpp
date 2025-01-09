@@ -18,15 +18,17 @@ void Game::run()
 
 	mario.setBoard(&board);
 	hammer.setBoard(&board);
+	hammer.setMario(&mario);
 
 	bool victory = false;
 	bool skip_ending = false; // for immediately ending the game if needed
-	Point pauline = stage.winPoint();
+	Point pauline_pos = stage.winPoint();
 	int frame = 0; // for controlling when a barrel spawns
 	char key = 0;  // for player input
 
 	while (lives > 0 && !victory) {
-		hammer.draw();
+		Point mario_pos = mario.getPos();
+	
 		mario.draw();
 		if (_kbhit()) {
 			key = _getch();
@@ -41,12 +43,18 @@ void Game::run()
 		/*************************************/
 		Sleep(250 - difficulty * 50); // game speed
 		
-		if (mario.getPos() == pauline) { // victory condition
+		if (mario_pos == pauline_pos) { // victory condition
 			victory = true;
 		}
 		else { // move mario and barrels, reset board if he dies at any point
-			mario.erase(); 
+			mario.erase();
+			hammer.erase();
 			bool alive = mario.move(); // death by fall damage?
+
+			if (mario_pos == hammer.getPos())
+				hammer.equip();
+			hammer.draw();
+
 			if (alive) {
 				alive = checkMarioDeath(); // death by moving into a barrel?
 				if (alive) {
@@ -67,6 +75,7 @@ void Game::run()
 				mario.drawDead();
 				Sleep(1400);
 				reset();
+				hammer.unequip();
 				frame = 0;
 				flushInput(key);
 			}

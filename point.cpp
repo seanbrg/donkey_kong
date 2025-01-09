@@ -1,6 +1,6 @@
 #include "point.h"
 
-Point Point::neighbor(Key dir)
+Point Point::neighbor(Key dir) const
 {
 	switch (dir) {
 	case LEFT:

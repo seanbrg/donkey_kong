@@ -1,6 +1,2 @@
-﻿  game.cpp
-  main.cpp
-  menu.cpp
-C:\Users\seanb\Documents\C++ Projects\donkey_kong\menu.cpp(173,18): warning C4129: 'A': unrecognized character escape sequence
-  Generating Code...
+﻿  hammer.cpp
   Donkey_Kong.vcxproj -> C:\Users\seanb\Documents\C++ Projects\donkey_kong\x64\Debug\Donkey_Kong.exe

@@ -22,6 +22,8 @@ void Mario::keyPressed(char key)
 	}
 	else if (lowkey == RIGHT || lowkey == LEFT || lowkey == STAY) {
 		dir = (!climbing) ? (Key)lowkey : STAY;
+		if (dir == LEFT || dir == RIGHT) 
+			x_axis_dir = dir;
 	}
 }
 

@@ -1,13 +1,24 @@
 #include "hammer.h"
 
-void Hammer::draw(char ch) const
+void Hammer::draw()
 {
 	if (equipped) {
-		Point equipped_pos = mario->getNext();
-		if (board->getChar(equipped_pos) == ch_blank)
-			board->drawChar(ch, equipped_pos);
+		pos = mario->getNext();
+		char next_char = board->getChar(pos);
+		if (next_char == ch_blank || next_char == ch_ladder) {
+			char ch = (mario->getXaxisDir() == LEFT) ? ch_hammer_left : ch_hammer_right;
+			board->drawChar(ch, pos);
+		}
 	}
 	else {
-		board->drawChar(ch, pos);
+		board->drawChar(ch_hammer_dropped, pos);
 	}
+}
+
+void Hammer::erase() const
+{
+	if (equipped)
+		board->restoreChar(pos);
+	else
+		board->restoreChar(pos);
 }

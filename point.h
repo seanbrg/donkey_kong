@@ -47,5 +47,5 @@ public:
 	 * @param dir: the direction from the point (given as key).
 	 * @return a new point that is next to this point in the given direction.
 	 */
-	Point neighbor(Key dir);
+	Point neighbor(Key dir) const;
 };

@@ -25,17 +25,16 @@ void changeColor(char type)
     unsigned short color;
     switch (type) {
 	case ch_mario:
-		color = BRIGHT_YELLOW;
-		break;
 	case ch_dead_mario:
+	case ch_hammer_dropped: // or right
+	case ch_hammer_left:
+	case ch_hammer_animation1:
+	case ch_hammer_animation2:
+	case 'l': // for label
 		color = BRIGHT_YELLOW;
 		break;
 	case ch_floor_flat:
-		color = BRIGHT_RED;
-		break;
 	case ch_floor_left:
-		color = BRIGHT_RED;
-		break;
 	case ch_floor_right:
 		color = BRIGHT_RED;
 		break;
@@ -46,25 +45,15 @@ void changeColor(char type)
 		color = PINK;
 		break;
 	case ch_explosion:
-		color = ORANGE;
-		break;
 	case ch_dk:
 		color = ORANGE;
 		break;
 	case ch_ghost:
-		color = GREEN;
-		break;
-	case ch_hammer:
-		color = BRIGHT_YELLOW;
-		break;
 	case 'e': // easy (for the menu)
 		color = GREEN;
 		break;
 	case 'h': // hard (for the menu)
 		color = RED;
-		break;
-	case 'l': // for label
-		color = BRIGHT_YELLOW;
 		break;
 	default:
 		color = WHITE;
