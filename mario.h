@@ -68,7 +68,7 @@ public:
 	 * processes a key press to change mario's movement direction.
 	 * @param key: the key pressed by the player.
 	 */
-	void keyPressed(char key);
+	void keyPressed(Key key);
 	
 	/**
 	 * moves mario based on his current state and checks for valid positions.
@@ -90,5 +90,10 @@ public:
 		board = pboard;
 		pos = board->startingPoint();
 	}
+
+	/*
+	* @return true if mario is currently falling, false otherwise.
+	*/
+	bool isFalling() { return fall_counter > 0; }
 };
 

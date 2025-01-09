@@ -7,7 +7,11 @@
 class Hammer
 {
 	Point pos;
+	Point hit;
 	bool equipped = false;
+	bool key_hit = false;
+	bool hitting = false;
+
 	Board* board = nullptr;
 	Mario* mario = nullptr;
 
@@ -50,6 +54,8 @@ public:
 
 	void draw();
 
-	void erase() const;
+	void keyPressed() { if (!mario->isFalling() && !hitting) key_hit = true; }
+
+	void erase();
 };
 

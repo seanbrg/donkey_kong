@@ -3,25 +3,23 @@
 
 using namespace keys;
 
-void Mario::keyPressed(char key)
+void Mario::keyPressed(Key key)
 {
-	char lowkey = std::tolower(key);
-
-	if (lowkey == UP && board->getChar(pos) == ch_ladder) {
+	if (key == UP && board->getChar(pos) == ch_ladder) {
 		climbing = true; // climb up
-		dir = (Key)lowkey;
+		dir = key;
 	}
-	else if (lowkey == DOWN && board->getChar(pos.neighbor(DOWN)) == ch_ladder) {
+	else if (key == DOWN && board->getChar(pos.neighbor(DOWN)) == ch_ladder) {
 		climbing = true; // climb down
-		dir = (Key)lowkey;
+		dir = key;
 	}
-	else if (lowkey == UP && board->getChar(pos.neighbor(DOWN)) != ' ') {
+	else if (key == UP && board->getChar(pos.neighbor(DOWN)) != ' ') {
 		jump_counter = 2; // jump
 		jump_dir = (dir == STAY) ? UP : dir; // set direction of jump
 		jumping = true;
 	}
-	else if (lowkey == RIGHT || lowkey == LEFT || lowkey == STAY) {
-		dir = (!climbing) ? (Key)lowkey : STAY;
+	else if (key == RIGHT || key == LEFT || key == STAY) {
+		dir = (!climbing) ? key : STAY;
 		if (dir == LEFT || dir == RIGHT) 
 			x_axis_dir = dir;
 	}

@@ -32,12 +32,12 @@ void Game::run()
 		mario.draw();
 		if (_kbhit()) {
 			key = _getch();
-
+			
 			if (key == ESC)
 				pause(skip_ending);
 			if (skip_ending) break;
 
-			mario.keyPressed(key);
+			keyPressed(key);
 		}
 
 		/*************************************/
@@ -75,15 +75,26 @@ void Game::run()
 				mario.drawDead();
 				Sleep(1400);
 				reset();
+				flushInput(key);
 				hammer.unequip();
 				frame = 0;
-				flushInput(key);
 			}
 			frame++;
 		}
 	}
 	if (!skip_ending) // ending window
 		printEndGameWindow(victory);
+}
+
+void Game::keyPressed(char key)
+{
+	char low_key = tolower(key);
+	if (low_key == 'w' || low_key == 'a' || low_key == 's' || low_key == 'd' || low_key == 'x') {
+		mario.keyPressed((Key)low_key);
+	}
+	else {
+		hammer.keyPressed();
+	}
 }
 
 void Game::initStage1() // custom built stage 1

@@ -46,6 +46,12 @@ public:
 	void run();
 
 	/**
+	* processes a keyboard hit by the player and handles appropriate input.
+	* @param key: character that was recieved as input.
+	*/
+	void keyPressed(char key);
+
+	/**
 	 * initializes stage 1 with predefined floors and ladders.
 	 */
 	void initStage1();
