@@ -189,8 +189,7 @@ void Game::rollBarrels(bool& alive)
 			score += 100;
 			printLegend();
 		}
-
-		if (mario_pos == barrel_pos) {
+		else if (mario_pos == barrel_pos) {
 			alive = false;
 			break;
 		}
@@ -240,7 +239,7 @@ void Game::moveGhosts(bool& alive)
 			score += 100;
 			printLegend();
 		}
-		if (mario_pos == ghost_pos) {
+		else if (mario_pos == ghost_pos) {
 			alive = false;
 			break;
 		}
@@ -282,7 +281,6 @@ void Game::checkHit()
 	while (barrel != barrels.end()) {
 		Point barrel_pos = barrel->getPos();
 		if (barrel_pos == hit0 || barrel_pos == hit1) {
-			barrel->erase();
 			barrel = barrels.erase(barrel);
 			score += 300;
 			hit = true;
@@ -294,7 +292,6 @@ void Game::checkHit()
 	while (ghost != ghosts.end()) {
 		Point ghost_pos = ghost->getPos();
 		if (ghost_pos == hit0 || ghost_pos == hit1) {
-			ghost->erase();
 			ghost = ghosts.erase(ghost);
 			score += 300;
 			hit = true;
@@ -349,8 +346,8 @@ void Game::printEndGameWindow(bool victory) const
 		std::cout << " |                You died.                | ";
 
 	gotoxy(center_x - 22, center_y);
-	std::cout << " |     Final score for this level: " << score;
-	for (int i = log10(score + 1); i < 6; i++) std::cout << " ";
+	std::cout << " |            Final score: " << score;
+	for (int i = log10(score + 1); i < 14; i++) std::cout << " ";
 	std::cout << " | ";
 	gotoxy(center_x - 22, center_y + 1);
 	std::cout << " |  Press ESC to return to the main menu.  | ";
