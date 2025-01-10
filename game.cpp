@@ -71,9 +71,8 @@ void Game::run()
 
 			if (!alive && !debug_mode) { // lower life and reset board
 				lives--;
-				score = 0;
 				mario.drawDead();
-				Sleep(1400);
+				Sleep(1200);
 				reset();
 				flushInput(key);
 				frame = 0;
