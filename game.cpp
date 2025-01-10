@@ -1,6 +1,7 @@
 #include "game.h"
 #include <Windows.h>
 #include <iostream>
+#include <chrono>
 
 using namespace keys;
 
@@ -25,6 +26,8 @@ void Game::run()
 	Point pauline_pos = stage.winPoint();
 	int frame = 0; // for controlling when a barrel spawns
 	char key = 0;  // for player input
+
+	auto start_clk = std::chrono::high_resolution_clock::now();
 
 	while (lives > 0 && !victory) {
 		Point mario_pos = mario.getPos();
@@ -80,12 +83,16 @@ void Game::run()
 			frame++;
 		}
 	}
+
+	auto end_clk = std::chrono::high_resolution_clock::now();
+
 	if (!skip_ending) { // ending window
 		if (victory) {
-			int bonus_score = max(0, 100*(370 - frame)); // each frame in normal is ~ 0.13 seconds
-												         // so total bonus score's time is ~ 8 minutes
-													     // for each time unit remaining, +100 score
-			score += bonus_score;
+			// duration counts in 0.1 seconds the length of the game.
+			// every 1 second below 6 minutes the game is won in is worth 100 bonus score
+			std::chrono::duration<double> duration = end_clk - start_clk;
+			int bonus_score = 5000 - 100 * duration.count();
+			score += max(0, bonus_score);
 		}
 		printEndGameWindow(victory);
 	}

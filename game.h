@@ -21,7 +21,7 @@ class Game
 	int score = 0;
 	bool colors = true;
 	int difficulty = 2;
-	bool debug_mode = false; // turn on to make mario immortal
+	bool debug_mode = true; // turn on to make mario immortal
 							// WARNING: may cause unexpected behavior
 
 	Mario mario;
