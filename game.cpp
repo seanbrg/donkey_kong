@@ -91,7 +91,7 @@ void Game::run()
 			// duration counts in 0.1 seconds the length of the game.
 			// every 1 second below 6 minutes the game is won in is worth 100 bonus score
 			std::chrono::duration<double> duration = end_clk - start_clk;
-			int bonus_score = 5000 - 100 * duration.count();
+			int bonus_score = 5000 - 100 * (int)duration.count();
 			score += max(0, bonus_score);
 		}
 		printEndGameWindow(victory);
