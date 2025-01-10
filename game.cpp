@@ -228,6 +228,12 @@ void Game::moveGhosts(bool& alive)
 		ghost.draw();
 
 		Point ghost_pos = ghost.getPos();
+		Point below_mario = mario_pos.neighbor(DOWN);
+
+		if (ghost_pos == below_mario || ghost_pos == below_mario.neighbor(DOWN)) {
+			score += 100;
+			printLegend();
+		}
 		if (mario_pos == ghost_pos) {
 			alive = false;
 			break;
