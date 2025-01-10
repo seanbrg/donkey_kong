@@ -1,7 +1,7 @@
 #pragma once
 #include "utils.h"
 #include "Point.h"
-#include <vector>
+#include <list>
 #include <random>
 
 using namespace keys;
@@ -32,7 +32,7 @@ public:
     /**
      * Moves the ghost 
      */
-    void move(const std::vector<Ghost>& allGhosts);
+    void move(const std::list<Ghost>& allGhosts);
 
     /**
      * Draws the ghost on the board.

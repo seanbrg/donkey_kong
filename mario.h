@@ -95,5 +95,10 @@ public:
 	* @return true if mario is currently falling, false otherwise.
 	*/
 	bool isFalling() { return fall_counter > 0; }
+
+	/*
+	* @return true if mario is currently jumping, false otherwise.
+	*/	
+	bool isJumping() { return jumping; }
 };
 

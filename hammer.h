@@ -25,6 +25,13 @@ public:
 	Point getPos() const { return pos; }
 
 	/**
+	 * retrieves the position that the hammer is hitting.
+	 * if used when the hammer is actually hitting, it should be one position next to the hammer.
+	 * @return the current position of the hammer.
+	 */
+	Point getHit() const { return hit; }
+
+	/**
 	 * assigns the board to the hammer and initializes its position.
 	 * @param pboard: the game board.
 	 */
@@ -49,10 +56,12 @@ public:
 	*/
 	void unequip() { 
 		equipped = false; 
+		hitting = false;
+		key_hit = false;
 		pos = board->hammerPoint();
 	}
 
-	void draw();
+	bool draw();
 
 	void keyPressed() { if (!mario->isFalling() && !hitting) key_hit = true; }
 

@@ -1,8 +1,9 @@
 #include "hammer.h"
 
-void Hammer::draw()
+bool Hammer::draw()
 {
 	if (equipped) {
+
 		pos = mario->getNext();
 		char next_char = board->getChar(pos);
 		if (key_hit) {
@@ -24,6 +25,8 @@ void Hammer::draw()
 	else {
 		board->drawChar(ch_hammer_dropped, pos);
 	}
+
+	return hitting;
 }
 
 void Hammer::erase()

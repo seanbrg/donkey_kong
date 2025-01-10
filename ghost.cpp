@@ -5,7 +5,7 @@
 
 
 
-void Ghost::move(const std::vector<Ghost>& allGhosts) {
+void Ghost::move(const std::list<Ghost>& allGhosts) {
 
     double random = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
     if (random > SAME_DIR_PROB) {
@@ -16,7 +16,7 @@ void Ghost::move(const std::vector<Ghost>& allGhosts) {
     char next_tile = pBoard->getChar(next_pos);
     char below_tile = pBoard->getChar(next_pos.neighbor(DOWN));
 
-    for (const Ghost& ghost : allGhosts) {
+    for (auto& ghost : allGhosts) {
         if (&ghost != this && ghost.getPos() == next_pos) {
             
             dir = (dir == LEFT) ? RIGHT : LEFT;

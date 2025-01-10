@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <vector>
+#include <list>
 #include "point.h"
 #include "utils.h"
 #include "ghost.h"
@@ -23,9 +23,9 @@ class Stage
 	Point win_pos;					// position that must be reached to win
 	Point dk_pos;					// position from which barrels spawn
 	Point hammer_pos;				// position of a hammer to be picked up
-	std::vector<Floor> floors;
-	std::vector<Point> ladders;
-	std::vector<Ghost> ghosts;
+	std::list<Floor> floors;
+	std::list<Point> ladders;
+	std::list<Ghost> ghosts;
 	Stage* next = nullptr;
 
 public:
@@ -114,7 +114,7 @@ public:
 	 * Gets the list of ghosts in the stage.
 	 * @return A reference to the vector of ghosts.
 	 */
-	std::vector<Ghost>& getGhosts() { return ghosts; }
+	std::list<Ghost>& getGhosts() { return ghosts; }
 
 	/***************************************************************/
 };

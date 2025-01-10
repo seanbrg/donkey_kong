@@ -32,7 +32,7 @@ void Game::run()
 		mario.draw();
 		if (_kbhit()) {
 			key = _getch();
-			
+
 			if (key == ESC)
 				pause(skip_ending);
 			if (skip_ending) break;
@@ -41,7 +41,7 @@ void Game::run()
 		}
 
 		/*************************************/
-		Sleep(250 - difficulty * 50); // game speed
+		Sleep(230 - difficulty * 50); // game speed
 		
 		if (mario_pos == pauline_pos) { // victory condition
 			victory = true;
@@ -53,37 +53,43 @@ void Game::run()
 
 			if (mario_pos == hammer.getPos())
 				hammer.equip();
-			hammer.draw();
 
 			if (alive) {
-				alive = checkMarioDeath(); // death by moving into a barrel?
+				alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
 				if (alive) {
 					if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
 						spawnBarrels(stage.dkPoint(), difficulty == 3); // double throw for hard diff
 					}
 
-					rollBarrels(alive); // death by explosion?
-					moveGhosts();
+					if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
 
-					if (alive)
-						alive = checkMarioDeath(); // death by movement of a barrel?
+					rollBarrels(alive);
+					moveGhosts(alive);
+					
 				}
 			}
 
 			if (!alive && !debug_mode) { // lower life and reset board
 				lives--;
+				score = 0;
 				mario.drawDead();
 				Sleep(1400);
 				reset();
 				flushInput(key);
-				hammer.unequip();
 				frame = 0;
 			}
 			frame++;
 		}
 	}
-	if (!skip_ending) // ending window
+	if (!skip_ending) { // ending window
+		if (victory) {
+			int bonus_score = max(0, 100*(370 - frame)); // each frame in normal is ~ 0.13 seconds
+												         // so total bonus score's time is ~ 8 minutes
+													     // for each time unit remaining, +100 score
+			score += bonus_score;
+		}
 		printEndGameWindow(victory);
+	}
 }
 
 void Game::keyPressed(char key)
@@ -92,7 +98,7 @@ void Game::keyPressed(char key)
 	if (low_key == 'w' || low_key == 'a' || low_key == 's' || low_key == 'd' || low_key == 'x') {
 		mario.keyPressed((Key)low_key);
 	}
-	else {
+	else if (low_key == 'p') {
 		hammer.keyPressed();
 	}
 }
@@ -154,27 +160,43 @@ void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 	if (thrown_twice) { // option for harder difficulty
 		barrels.push_back({ dk, LEFT, &board });
 		barrels.push_back({ dk, RIGHT, &board });
-		num_barrels += 2;
 	}
 	else { // default
 		barrels.push_back({ dk, next, &board });
 		next = (next == LEFT) ? RIGHT : LEFT;
-		num_barrels++;
 	}
 }
 
 void Game::rollBarrels(bool& alive)
 {
-	for (int i = 0; i < num_barrels; i++) {
-		barrels[i].erase();
-		barrels[i].move();
-		if (barrels[i].isExploding()) {
-			barrels[i].drawExplosion();
+	Point mario_pos = mario.getPos();
+	auto barrel = barrels.begin(); // iterator over the barrels list
+
+	while (barrel != barrels.end()) {
+		barrel->erase();
+		barrel->move();
+
+		Point barrel_pos = barrel->getPos();
+		Point below_mario = mario_pos.neighbor(DOWN);
+
+		if (barrel_pos == below_mario || barrel_pos == below_mario.neighbor(DOWN)) {
+			score += 100;
+			printLegend();
+		}
+
+		if (mario_pos == barrel_pos) {
+			alive = false;
+			break;
+		}
+
+		if (barrel->isExploding()) {
+			barrel->drawExplosion();
 			// check if mario is within range of the explosion
-			int mario_x = mario.getPos().getX();
-			int mario_y = mario.getPos().getY();
-			int explosion_x = barrels[i].getPos().getX();
-			int explosion_y = barrels[i].getPos().getY();
+
+			int mario_x = mario_pos.getX();
+			int mario_y = mario_pos.getY();
+			int explosion_x = barrel_pos.getX();
+			int explosion_y = barrel_pos.getY();
 			if (explosion_x - explosion_range <= mario_x && mario_x <= explosion_x + explosion_range) {
 				if (explosion_y - explosion_range <= mario_y && mario_y <= explosion_y + explosion_range) {
 					alive = false;
@@ -183,36 +205,45 @@ void Game::rollBarrels(bool& alive)
 			}
 		}
 
-		if (barrels[i].exists()) {
-			barrels[i].draw();
+		if (barrel->exists()) { // a barrel stops existing the tick after its death
+			barrel->draw();
+			++barrel;
 		}
-		else { // if barrel doesn't exist anymore is erased
-			if (barrels[i].isExploding())
-				board.restoreBoardExplosion(barrels[i].getPos());
+		else { // erased
+			if (barrel->isExploding())
+				board.restoreBoardExplosion(barrel_pos);
 
-			barrels.erase(barrels.begin() + i);
-			num_barrels--;
+			barrel = barrels.erase(barrel);
 		}
 	}
 }
 
-void Game::moveGhosts()
+void Game::moveGhosts(bool& alive)
 {
+	Point mario_pos = mario.getPos();
+
 	for (auto& ghost : ghosts) {
 		ghost.erase();
 		ghost.move(ghosts);
 		ghost.draw();
+
+		Point ghost_pos = ghost.getPos();
+		if (mario_pos == ghost_pos) {
+			alive = false;
+			break;
+		}
 	}
 }
 
 void Game::reset()
 {
+	hammer.unequip();
 	board.reset();
-	num_barrels = 0;
 	barrels.clear();
 	board.print();
 	printLegend();
 	mario.reset();
+	ghosts = stage.getGhosts();
 }
 
 bool Game::checkMarioDeath() const
@@ -227,6 +258,39 @@ bool Game::checkMarioDeath() const
 			return false;
 	}
 	return true;
+}
+
+void Game::checkHit()
+{
+	Point hit0 = hammer.getPos();
+	Point hit1 = hammer.getHit();
+	bool hit = false;
+
+	auto barrel = barrels.begin(); // iterator over the barrels list
+	while (barrel != barrels.end()) {
+		Point barrel_pos = barrel->getPos();
+		if (barrel_pos == hit0 || barrel_pos == hit1) {
+			barrel->erase();
+			barrel = barrels.erase(barrel);
+			score += 300;
+			hit = true;
+		}
+		else ++barrel;
+	}
+
+	auto ghost = ghosts.begin(); // iterator over the barrels list
+	while (ghost != ghosts.end()) {
+		Point ghost_pos = ghost->getPos();
+		if (ghost_pos == hit0 || ghost_pos == hit1) {
+			ghost->erase();
+			ghost = ghosts.erase(ghost);
+			score += 300;
+			hit = true;
+		}
+		else ++ghost;
+	}
+
+	if (hit) printLegend();
 }
 
 void Game::printPauseWindow() const
@@ -273,7 +337,9 @@ void Game::printEndGameWindow(bool victory) const
 		std::cout << " |                You died.                | ";
 
 	gotoxy(center_x - 22, center_y);
-	std::cout << " |                                         | ";
+	std::cout << " |     Final score for this level: " << score;
+	for (int i = log10(score + 1); i < 6; i++) std::cout << " ";
+	std::cout << " | ";
 	gotoxy(center_x - 22, center_y + 1);
 	std::cout << " |  Press ESC to return to the main menu.  | ";
 	gotoxy(center_x - 22, center_y + 2);
@@ -301,6 +367,7 @@ void Game::pause(bool& skip_ending)
 	board.print(); // redraw board over the pause menu
 	printLegend();
 	mario.draw();
+	hammer.draw();
 	for (auto& barrel : barrels)
 		barrel.draw();
 }

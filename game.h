@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <list>
 
 #include "utils.h"
 #include "point.h"
@@ -18,18 +19,17 @@ class Game
 {
 	int lives = 3;
 	int score = 0;
-	int num_barrels = 0;
 	bool colors = true;
 	int difficulty = 2;
-	bool debug_mode = false; // turn on to make mario immortal
+	bool debug_mode = true; // turn on to make mario immortal
 							// WARNING: may cause unexpected behavior
 
 	Mario mario;
 	Hammer hammer;
 	Board board;
 	Stage stage;
-	std::vector<Barrel> barrels;
-	std::vector<Ghost> ghosts;
+	std::list<Barrel> barrels;
+	std::list<Ghost> ghosts;
 
 public:
 
@@ -71,14 +71,16 @@ public:
 	/**
 	 * updates the state of all barrels, including handling explosions.
 	 * @param alive: a reference to mario's alive status.
-	 * becomes false if mario dies in an explosion.
+	 * becomes false if mario dies from a barrel.
 	 */
 	void rollBarrels(bool& alive);
 
 	/**
 	 * updates the position of all ghosts.
+	 * @param alive: a reference to mario's alive status.
+	 * becomes false if mario dies from a ghost.
 	 */
-	void moveGhosts();
+	void moveGhosts(bool& alive);
 	
 	/**
 	 * resets the game state, including mario, barrels, and the board.
@@ -90,6 +92,8 @@ public:
 	 * @return true if mario avoids barrels or ghosts, false if hit.
 	 */
 	bool checkMarioDeath() const;
+
+	void checkHit();
 	
 	/**
 	 * displays the pause window with instructions to resume or quit the game.
