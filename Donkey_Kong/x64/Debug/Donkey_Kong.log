@@ -1,3 +1,8 @@
 ﻿  game.cpp
 C:\Users\seanb\Documents\C++ Projects\donkey_kong\game.cpp(350,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  hammer.cpp
+  main.cpp
+  menu.cpp
+C:\Users\seanb\Documents\C++ Projects\donkey_kong\menu.cpp(173,18): warning C4129: 'A': unrecognized character escape sequence
+  Generating Code...
   Donkey_Kong.vcxproj -> C:\Users\seanb\Documents\C++ Projects\donkey_kong\x64\Debug\Donkey_Kong.exe

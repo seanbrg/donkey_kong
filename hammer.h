@@ -63,7 +63,7 @@ public:
 
 	bool draw();
 
-	void keyPressed() { if (!mario->isFalling() && !hitting) key_hit = true; }
+	void keyPressed() { if (!mario->isFalling() && !hitting && equipped) key_hit = true; }
 
 	void erase();
 };
