@@ -129,6 +129,7 @@ void Menu::instructionsMenu() {
         " - Press 's' to stay in place.\n"
         "\nAdditional keys:\n"
         "****************\n"
+        " - Press 'p' to hit with a hammer.\n"
         " - Press 'ESC' to pause the game.\n"
         "\nPress any key to return to the main menu.\n";
 
