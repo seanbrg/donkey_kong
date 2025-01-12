@@ -1,6 +1,5 @@
 #include "ghost.h"
 #include "board.h"
-#include "stage.h" 
 #include <cstdlib>
 
 

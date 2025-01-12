@@ -135,7 +135,6 @@
     <ClInclude Include="mario.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="point.h" />
-    <ClInclude Include="stage.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +147,6 @@
     <ClCompile Include="mario.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="point.cpp" />
-    <ClCompile Include="stage.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>

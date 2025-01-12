@@ -6,7 +6,6 @@
 #include "point.h"
 #include "board.h"
 #include "mario.h"
-#include "stage.h"
 #include "hammer.h"
 #include "barrel.h"
 #include "ghost.h"
