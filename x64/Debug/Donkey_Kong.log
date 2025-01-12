@@ -1,13 +1,16 @@
 ﻿  barrel.cpp
   board.cpp
   game.cpp
+C:\Users\Anna\source\repos\donkey_kongj\game.cpp(368,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   ghost.cpp
+  hammer.cpp
   main.cpp
   mario.cpp
   menu.cpp
-C:\Users\Anna\source\repos\donkey_konga\menu.cpp(154,22): warning C4129: 'A': unrecognized character escape sequence
+C:\Users\Anna\source\repos\donkey_kongj\menu.cpp(174,18): warning C4129: 'A': unrecognized character escape sequence
   point.cpp
   stage.cpp
   utils.cpp
   Generating Code...
-  Donkey_Kong.vcxproj -> C:\Users\Anna\Source\Repos\donkey_konga\x64\Debug\Donkey_Kong.exe
+  LINK : C:\Users\Anna\Source\Repos\donkey_kongj\x64\Debug\Donkey_Kong.exe not found or not built by the last incremental link; performing full link
+  Donkey_Kong.vcxproj -> C:\Users\Anna\Source\Repos\donkey_kongj\x64\Debug\Donkey_Kong.exe

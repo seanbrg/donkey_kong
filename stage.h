@@ -12,19 +12,12 @@
 
 class Stage
 {
-	struct Floor		// inner struct for saving floors
-	{
-		Point start;	// leftmost point
-		char type;		// '<' '>' or '='
-		int len;		// length
-	};
+	
 
 	Point start_pos;				// player's starting position
 	Point win_pos;					// position that must be reached to win
 	Point dk_pos;					// position from which barrels spawn
 	Point hammer_pos;				// position of a hammer to be picked up
-	std::list<Floor> floors;
-	std::list<Point> ladders;
 	std::list<Ghost> ghosts;
 	Stage* next = nullptr;
 
@@ -43,21 +36,7 @@ public:
 	*/
 	Stage() = default;
 
-	/**
-	 * adds a floor to the stage.
-	 * @param _start: the starting position of the floor.
-	 * @param _type: the type of the floor ('<', '>', or '=').
-	 * @param _len: the length of the floor.
-	 */
-	void addFloor(const Point& _start, char _type, int _len) {
-		floors.push_back({ _start, _type, _len });
-	}
-
-	/**
-	 * adds a ladder to the stage.
-	 * @param _ladder: the top position of the ladder (should be on a floor).
-	 */
-	void addLadder(const Point& _ladder) { ladders.push_back(_ladder); }
+	
 	
 	/**
 	 * sets the next stage in the sequence.
@@ -117,5 +96,18 @@ public:
 	std::list<Ghost>& getGhosts() { return ghosts; }
 
 	/***************************************************************/
+	
+
+
+	void setStartingPoint(Point start_point) { start_pos = start_point; }
+
+
+	void setHammerPoint(Point hammer_point) { hammer_pos = hammer_point; }
+
+
+	void setWinPoint(Point win_point) { win_pos = win_point; }
+
+
+	void setDkPoint(Point dk_point) { dk_pos = dk_point; }
 };
 

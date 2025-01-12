@@ -8,93 +8,111 @@ using namespace keys;
 void Game::run()
 {
 	system("cls"); // clear screen
-	initStage1();
+	std::vector<std::string> fileNames;
+	getAllScreenFileNames(fileNames);
 
-	board = Board(&stage, colors);
-	ghosts = stage.getGhosts();
 
-	ShowConsoleCursor(false);
-	board.print();
-	printLegend();
-
-	mario.setBoard(&board);
-	hammer.setBoard(&board);
-	hammer.setMario(&mario);
-
-	bool victory = false;
-	bool skip_ending = false; // for immediately ending the game if needed
-	Point pauline_pos = stage.winPoint();
-	int frame = 0; // for controlling when a barrel spawns
-	char key = 0;  // for player input
-
-	auto start_clk = std::chrono::high_resolution_clock::now();
-
-	while (lives > 0 && !victory) {
-		Point mario_pos = mario.getPos();
-	
-		mario.draw();
-		if (_kbhit()) {
-			key = _getch();
-
-			if (key == ESC)
-				pause(skip_ending);
-			if (skip_ending) break;
-
-			keyPressed(key);
-		}
-
-		/*************************************/
-		Sleep(230 - difficulty * 50); // game speed
-		
-		if (mario_pos == pauline_pos) { // victory condition
-			victory = true;
-		}
-		else { // move mario and barrels, reset board if he dies at any point
-			mario.erase();
-			hammer.erase();
-			bool alive = mario.move(); // death by fall damage?
-
-			if (mario_pos == hammer.getPos())
-				hammer.equip();
-
-			if (alive) {
-				alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
-				if (alive) {
-					if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
-						spawnBarrels(stage.dkPoint(), difficulty == 3); // double throw for hard diff
-					}
-
-					if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
-
-					rollBarrels(alive);
-					moveGhosts(alive);
-					
-				}
-			}
-
-			if (!alive && !debug_mode) { // lower life and reset board
-				lives--;
-				mario.drawDead();
-				Sleep(1200);
-				reset();
-				flushInput(key);
-				frame = 0;
-			}
-			frame++;
-		}
+	if (fileNames.empty()) {
+		std::cout << "No screen files found! Please add screen files to the directory.\n";
+		return;
 	}
 
-	auto end_clk = std::chrono::high_resolution_clock::now();
+	for (const auto& filename : fileNames) {
+		board = Board(&stage, colors);
+		board.load(filename);
+		board.reset();
+		board.print();
 
-	if (!skip_ending) { // ending window
-		if (victory) {
-			// duration counts in 0.1 seconds the length of the game.
-			// every 1 second below 6 minutes the game is won in is worth 100 bonus score
-			std::chrono::duration<double> duration = end_clk - start_clk;
-			int bonus_score = 5000 - 100 * (int)duration.count();
-			score += max(0, bonus_score);
+
+		ghosts = stage.getGhosts();
+
+		ShowConsoleCursor(false);
+
+		printLegend();
+
+		mario.setBoard(&board);
+		hammer.setBoard(&board);
+		hammer.setMario(&mario);
+
+		bool victory = false;
+		bool skip_ending = false; // for immediately ending the game if needed
+		Point pauline_pos = stage.winPoint();
+		int frame = 0; // for controlling when a barrel spawns
+		char key = 0;  // for player input
+
+		auto start_clk = std::chrono::high_resolution_clock::now();
+
+		while (lives > 0 && !victory) {
+			Point mario_pos = mario.getPos();
+
+			mario.draw();
+			if (_kbhit()) {
+				key = _getch();
+
+				if (key == ESC)
+					pause(skip_ending);
+				if (skip_ending) break;
+
+				keyPressed(key);
+			}
+
+
+			Sleep(230 - difficulty * 50); // game speed
+
+			if (mario_pos == pauline_pos) { // victory condition
+				victory = true;
+				break;
+
+			}
+			else { // move mario and barrels, reset board if he dies at any point
+				mario.erase();
+				hammer.erase();
+				bool alive = mario.move(); // death by fall damage?
+
+				if (mario_pos == hammer.getPos())
+					hammer.equip();
+
+				if (alive) {
+					alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
+					if (alive) {
+						if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
+							spawnBarrels(stage.dkPoint(), difficulty == 3); // double throw for hard diff
+						}
+
+						if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
+
+						rollBarrels(alive);
+						moveGhosts(alive);
+
+					}
+				}
+
+				if (!alive && !debug_mode) { // lower life and reset board
+					lives--;
+					mario.drawDead();
+					Sleep(1200);
+					reset();
+					flushInput(key);
+					frame = 0;
+				}
+				frame++;
+			}
 		}
-		printEndGameWindow(victory);
+
+		auto end_clk = std::chrono::high_resolution_clock::now();
+
+		if (!skip_ending) { // ending window
+			if (victory) {
+				// duration counts in 0.1 seconds the length of the game.
+				// every 1 second below 6 minutes the game is won in is worth 100 bonus score
+				std::chrono::duration<double> duration = end_clk - start_clk;
+				int bonus_score = 5000 - 100 * (int)duration.count();
+				score += max(0, bonus_score);
+			}
+			printEndGameWindow(victory);
+		}
+
+
 	}
 }
 
@@ -111,7 +129,7 @@ void Game::keyPressed(char key)
 
 void Game::initStage1() // custom built stage 1
 {
-	stage = Stage({ 4, 22 }, { 40, 2 }, { 40, 5 }, { 33, 22 });
+	/*stage = Stage({4, 22}, {40, 2}, {40, 5}, {33, 22});
 
 	static constexpr int NUM_LADDERS = 9;
 	Point ladders[NUM_LADDERS]; 
@@ -144,7 +162,7 @@ void Game::initStage1() // custom built stage 1
 	stage.addGhost(Ghost({ 9, 18 }, RIGHT, &board));
 	stage.addGhost(Ghost({ 25, 9 }, RIGHT, &board));
 	stage.addGhost(Ghost({ 8, 9 }, RIGHT, &board));
-	stage.addGhost(Ghost({ 60, 10 }, RIGHT, &board));
+	stage.addGhost(Ghost({ 60, 10 }, RIGHT, &board));*/
 
 }
 
@@ -387,4 +405,9 @@ void Game::flushInput(char& input)
 	FlushConsoleInputBuffer(hInput);
 
 	input = 0;
+}
+void Game::getAllScreenFileNames(std::vector<std::string>& vec_to_fill) {
+	vec_to_fill.push_back("dkong_01.screen");
+	vec_to_fill.push_back("dkong_02.screen");
+
 }

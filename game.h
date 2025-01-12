@@ -117,5 +117,6 @@ public:
 	* needed to "forget" any unused input from the previous screen/before reset.
 	*/
 	void flushInput(char& input);
+	void getAllScreenFileNames(std::vector<std::string>& vec_to_fill);
 };
 

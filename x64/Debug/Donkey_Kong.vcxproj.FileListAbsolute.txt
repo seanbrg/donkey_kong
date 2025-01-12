@@ -3,3 +3,4 @@ C:\Users\Anna\source\repos\donkey_kong_try\x64\Debug\Donkey_Kong.exe
 C:\Users\Anna\source\repos\donkey_kongtt\x64\Debug\Donkey_Kong.exe
 C:\Users\Anna\source\repos\donkey_konguu\x64\Debug\Donkey_Kong.exe
 C:\Users\Anna\source\repos\donkey_konga\x64\Debug\Donkey_Kong.exe
+C:\Users\Anna\source\repos\donkey_kongj\x64\Debug\Donkey_Kong.exe

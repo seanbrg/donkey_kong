@@ -14,7 +14,6 @@ class Board {
 	Point start; // must be set in stage
 
 	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario)
-	char blankBoard[MAX_Y][MAX_X + 1]; // board with only borders
 	char originalStageBoard[MAX_Y][MAX_X + 1]; // board with borders, floors and ladders
 
 	
@@ -93,5 +92,7 @@ public:
 	* @return the hammer location as a Point object.
 	*/
 	Point hammerPoint() const { return stage->hammerPoint(); }
+
+	void load(const std::string& fileName);
 };
 
