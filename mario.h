@@ -88,7 +88,7 @@ public:
 	 */
 	void setBoard(Board* pboard) {
 		board = pboard;
-		pos = board->startingPoint();
+		pos = board->getStart();
 	}
 
 	/*

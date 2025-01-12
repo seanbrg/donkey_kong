@@ -13,18 +13,19 @@ void Game::run()
 
 
 	if (fileNames.empty()) {
-		std::cout << "No screen files found! Please add screen files to the directory.\n";
+		std::cout << "ERROR: no screen files found! Please add screen files to the directory.\n";
+		_getch();
 		return;
 	}
 
 	for (const auto& filename : fileNames) {
-		board = Board(&stage, colors);
+		board = Board(colors);
 		board.load(filename);
 		board.reset();
 		board.print();
 
 
-		ghosts = stage.getGhosts();
+		ghosts = board.getGhosts();
 
 		ShowConsoleCursor(false);
 
@@ -36,7 +37,7 @@ void Game::run()
 
 		bool victory = false;
 		bool skip_ending = false; // for immediately ending the game if needed
-		Point pauline_pos = stage.winPoint();
+		Point pauline_pos = board.getPauline();
 		int frame = 0; // for controlling when a barrel spawns
 		char key = 0;  // for player input
 
@@ -76,7 +77,7 @@ void Game::run()
 					alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
 					if (alive) {
 						if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
-							spawnBarrels(stage.dkPoint(), difficulty == 3); // double throw for hard diff
+							spawnBarrels(board.getDK(), difficulty == 3); // double throw for hard diff
 						}
 
 						if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
@@ -127,52 +128,15 @@ void Game::keyPressed(char key)
 	}
 }
 
-void Game::initStage1() // custom built stage 1
-{
-	/*stage = Stage({4, 22}, {40, 2}, {40, 5}, {33, 22});
-
-	static constexpr int NUM_LADDERS = 9;
-	Point ladders[NUM_LADDERS]; 
-	// format: { (leftmost point), floor type, floor length }
-	stage.addFloor({ 1, 23}, ch_floor_flat, 78);
-	stage.addFloor({ 69, 18 }, ch_floor_flat, 7);
-	stage.addFloor({ 65, 18 }, ch_floor_flat, 3);
-	stage.addFloor({ 58, 18 }, ch_floor_flat, 6);
-	stage.addFloor({ 55, 11}, ch_floor_left, 17);
-	stage.addFloor({ 8, 19}, ch_floor_right, 32);
-	stage.addFloor({ 13, 15}, ch_floor_left, 32);
-	stage.addFloor({ 3, 10}, ch_floor_right, 36);
-	stage.addFloor({ 8, 6}, ch_floor_flat, 60);
-	stage.addFloor({ 35, 3 }, ch_floor_flat, 11);
-
-	// the point saved in a ladder must be its highest point (on a floor)
-	ladders[0] = { 72, 18 };
-	ladders[1] = { 59 , 11 };
-	ladders[2] = { 65 , 6 };
-	ladders[3] = { 38, 19 };
-	ladders[4] = { 14 , 15 };
-	ladders[5] = { 37 , 10 };
-	ladders[6] = { 10 , 6 };
-	ladders[7] = { 36 , 3 };
-	ladders[8] = { 44 , 3 };
-
-	for (int i = 0; i < NUM_LADDERS; i++)
-		stage.addLadder(ladders[i]);
-
-	stage.addGhost(Ghost({ 9, 18 }, RIGHT, &board));
-	stage.addGhost(Ghost({ 25, 9 }, RIGHT, &board));
-	stage.addGhost(Ghost({ 8, 9 }, RIGHT, &board));
-	stage.addGhost(Ghost({ 60, 10 }, RIGHT, &board));*/
-
-}
-
 void Game::printLegend() const
 {
+	Point legend = board.getLegend();
+
 	if (colors)
 		changeColor('l');
-	gotoxy(MIN_X + 2, MIN_Y + 1);
+	gotoxy(MIN_X + legend.getX(), MIN_Y + legend.getY());
 	std::cout << "LIVES: " << lives;
-	gotoxy(MIN_X + 2, MIN_Y + 2);
+	gotoxy(MIN_X + legend.getX(), MIN_Y + legend.getY() + 1);
 	std::cout << "SCORE: " << score;
 	if (colors)
 		changeColor(' ');
@@ -272,7 +236,7 @@ void Game::reset()
 	board.print();
 	printLegend();
 	mario.reset();
-	ghosts = stage.getGhosts();
+	ghosts = board.getGhosts();
 }
 
 bool Game::checkMarioDeath() const
@@ -406,8 +370,9 @@ void Game::flushInput(char& input)
 
 	input = 0;
 }
+
 void Game::getAllScreenFileNames(std::vector<std::string>& vec_to_fill) {
 	vec_to_fill.push_back("dkong_01.screen");
-	vec_to_fill.push_back("dkong_02.screen");
+	//vec_to_fill.push_back("dkong_02.screen");
 
 }

@@ -32,3 +32,12 @@
 *.app
 
 /.vs
+/x64/Debug/Donkey_Kong.pdb
+/Donkey_Kong/x64/Debug/vc143.pdb
+/Donkey_Kong/x64/Debug/vc143.idb
+/Donkey_Kong/x64/Debug/Donkey_Kong.tlog/CL.command.1.tlog
+/Donkey_Kong/x64/Debug/Donkey_Kong.tlog/CL.read.1.tlog
+/Donkey_Kong/x64/Debug/Donkey_Kong.tlog/CL.write.1.tlog
+/Donkey_Kong/x64/Debug/Donkey_Kong.tlog/link.read.1.tlog
+/Donkey_Kong/x64/Debug/Donkey_Kong.ilk
+/Donkey_Kong/x64/Debug/Donkey_Kong.log

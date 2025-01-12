@@ -37,7 +37,7 @@ public:
 	 */
 	void setBoard(Board* pboard) {
 		board = pboard;
-		pos = board->hammerPoint();
+		pos = board->getHammer();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public:
 		equipped = false; 
 		hitting = false;
 		key_hit = false;
-		pos = board->hammerPoint();
+		pos = board->getHammer();
 	}
 
 	bool draw();

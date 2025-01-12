@@ -2,39 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include "board.h"
-#include "stage.h"
 #include "utils.h"
 #include "ghost.h"
 
 using namespace colors;
-
-Board::Board(Stage* _stage, bool _colors) : stage(_stage), colors(_colors)
-{
-	/*for (int x = 0; x <= MAX_X - MIN_X; x++)
-		blankBoard[0][x] = ch_border;
-
-	for (int y = 1; y < MAX_Y - MIN_Y - 1; y++) {
-		blankBoard[y][0] = ch_border;
-		for (int x = 1; x < MAX_X - MIN_X; x++) {
-			blankBoard[y][x] = ' ';
-		}
-		blankBoard[y][MAX_X - MIN_X] = ch_border;
-	}
-
-	for (int x = 0; x <= MAX_X - MIN_X; x++)
-		blankBoard[MAX_Y - MIN_Y - 1][x] = ch_border;
-
-	reset(stage);*/
-}
-
-void Board::addStage(Stage* const _stage) {
-	if (stage == nullptr) {
-		stage = _stage;
-		reset(_stage);
-		start = _stage->startingPoint();
-	}
-	else stage->addNextStage(_stage);
-}
 
 char Board::getChar(const Point& pos) const {
 	return currentBoard[pos.getY()][pos.getX()];
@@ -73,9 +44,8 @@ void Board::restoreBoardExplosion(const Point& explosion) const
 	}
 }
 
-void Board::reset(const Stage* _stage)
+void Board::reset()
 {
-	
 	for (int y = 0; y < MAX_Y; y++) {
 		memcpy(currentBoard[y], originalStageBoard[y], MAX_X + 1);
 	}
@@ -94,15 +64,13 @@ void Board::print() const {
 
 			std::cout << current_char;
 		}
-		
-		
-
 
 		if (i < MAX_Y - 1)
 			std::cout << '\n';
 	}
 	SetConsoleTextAttribute(hConsole, WHITE);
 }
+
 void Board::load(const std::string& fileName)
 {
 	std::ifstream screen_file(fileName);
@@ -114,10 +82,9 @@ void Board::load(const std::string& fileName)
 	int curr_row = 0;
 	int curr_col = 0;
 	char c;
-	while (!screen_file.get(c).eof() && curr_row < MAX_Y) {
+	while (!screen_file.get(c).eof() && curr_row <= MAX_Y) {
 		if (c == '\n') {
-			if (curr_col < MAX_X) {
-				// add spaces for missing cols
+			if (curr_col < MAX_X) { // add spaces for missing columns
 				#pragma warning(suppress : 4996) // to allow strcpy
 				strcpy(originalStageBoard[curr_row] + curr_col, std::string(MAX_X - curr_col - 1, ' ').c_str());
 			}
@@ -125,48 +92,49 @@ void Board::load(const std::string& fileName)
 			curr_col = 0;
 			continue;
 		}
-		if (curr_col < MAX_X) {
-			originalStageBoard[curr_row][curr_col] = c;
-
+		if (curr_col <= MAX_X) {
 			Point position(curr_col, curr_row);
 			switch (c) {
 			case ch_mario:
-				stage->setStartingPoint(position);
-				originalStageBoard[curr_row][curr_col] = ' ';
+				start_pos = position;
+				c = ' ';
 				break;
 			case ch_hammer_dropped:
-				stage->setHammerPoint(position);
-				originalStageBoard[curr_row][curr_col] = ' ';
-				break;
-			case ch_dk:
-				stage->setDkPoint(position);
-
-				break;
-			case ch_pauline:
-				stage->setWinPoint(position);
+				hammer_pos = position;
+				c = ' ';
 				break;
 			case ch_ghost:
-				stage->addGhost(Ghost(position, RIGHT, this));
-				originalStageBoard[curr_row][curr_col] = ' ';
+				start_ghosts.push_back({ position, RIGHT, this });
+				c = ' ';
+				break;
+			case ch_legend_symbol:
+				legend_pos = position;
+				c = ' ';
+				break;
+			case ch_dk:
+				dk_pos = position;
+				break;
+			case ch_pauline:
+				pauline_pos = position;
 				break;
 			}
+			originalStageBoard[curr_row][curr_col] = c;
 			++curr_col;
 		}
 	}
-	int last_row = (curr_row < MAX_Y ? curr_row : MAX_Y - 1);
-	// add a closing frame
-	// first line
+
+	int last_row = (curr_row <= MAX_Y - 1 ? curr_row : MAX_Y - 1);
+
+	// add a frame of 'Q' even if file didn't have one
 	#pragma warning(suppress : 4996) // to allow strcpy
-	strcpy(originalStageBoard[0], std::string(MAX_X, ch_border).c_str());
-	originalStageBoard[0][MAX_X] = '\n';
-	// last line
+	strcpy(originalStageBoard[0], std::string(MAX_X, ch_border).c_str()); // first row
+	
 	#pragma warning(suppress : 4996) // to allow strcpy
-	strcpy(originalStageBoard[last_row], std::string(MAX_X, ch_border).c_str());
-	originalStageBoard[last_row][MAX_X] = '\0';
-	// first col + last col
-	for (int row = 1; row < last_row; ++row) {
+	strcpy(originalStageBoard[last_row], std::string(MAX_X, ch_border).c_str()); // last row
+
+	// first and last columns
+	for (int row = 0; row <= last_row; ++row) {
 		originalStageBoard[row][0] = ch_border;
-		originalStageBoard[row][MAX_X - 1] = ch_border;
-		originalStageBoard[row][MAX_X] = '\n';
+		originalStageBoard[row][MAX_X] = ch_border;
 	}
 }

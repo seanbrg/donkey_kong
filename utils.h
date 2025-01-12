@@ -59,6 +59,7 @@ static const int explosion_range = 2;
 static const char ch_blank = ' ';
 static const char ch_border = 'Q';
 static const char ch_ladder = 'H';
+static const char ch_legend_symbol = 'L';
 static const char ch_floor_flat = '=';
 static const char ch_floor_left = '<';
 static const char ch_floor_right = '>';

@@ -70,7 +70,7 @@ bool Mario::move()
 
 void Mario::reset()
 {
-	pos = board->startingPoint();
+	pos = board->getStart();
 	dir = STAY;
 	fall_counter = 0;
 	jump_counter = 0;

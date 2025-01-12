@@ -27,7 +27,6 @@ class Game
 	Mario mario;
 	Hammer hammer;
 	Board board;
-	Stage stage;
 	std::list<Barrel> barrels;
 	std::list<Ghost> ghosts;
 
@@ -50,11 +49,6 @@ public:
 	* @param key: character that was recieved as input.
 	*/
 	void keyPressed(char key);
-
-	/**
-	 * initializes stage 1 with predefined floors and ladders.
-	 */
-	void initStage1();
 
 	/**
 	 * prints the legend containing Mario's remaining lives and the current score.
@@ -117,6 +111,7 @@ public:
 	* needed to "forget" any unused input from the previous screen/before reset.
 	*/
 	void flushInput(char& input);
+
 	void getAllScreenFileNames(std::vector<std::string>& vec_to_fill);
 };
 

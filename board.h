@@ -1,53 +1,48 @@
 #pragma once
 #include "utils.h"
 #include "point.h"
-#include "stage.h"
 #include "ghost.h"
+
 /**
  * class representing the game board.
  * handles the board's state, display, and interactions with the game stage.
  */
 class Board {
-	Stage* stage = nullptr;
 	bool colors = true;
 
-	Point start; // must be set in stage
+	Point start_pos;
+	Point hammer_pos;
+	Point legend_pos;
+	Point dk_pos;
+	Point pauline_pos;
 
-	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario)
-	char originalStageBoard[MAX_Y][MAX_X + 1]; // board with borders, floors and ladders
+	std::list<Ghost> start_ghosts;
 
-	
-	
+	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario, hammer and entities)
+	char originalStageBoard[MAX_Y][MAX_X + 1]; // original board of current stage
+
 public:
 
 	/**
 	 * constructor to initialize the board.
-	 * @param _stage: pointer to the initial stage.
+	 * @param _colors: color mode (for printing in color).
 	 */
-	Board(Stage* _stage, bool _colors);
+	Board(bool _colors) : colors(_colors) {}
 
 	/**
 	 * default constructor.
 	 */
 	Board() = default;
 
-	
 	/**
 	 * resets the board to the initial stage.
-	 * @param _stage: pointer to the stage to reset to.
 	 */
-	void reset(const Stage* _stage = nullptr);
+	void reset();
 
 	/**
 	 * prints the current state of the board.
 	 */
 	void print() const;
-	
-	/**
-	 * adds a new stage to the board.
-	 * @param _stage: pointer to the new stage to add.
-	 */
-	void addStage(Stage* const _stage);
 	
 	/**
 	 * retrieves the character at a specified position.
@@ -81,18 +76,27 @@ public:
 	*/
 	bool isColor() const { return colors; }
 	
+	void load(const std::string& fileName);
+
 	/**
 	* gets the starting point of the player.
 	* @return the starting point as a Point object.
 	*/
-	Point startingPoint() const { return stage->startingPoint(); }
+	Point getStart() const { return start_pos; }
 
 	/**
 	* gets the first location of the hammer.
 	* @return the hammer location as a Point object.
 	*/
-	Point hammerPoint() const { return stage->hammerPoint(); }
+	Point getHammer() const { return hammer_pos; }
 
-	void load(const std::string& fileName);
+	Point getDK() const { return dk_pos; }
+
+	Point getLegend() const { return legend_pos; }
+
+	Point getPauline() const { return pauline_pos; }
+
+	std::list<Ghost>& getGhosts() { return start_ghosts; }
+
 };
 
