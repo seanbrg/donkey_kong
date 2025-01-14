@@ -156,12 +156,6 @@ void Menu::instructionsMenu() {
     current_menu = 0;
 }
 
-void Menu::findFiles()
-{
-    fileNames.push_back("dkong_01.screen");
-    //vec_to_fill.push_back("dkong_02.screen");
-}
-
 void Menu::mainMenu() {
     char choice = '\0';
     system("cls");  
@@ -236,13 +230,13 @@ void Menu::fileInputMenu()
     else {
         bool found = false;
 
-        for (const auto& entry : std::filesystem::directory_iterator(".")) {
+        for (const auto& entry : std::filesystem::directory_iterator(".")) { // search file in local directory
             if (entry.is_regular_file()) {
                 std::string filename = entry.path().filename().string();
                 if (filename == input && filename.ends_with(".screen")) {
                     found = true;
                     manual_files = true;
-                    fileNames.push_back(input);
+                    fileNames.push_back(filename);
                     break;
                 }
             }
@@ -252,4 +246,28 @@ void Menu::fileInputMenu()
             Sleep(800);
         }
     }
+}
+
+void Menu::findFiles()
+{
+    // Iterate through files in the directory
+    for (const auto& entry : std::filesystem::directory_iterator(".")) {
+        if (entry.is_regular_file()) {
+            std::string filename = entry.path().filename().string();
+
+            // Check if the filename matches the desired pattern
+            if (filename.starts_with("dkong_") && filename.ends_with(".screen")) {
+                fileNames.push_back(filename);
+            }
+        }
+    }
+    if (!fileNames.empty()) {
+        std::sort(fileNames.begin(), fileNames.end());
+    }
+    else {
+        std::cout << "ERROR: No valid files found.";
+        Sleep(1000);
+    }
+
+
 }
