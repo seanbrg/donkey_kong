@@ -1,12 +1,17 @@
 #include <iostream>
+#include <filesystem>
+#include <vector>
+#include <algorithm>
 #include "menu.h"
 #include "game.h"
 
 void Menu::startGame() { 
-    findFiles();
+    if (!manual_files) findFiles();
     Game game(fileNames, colors, difficulty);
+
     game.run();
     fileNames.clear();
+    manual_files = false;
 }
 
 void Menu::display() {
@@ -20,6 +25,9 @@ void Menu::display() {
             break;
         case 2:
             settingsMenu();
+            break;
+        case 3:
+            fileInputMenu();
             break;
         case 8:
             instructionsMenu();
@@ -169,6 +177,7 @@ void Menu::mainMenu() {
     std::string menu =
         "(1) Start Game                                                                 \n"
         "(2) Game Settings (colors and difficulty)                                      \n"
+        "(3) Manually input screen files                                                \n"
         "(8) Instructions and Controls                                                  \n"
         "(9) Exit                                                                       \n";
 
@@ -184,10 +193,63 @@ void Menu::mainMenu() {
 
     choice = _getch();
 
-    while (choice != '1' && choice != '2' && choice != '8' && choice != '9') { // wait for correct input
+    while (choice != '1' && choice != '2' && choice != '3' && choice != '8' && choice != '9') { // wait for correct input
         gotoxy(0, 15);
         std::cout << "\nInvalid choice. Please try again.\n";
         choice = _getch();
     }
     current_menu = choice - '0'; // update menu
+}
+
+void Menu::fileInputMenu()
+{
+    system("cls");
+
+    std::string instructions = 
+                "Write screen file names here to input them as replacement of the default stages.\n"
+                "Files must be of .screen format and each must contain a single game stage\n"
+                "drawn with text, which must include all the necessary game elements.\n"
+                "Please ensure that the files are in the game directory before input.\n"
+                "********************************************************************************\n";
+
+    if (colors) changeColor(ch_dk);
+    std::cout << instructions;
+    if (colors) changeColor();
+
+    if (!fileNames.empty()) {
+        std::cout << "\nCurrently inputted files:\n";
+        for (auto file : fileNames)
+            std::cout << file << std::endl;
+
+        std::cout << "\nInput 'd' to cancel file input.\n";
+    }
+    std::cout << "\nWaiting for input (input 'x' to return to main menu):\n";
+
+    std::string input;
+    std::cin >> input;
+    if (input == "x") {
+        current_menu = 0;
+    }
+    else if (input == "d") {
+        fileNames.clear();
+    }
+    else {
+        bool found = false;
+
+        for (const auto& entry : std::filesystem::directory_iterator(".")) {
+            if (entry.is_regular_file()) {
+                std::string filename = entry.path().filename().string();
+                if (filename == input && filename.ends_with(".screen")) {
+                    found = true;
+                    manual_files = true;
+                    fileNames.push_back(input);
+                    break;
+                }
+            }
+        }
+        if (!found) {
+            std::cout << "File not found.";
+            Sleep(800);
+        }
+    }
 }

@@ -5,6 +5,7 @@
 class Menu {
     std::vector<std::string> fileNames;
 
+    bool manual_files = false;
     int difficulty = 2; // game difficulty - 1 to 3
     bool colors = true;
     int current_menu = 0;   // 0 = main menu
@@ -29,6 +30,8 @@ public:
      * displays the main menu which leads to all other menus.
      */
     void mainMenu();
+
+    void fileInputMenu();
 
     /**
      * displays and handles game settings options,
