@@ -1,9 +1,12 @@
+#include <iostream>
 #include "menu.h"
 #include "game.h"
 
 void Menu::startGame() { 
-    Game game(colors, difficulty);
-    game.run();  
+    findFiles();
+    Game game(fileNames, colors, difficulty);
+    game.run();
+    fileNames.clear();
 }
 
 void Menu::display() {
@@ -143,6 +146,12 @@ void Menu::instructionsMenu() {
 
     _getch(); // await input to return to main menu
     current_menu = 0;
+}
+
+void Menu::findFiles()
+{
+    fileNames.push_back("dkong_01.screen");
+    //vec_to_fill.push_back("dkong_02.screen");
 }
 
 void Menu::mainMenu() {

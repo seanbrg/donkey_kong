@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
-
+#include <vector>
 
 class Menu {
+    std::vector<std::string> fileNames;
+
     int difficulty = 2; // game difficulty - 1 to 3
     bool colors = true;
     int current_menu = 0;   // 0 = main menu
@@ -38,6 +40,9 @@ public:
     * presents the game instructions and controls to the user.
     */
     void instructionsMenu();
+
+
+    void findFiles();
 };
 
 

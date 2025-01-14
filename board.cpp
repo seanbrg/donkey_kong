@@ -71,17 +71,28 @@ void Board::print() const {
 	SetConsoleTextAttribute(hConsole, WHITE);
 }
 
-void Board::load(const std::string& fileName)
+int Board::load(const std::string& fileName)
 {
 	std::ifstream screen_file(fileName);
 	if (!screen_file.is_open()) {
 		std::cerr << "Error: Unable to open the file: " << fileName << std::endl;
-
-		return;
+		std::cout << "Press anything to return to main menu.";
+		_getch();
+		return EXIT_FAILURE;
 	}
+
+	// following flags are for checking if something has appeared:
+	bool flag_start = false;	
+	bool flag_pauline = false;
+	bool flag_dk = false;
+	bool flag_legend = false;
+	bool flag_hammer = false;
+	bool flag_once = true;	// false if anything appeared more than once
+
 	int curr_row = 0;
 	int curr_col = 0;
 	char c;
+
 	while (!screen_file.get(c).eof() && curr_row <= MAX_Y) {
 		if (c == '\n') {
 			if (curr_col < MAX_X) { // add spaces for missing columns
@@ -96,26 +107,44 @@ void Board::load(const std::string& fileName)
 			Point position(curr_col, curr_row);
 			switch (c) {
 			case ch_mario:
+				if (!flag_start) flag_start = true;
+				else flag_once = false;
 				start_pos = position;
 				c = ' ';
 				break;
 			case ch_hammer_dropped:
+				if (!flag_hammer) flag_hammer = true;
+				else flag_once = false;
 				hammer_pos = position;
 				c = ' ';
+				break;
+			case ch_legend_symbol:
+				if (!flag_legend) flag_legend = true;
+				else flag_once = false;
+				legend_pos = position;
+				c = ' ';
+				break;
+			case ch_dk:
+				if (!flag_dk) flag_dk = true;
+				else flag_once = false;
+				dk_pos = position;
+				break;
+			case ch_pauline:
+				if (!flag_pauline) flag_pauline = true;
+				else flag_once = false;
+				pauline_pos = position;
 				break;
 			case ch_ghost:
 				start_ghosts.push_back({ position, RIGHT, this });
 				c = ' ';
 				break;
-			case ch_legend_symbol:
-				legend_pos = position;
+			case ch_ladder:
+			case ch_floor_flat:
+			case ch_floor_left:
+			case ch_floor_right:
+				break;
+			default: // including 'Q', to not draw any border from the file, as we draw our own borders
 				c = ' ';
-				break;
-			case ch_dk:
-				dk_pos = position;
-				break;
-			case ch_pauline:
-				pauline_pos = position;
 				break;
 			}
 			originalStageBoard[curr_row][curr_col] = c;
@@ -137,4 +166,19 @@ void Board::load(const std::string& fileName)
 		originalStageBoard[row][0] = ch_border;
 		originalStageBoard[row][MAX_X] = ch_border;
 	}
+
+	hammer_in_board = flag_hammer;
+	if (!flag_legend) legend_pos = Point(2, 1); // fix missing L
+
+	if (!flag_pauline || !flag_dk || !flag_start || !flag_once) {
+		std::cerr << "Error: file " << fileName << " is invalid: ";
+		if (!flag_pauline) std::cout << std::endl << "No Pauline symbol in screen file";
+		if (!flag_dk) std::cout << std::endl << "No Donkey Kong symbol in screen file";
+		if (!flag_start) std::cout << std::endl << "No Mario symbol in screen file";
+		if (!flag_once) std::cout << std::endl << "A symbol has appeared more than once";
+		std::cout << std::endl << "Press anything to continue to next file or return to main menu.";
+		_getch();
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
 }

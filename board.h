@@ -9,6 +9,7 @@
  */
 class Board {
 	bool colors = true;
+	bool hammer_in_board = false;
 
 	Point start_pos;
 	Point hammer_pos;
@@ -76,7 +77,7 @@ public:
 	*/
 	bool isColor() const { return colors; }
 	
-	void load(const std::string& fileName);
+	int load(const std::string& fileName);
 
 	/**
 	* gets the starting point of the player.

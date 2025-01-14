@@ -8,9 +8,6 @@ using namespace keys;
 void Game::run()
 {
 	system("cls"); // clear screen
-	std::vector<std::string> fileNames;
-	getAllScreenFileNames(fileNames);
-
 
 	if (fileNames.empty()) {
 		std::cout << "ERROR: no screen files found! Please add screen files to the directory.\n";
@@ -20,100 +17,100 @@ void Game::run()
 
 	for (const auto& filename : fileNames) {
 		board = Board(colors);
-		board.load(filename);
-		board.reset();
-		board.print();
+		int loaded = board.load(filename);
+		if (loaded == EXIT_SUCCESS) {
+			board.reset();
+			board.print();
 
 
-		ghosts = board.getGhosts();
+			ghosts = board.getGhosts();
 
-		ShowConsoleCursor(false);
+			ShowConsoleCursor(false);
 
-		printLegend();
+			printLegend();
 
-		mario.setBoard(&board);
-		hammer.setBoard(&board);
-		hammer.setMario(&mario);
+			mario.setBoard(&board);
+			hammer.setBoard(&board);
+			hammer.setMario(&mario);
 
-		bool victory = false;
-		bool skip_ending = false; // for immediately ending the game if needed
-		Point pauline_pos = board.getPauline();
-		int frame = 0; // for controlling when a barrel spawns
-		char key = 0;  // for player input
+			bool victory = false;
+			bool skip_ending = false; // for immediately ending the game if needed
+			Point pauline_pos = board.getPauline();
+			int frame = 0; // for controlling when a barrel spawns
+			char key = 0;  // for player input
 
-		auto start_clk = std::chrono::high_resolution_clock::now();
+			auto start_clk = std::chrono::high_resolution_clock::now();
 
-		while (lives > 0 && !victory) {
-			Point mario_pos = mario.getPos();
+			while (lives > 0 && !victory) {
+				Point mario_pos = mario.getPos();
 
-			mario.draw();
-			if (_kbhit()) {
-				key = _getch();
+				mario.draw();
+				if (_kbhit()) {
+					key = _getch();
 
-				if (key == ESC)
-					pause(skip_ending);
-				if (skip_ending) break;
+					if (key == ESC)
+						pause(skip_ending);
+					if (skip_ending) break;
 
-				keyPressed(key);
-			}
+					keyPressed(key);
+				}
 
 
-			Sleep(230 - difficulty * 50); // game speed
+				Sleep(230 - difficulty * 50); // game speed
 
-			if (mario_pos == pauline_pos) { // victory condition
-				victory = true;
-				break;
+				if (mario_pos == pauline_pos) { // victory condition
+					victory = true;
+					break;
 
-			}
-			else { // move mario and barrels, reset board if he dies at any point
-				mario.erase();
-				hammer.erase();
-				bool alive = mario.move(); // death by fall damage?
+				}
+				else { // move mario and barrels, reset board if he dies at any point
+					mario.erase();
+					hammer.erase();
+					bool alive = mario.move(); // death by fall damage?
 
-				if (mario_pos == hammer.getPos())
-					hammer.equip();
+					if (mario_pos == hammer.getPos())
+						hammer.equip();
 
-				if (alive) {
-					alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
 					if (alive) {
-						if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
-							spawnBarrels(board.getDK(), difficulty == 3); // double throw for hard diff
+						alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
+						if (alive) {
+							if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
+								spawnBarrels(board.getDK(), difficulty == 3); // double throw for hard diff
+							}
+
+							if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
+
+							rollBarrels(alive);
+							moveGhosts(alive);
+
 						}
-
-						if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
-
-						rollBarrels(alive);
-						moveGhosts(alive);
-
 					}
-				}
 
-				if (!alive && !debug_mode) { // lower life and reset board
-					lives--;
-					mario.drawDead();
-					Sleep(1200);
-					reset();
-					flushInput(key);
-					frame = 0;
+					if (!alive && !debug_mode) { // lower life and reset board
+						lives--;
+						mario.drawDead();
+						Sleep(1200);
+						reset();
+						flushInput(key);
+						frame = 0;
+					}
+					frame++;
 				}
-				frame++;
+			}
+
+			auto end_clk = std::chrono::high_resolution_clock::now();
+
+			if (!skip_ending) { // ending window
+				if (victory) {
+					// duration counts in 0.1 seconds the length of the game.
+					// every 1 second below 6 minutes the game is won in is worth 100 bonus score
+					std::chrono::duration<double> duration = end_clk - start_clk;
+					int bonus_score = 5000 - 100 * (int)duration.count();
+					score += max(0, bonus_score);
+				}
+				printEndGameWindow(victory);
 			}
 		}
-
-		auto end_clk = std::chrono::high_resolution_clock::now();
-
-		if (!skip_ending) { // ending window
-			if (victory) {
-				// duration counts in 0.1 seconds the length of the game.
-				// every 1 second below 6 minutes the game is won in is worth 100 bonus score
-				std::chrono::duration<double> duration = end_clk - start_clk;
-				int bonus_score = 5000 - 100 * (int)duration.count();
-				score += max(0, bonus_score);
-			}
-			printEndGameWindow(victory);
-		}
-
-
 	}
 }
 
@@ -369,10 +366,4 @@ void Game::flushInput(char& input)
 	FlushConsoleInputBuffer(hInput);
 
 	input = 0;
-}
-
-void Game::getAllScreenFileNames(std::vector<std::string>& vec_to_fill) {
-	vec_to_fill.push_back("dkong_01.screen");
-	//vec_to_fill.push_back("dkong_02.screen");
-
 }

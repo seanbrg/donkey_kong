@@ -28,6 +28,7 @@ class Game
 	Board board;
 	std::list<Barrel> barrels;
 	std::list<Ghost> ghosts;
+	std::vector<std::string> fileNames;
 
 public:
 
@@ -36,7 +37,7 @@ public:
 	 * @param _colors: indicates if colors are being used.
 	 * @param _difficulty: specifies the difficulty level of the game.
 	 */
-	Game(bool _clr, int _dif) : colors(_clr), difficulty(_dif) {}
+	Game(std::vector<std::string>& _files, bool _clr, int _dif) : fileNames(_files), colors(_clr), difficulty(_dif) {}
 
 	/**
 	 * runs the main game loop.
@@ -111,6 +112,5 @@ public:
 	*/
 	void flushInput(char& input);
 
-	void getAllScreenFileNames(std::vector<std::string>& vec_to_fill);
 };
 
