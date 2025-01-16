@@ -1,7 +1,7 @@
 #include "barrel.h"
 #include "board.h"
 
-void Barrel::move(std::list<Entity*>& allEntities)
+void Barrel::move(std::list<EntityPtr>& allEntities)
 {
 	if (explode) {
 		active = false;

@@ -30,7 +30,7 @@ public:
 	/**
 	 * moves the barrel based on its current state and the board.
 	 */
-	void move(std::list<Entity*>& allEntities) override;
+	void move(std::list<EntityPtr>& allEntities) override;
 
 	/**
 	 * draws the barrel on the board.

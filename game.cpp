@@ -145,14 +145,14 @@ void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 {
 	static Key next = LEFT;
 	if (thrown_twice) { // option for harder difficulty
-		Entity* barrel_left = new Barrel(dk, LEFT, &board);
-		Entity* barrel_right = new Barrel(dk, LEFT, &board);
+		EntityPtr barrel_left = (EntityPtr)new Barrel(dk, LEFT, &board);
+		EntityPtr barrel_right = (EntityPtr)new Barrel(dk, LEFT, &board);
 
 		entities.push_back(barrel_left);
 		entities.push_back(barrel_right);
 	}
 	else { // default
-		Entity* barrel_next = new Barrel(dk, next, &board);
+		EntityPtr barrel_next = (EntityPtr)new Barrel(dk, next, &board);
 
 		entities.push_back(barrel_next);
 		next = (next == LEFT) ? RIGHT : LEFT;
@@ -170,7 +170,7 @@ void Game::moveEntities(bool& alive)
 		Point entity_pos = (*entity)->getPos();
 		Point below_mario = mario_pos.neighbor(DOWN);
 
-		if (entity_pos == below_mario || entity_pos == below_mario.neighbor(DOWN)) {
+		if (mario.isJumping() && (entity_pos == below_mario || entity_pos == below_mario.neighbor(DOWN))) {
 			score += 100;
 			printLegend();
 		}
@@ -179,7 +179,7 @@ void Game::moveEntities(bool& alive)
 			break;
 		}
 
-		Barrel* barrel = dynamic_cast<Barrel*>(*entity);
+		Barrel* barrel = dynamic_cast<Barrel*>((*entity).get());
 		if (barrel) {
 			if (barrel->isExploding()) {
 				barrel->drawExplosion();
@@ -206,7 +206,6 @@ void Game::moveEntities(bool& alive)
 				if (barrel->isExploding())
 					board.restoreBoardExplosion(entity_pos);
 
-				delete* entity;
 				entity = entities.erase(entity);
 			}
 		}
@@ -221,6 +220,7 @@ void Game::reset()
 {
 	hammer.unequip();
 	board.reset();
+	entities.clear();
 	entities = board.getEntities();
 	board.print();
 	printLegend();
@@ -247,7 +247,6 @@ void Game::checkHit()
 	while (entity != entities.end()) {
 		Point barrel_pos = (*entity)->getPos();
 		if (barrel_pos == hit0 || barrel_pos == hit1) {
-			delete *entity;
 			entity = entities.erase(entity);
 			score += 300;
 			hit = true;
@@ -349,12 +348,4 @@ void Game::flushInput(char& input)
 	FlushConsoleInputBuffer(hInput);
 
 	input = 0;
-}
-
-Game::~Game()
-{
-	for (auto& entity : entities) {
-		delete entity;
-	}
-	entities.clear();
 }

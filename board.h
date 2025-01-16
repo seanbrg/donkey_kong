@@ -5,6 +5,7 @@
 #include "ghost.h"
 #include <list>
 
+
 /**
  * class representing the game board.
  * handles the board's state, display, and interactions with the game stage.
@@ -19,7 +20,7 @@ class Board {
 	Point dk_pos;
 	Point pauline_pos;
 
-	std::list<Entity*> entities;
+	std::list<EntityPtr> entities;
 
 	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario, hammer and entities)
 	char originalStageBoard[MAX_Y][MAX_X + 1]; // original board of current stage
@@ -100,6 +101,6 @@ public:
 	Point getPauline() const { return pauline_pos; }
 
 
-	std::list<Entity*> getEntities() const { return entities; }
+	std::list<EntityPtr> getEntities() const { return entities; }
 };
 

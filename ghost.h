@@ -30,7 +30,7 @@ public:
     /**
      * Moves the ghost 
      */
-    void move(std::list<Entity*>& allEntities) override;
+    void move(std::list<EntityPtr>& allEntities) override;
 
     /**
      * Draws the ghost on the board.

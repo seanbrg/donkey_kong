@@ -25,7 +25,7 @@ class Game
 	Mario mario;
 	Hammer hammer;
 	Board board;
-	std::list<Entity*> entities;
+	std::list<EntityPtr> entities;
 	std::vector<std::string> fileNames;
 
 public:
@@ -102,7 +102,5 @@ public:
 	* needed to "forget" any unused input from the previous screen/before reset.
 	*/
 	void flushInput(char& input);
-
-	~Game();
 };
 

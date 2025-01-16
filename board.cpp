@@ -107,7 +107,7 @@ int Board::load(const std::string& fileName)
 		}
 		if (curr_col <= MAX_X) {
 			Point position(curr_col, curr_row);
-			Entity* ghost;
+			EntityPtr new_ghost;
 
 			switch (c) {
 			case ch_mario:
@@ -139,8 +139,8 @@ int Board::load(const std::string& fileName)
 				pauline_pos = position;
 				break;
 			case ch_ghost:
-				ghost = new Ghost(position, RIGHT, this);
-				entities.push_back(ghost);
+				new_ghost = (EntityPtr)new Ghost(position, RIGHT, this);
+				entities.push_back(new_ghost);
 				c = ' ';
 				break;
 			case ch_ladder:

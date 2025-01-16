@@ -35,12 +35,11 @@ bool Mario::move()
 		fall_counter = 0;
 	}
 
-	if (jumping) { // jumping logic
+	if (jump_counter > 0) { // jumping logic
 		new_pos = pos.neighbor(jump_dir);
 		if (jump_dir != UP)
 			new_pos = (jump_counter == 2) ? new_pos.neighbor(UP) : new_pos.neighbor(DOWN);
 		jump_counter--;
-		if (jump_counter == 0) jumping = false;
 	}
 	else {
 		if (board->getChar(pos.neighbor(DOWN)) == ' ') {  // fall
@@ -48,6 +47,7 @@ bool Mario::move()
 			new_pos = pos.neighbor(DOWN);
 		}
 		else {
+			jumping = false;
 			new_pos = pos.neighbor(dir);
 		}
 	}

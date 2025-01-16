@@ -3,7 +3,7 @@
 #include "board.h"
 #include <cstdlib>
 
-void Ghost::move(std::list<Entity*>& allEntities)
+void Ghost::move(std::list<EntityPtr>& allEntities)
 {
     Key dir = Entity::getDir();
     Point pos = Entity::getPos();
@@ -21,7 +21,7 @@ void Ghost::move(std::list<Entity*>& allEntities)
 
     for (auto& entity : allEntities) {
         if (typeid(*entity) == typeid(Ghost)) {
-            if (entity != this && (*entity).getPos() == next_pos) {
+            if (entity.get() != this && entity->getPos() == next_pos) {
                 dir = (dir == LEFT) ? RIGHT : LEFT;
                 Entity::setDir(dir);
                 return;

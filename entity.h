@@ -4,6 +4,8 @@
 #include <list>
 
 class Board;
+class Entity;
+using EntityPtr = std::shared_ptr<Entity>; // smart pointer that has a destructor
 
 class Entity
 {
@@ -27,7 +29,7 @@ public:
     /**
      * Moves the entity
      */
-    virtual void move(std::list<Entity*>& allEntities) = 0;
+    virtual void move(std::list<EntityPtr>& allEntities) = 0;
 
     /**
      * Draws the entity on the board.
@@ -50,4 +52,3 @@ public:
     void setDirection(Key newDir) { dir = newDir; }
 
 };
-
