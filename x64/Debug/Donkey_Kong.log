@@ -1,16 +1,590 @@
 ﻿  barrel.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'barrel.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'barrel.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'barrel.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\barrel.h(33,22): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'barrel.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'barrel.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'barrel.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'barrel.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\barrel.cpp(4,29): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
   board.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'board.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'board.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'board.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'board.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'board.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'board.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2641: cannot deduce template arguments for 'std::shared_ptr'
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::weak_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1867,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ty,_Dx>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1870,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::weak_ptr<_Uty> &)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1646,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1636,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1626,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1576,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2783: 'std::shared_ptr<_Ty> std::shared_ptr(void) noexcept': could not deduce template argument for '_Ty'
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1568,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(111,14): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(158,17): error C2440: 'type cast': cannot convert from 'Ghost *' to 'EntityPtr'
+  C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(158,17):
+  'std::shared_ptr<_Ty>::shared_ptr': no overloaded function could convert all the argument types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  	could be 'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept'
+  		C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(158,17):
+  		'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept': cannot convert argument 1 from 'Ghost *' to 'std::nullptr_t'
+  			C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(158,37):
+  			nullptr can only be converted to pointer or handle types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1646,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::weak_ptr<_Ty2> &)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1576,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *)'
+  	C:\Users\Anna\source\repos\donkey_kongaa\board.cpp(158,17):
+  	while trying to match the argument list '(Ghost *)'
+  
+  entity.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'entity.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'entity.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'entity.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'entity.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'entity.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'entity.cpp')
+  
   game.cpp
-C:\Users\Anna\source\repos\donkey_kongj\game.cpp(368,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'game.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.h(28,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\barrel.h(33,22): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'game.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,27): error C2440: 'type cast': cannot convert from 'Barrel *' to 'EntityPtr'
+  C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,27):
+  'std::shared_ptr<_Ty>::shared_ptr': no overloaded function could convert all the argument types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  	could be 'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept'
+  		C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,27):
+  		'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept': cannot convert argument 1 from 'Barrel *' to 'std::nullptr_t'
+  			C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,48):
+  			nullptr can only be converted to pointer or handle types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1646,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::weak_ptr<_Ty2> &)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1576,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *)'
+  	C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,27):
+  	while trying to match the argument list '(Barrel *)'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2641: cannot deduce template arguments for 'std::shared_ptr'
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::weak_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1867,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ty,_Dx>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1870,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1636,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1626,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2783: 'std::shared_ptr<_Ty> std::shared_ptr(void) noexcept': could not deduce template argument for '_Ty'
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1568,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(152,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,28): error C2440: 'type cast': cannot convert from 'Barrel *' to 'EntityPtr'
+  C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,28):
+  'std::shared_ptr<_Ty>::shared_ptr': no overloaded function could convert all the argument types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  	could be 'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept'
+  		C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,28):
+  		'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept': cannot convert argument 1 from 'Barrel *' to 'std::nullptr_t'
+  			C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,49):
+  			nullptr can only be converted to pointer or handle types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1646,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::weak_ptr<_Ty2> &)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1576,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *)'
+  	C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,28):
+  	while trying to match the argument list '(Barrel *)'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2641: cannot deduce template arguments for 'std::shared_ptr'
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::weak_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1867,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ty,_Dx>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1870,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1636,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1626,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2783: 'std::shared_ptr<_Ty> std::shared_ptr(void) noexcept': could not deduce template argument for '_Ty'
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1568,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(153,26): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,27): error C2440: 'type cast': cannot convert from 'Barrel *' to 'EntityPtr'
+  C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,27):
+  'std::shared_ptr<_Ty>::shared_ptr': no overloaded function could convert all the argument types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  	could be 'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept'
+  		C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,27):
+  		'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t) noexcept': cannot convert argument 1 from 'Barrel *' to 'std::nullptr_t'
+  			C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,48):
+  			nullptr can only be converted to pointer or handle types
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1646,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::weak_ptr<_Ty2> &)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::shared_ptr<_Ty2> &&,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(const std::shared_ptr<_Ty2> &,remove_extent<_Ty>::type *) noexcept'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(std::nullptr_t,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx,_Alloc)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *,_Dx)'
+  	C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1576,5):
+  	or       'std::shared_ptr<_Ty>::shared_ptr(_Ux *)'
+  	C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,27):
+  	while trying to match the argument list '(Barrel *)'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2641: cannot deduce template arguments for 'std::shared_ptr'
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::weak_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1867,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ty,_Dx>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1870,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::unique_ptr<_Ux,_Dx> &&)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1665,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1641,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty> &&) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1636,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1631,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty> &) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1626,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty0> &&,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1621,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(const std::shared_ptr<_Ty0> &,remove_extent<_Ty>::type *) noexcept': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1615,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1610,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1604,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx,_Alloc)': expects 3 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1598,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(_Ux *,_Dx)': expects 2 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1590,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::nullptr_t) noexcept': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1570,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2783: 'std::shared_ptr<_Ty> std::shared_ptr(void) noexcept': could not deduce template argument for '_Ty'
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1568,5):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(159,25): error C2780: 'std::shared_ptr<_Ty> std::shared_ptr(std::shared_ptr<_Ty>)': expects 1 arguments - 0 provided
+  C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.38.33130\include\memory(1557,1):
+  see declaration of 'std::shared_ptr'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.cpp(316,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   ghost.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'ghost.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'ghost.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'ghost.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'ghost.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'ghost.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'ghost.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.cpp(6,28): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.cpp(29,24): error C2100: illegal indirection
   hammer.cpp
-  main.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'hammer.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'hammer.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'hammer.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'hammer.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'hammer.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'hammer.cpp')
+  
   mario.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'mario.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'mario.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'mario.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'mario.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'mario.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'mario.cpp')
+  
   menu.cpp
-C:\Users\Anna\source\repos\donkey_kongj\menu.cpp(174,18): warning C4129: 'A': unrecognized character escape sequence
-  point.cpp
-  stage.cpp
-  utils.cpp
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35): error C2065: 'Entity': undeclared identifier
+  (compiling source file 'menu.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,24): error C2923: 'std::shared_ptr': 'Entity' is not a valid template type argument for parameter '_Ty'
+  (compiling source file 'menu.cpp')
+  C:\Users\Anna\source\repos\donkey_kongaa\entity.h(8,35):
+  see declaration of 'Entity'
+  
+C:\Users\Anna\source\repos\donkey_kongaa\entity.h(32,33): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'menu.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\ghost.h(33,25): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'menu.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(23,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'menu.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\board.h(104,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'menu.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\game.h(28,12): error C3203: 'shared_ptr': unspecialized class template can't be used as a template argument for template parameter '_Ty', expected a real type
+  (compiling source file 'menu.cpp')
+  
+C:\Users\Anna\source\repos\donkey_kongaa\menu.cpp(186,18): warning C4129: 'A': unrecognized character escape sequence
   Generating Code...
-  LINK : C:\Users\Anna\Source\Repos\donkey_kongj\x64\Debug\Donkey_Kong.exe not found or not built by the last incremental link; performing full link
-  Donkey_Kong.vcxproj -> C:\Users\Anna\Source\Repos\donkey_kongj\x64\Debug\Donkey_Kong.exe

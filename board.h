@@ -79,7 +79,11 @@ public:
 	* @return true if colors are used, false if not.
 	*/
 	bool isColor() const { return colors; }
-	
+	/**
+	* loads the board layout from a file.
+	* @param fileName The name of the file containing the board layout.
+	* @return An integer indicating success (0) or failure (non-zero).
+	*/
 	int load(const std::string& fileName);
 
 	/**
@@ -87,20 +91,34 @@ public:
 	* @return the starting point as a Point object.
 	*/
 	Point getStart() const { return start_pos; }
-
 	/**
-	* gets the first location of the hammer.
-	* @return the hammer location as a Point object.
-	*/
+	 * retrieves the initial position of the hammer on the board.
+	 * @return The hammer position as a Point object.
+	 */
 	Point getHammer() const { return hammer_pos; }
 
+	/**
+	 * retrieves the position of Donkey Kong on the board.
+	 * @return The Donkey Kong position as a Point object.
+	 */
 	Point getDK() const { return dk_pos; }
 
+	/**
+	 * retrieves the position of the legend on the board.
+	 * @return The legend position as a Point object.
+	 */
 	Point getLegend() const { return legend_pos; }
 
+	/**
+	 * retrieves the position of Pauline on the board.
+	 * @return The Pauline position as a Point object.
+	 */
 	Point getPauline() const { return pauline_pos; }
 
-
+	/**
+	 * retrieves the list of entities currently on the board.
+	 * @return A list of shared pointers to entities.
+	 */
 	std::list<EntityPtr> getEntities() const { return entities; }
 };
 
