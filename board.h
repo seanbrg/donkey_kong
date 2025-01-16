@@ -1,7 +1,9 @@
 #pragma once
 #include "utils.h"
 #include "point.h"
+#include "entity.h"
 #include "ghost.h"
+#include <list>
 
 /**
  * class representing the game board.
@@ -17,7 +19,7 @@ class Board {
 	Point dk_pos;
 	Point pauline_pos;
 
-	std::list<Ghost> start_ghosts;
+	std::list<Entity*> entities;
 
 	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario, hammer and entities)
 	char originalStageBoard[MAX_Y][MAX_X + 1]; // original board of current stage
@@ -97,7 +99,7 @@ public:
 
 	Point getPauline() const { return pauline_pos; }
 
-	std::list<Ghost>& getGhosts() { return start_ghosts; }
 
+	std::list<Entity*>& getEntities() { return entities; }
 };
 

@@ -1,15 +1,19 @@
 #include "barrel.h"
+#include "board.h"
 
-void Barrel::move() // return if alive
+void Barrel::move(std::list<Entity*>& allEntities)
 {
 	if (explode) {
 		active = false;
 	}
 	else {
-
+		Board* pBoard = Entity::getBoard();
+		Point pos = Entity::getPos();
+		Key dir = Entity::getDir();
 		Point new_pos;
+		char floor = pBoard->getChar(pos.neighbor(DOWN));
 
-		switch (pBoard->getChar(pos.neighbor(DOWN))) {
+		switch (floor) {
 		case ch_floor_left:
 			dir = LEFT;
 			break;
@@ -17,8 +21,9 @@ void Barrel::move() // return if alive
 			dir = RIGHT;
 			break;
 		}
+		Entity::setDir(dir);
 
-		if (pBoard->getChar(pos.neighbor(DOWN)) == ' ') {  // fall
+		if (floor == ' ') {  // fall
 			fall_counter++;
 			new_pos = pos.neighbor(DOWN);
 		}
@@ -31,9 +36,9 @@ void Barrel::move() // return if alive
 		if (new_tile == ch_border)
 			active = false;
 
-		pos = new_pos;
+		Entity::setPos(new_pos);
 
-		if (pBoard->getChar(pos.neighbor(DOWN)) != ' ' && fall_counter > 0) {
+		if (floor != ' ' && fall_counter > 0) {
 			if (fall_counter >= 8) {
 				explode = true;
 			}
@@ -44,6 +49,9 @@ void Barrel::move() // return if alive
 
 void Barrel::drawExplosion() const
 {
+	Board* pBoard = Entity::getBoard();
+	Point pos = Entity::getPos();
+
 	for (int x = 0 - explosion_range; x <= explosion_range; x++) {
 		for (int y = 0 - explosion_range; y <= explosion_range; y++) {
 			Point pos_explosion = { pos.getX() + x, pos.getY() + y };

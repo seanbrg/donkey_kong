@@ -2,19 +2,17 @@
 #include <Windows.h>
 #include "utils.h"
 #include "point.h"
-#include "Board.h"
+#include "entity.h"
 
 using namespace keys;
+
+class Board;
 
 /**
  * class representing a barrel in the game.
  * the barrel can move, fall, explode, and interact with the board.
  */
-class Barrel
-{
-	Point pos;
-	Key dir;
-	Board* pBoard = nullptr;
+class Barrel : public Entity {
 	bool active = true;
 	bool explode = false;
 	int fall_counter = 0;
@@ -27,41 +25,23 @@ public:
 	 * @param _dir: initial direction of the barrel.
 	 * @param _board: pointer to the game board.
 	 */
-	Barrel (const Point& _pos, Key _dir, Board* _board) : pos(_pos), dir(_dir), pBoard(_board) {}
-
-	/**
-	 * default constructor.
-	 */
-	Barrel() = default;
+	Barrel (const Point& _pos, Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
 
 	/**
 	 * moves the barrel based on its current state and the board.
 	 */
-	void move();
-
-	/**
-	 * gets the current position of the barrel.
-	 * @return the position of the barrel as a Point object.
-	 */
-	Point getPos() const { return pos; }
+	void move(std::list<Entity*>& allEntities) override;
 
 	/**
 	 * draws the barrel on the board.
 	 */
-	void draw(char ch = ch_barrel) const {
-		pBoard->drawChar(ch, pos);
-	}
+	void draw(char ch = ch_barrel) const override { Entity::draw(ch); };
+
 
 	/**
 	 * draws the explosion effect for the barrel.
 	 */
 	void drawExplosion() const;
-
-	/**
-	 * erases the barrel from the board and restores the character at the
-	 * barrel's position to the original board state.
-	 */
-	void erase() const { pBoard->restoreChar(pos); }
 	
 	/**
 	 * checks if the barrel is exploding.

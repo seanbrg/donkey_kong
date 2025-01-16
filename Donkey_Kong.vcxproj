@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="barrel.h" />
     <ClInclude Include="board.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="ghost.h" />
     <ClInclude Include="hammer.h" />
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="barrel.cpp" />
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="ghost.cpp" />
     <ClCompile Include="hammer.cpp" />
@@ -153,6 +155,8 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="dkong_01.screen" />
+    <None Include="dkong_02.screen" />
+    <None Include="dkong_03.screen" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

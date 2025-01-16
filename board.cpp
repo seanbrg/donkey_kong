@@ -3,6 +3,7 @@
 #include <fstream>
 #include "board.h"
 #include "utils.h"
+#include "entity.h"
 #include "ghost.h"
 
 using namespace colors;
@@ -105,6 +106,8 @@ int Board::load(const std::string& fileName)
 		}
 		if (curr_col <= MAX_X) {
 			Point position(curr_col, curr_row);
+			Entity* ghost;
+
 			switch (c) {
 			case ch_mario:
 				if (!flag_start) flag_start = true;
@@ -135,7 +138,8 @@ int Board::load(const std::string& fileName)
 				pauline_pos = position;
 				break;
 			case ch_ghost:
-				start_ghosts.push_back({ position, RIGHT, this });
+				ghost = new Ghost(position, RIGHT, this);
+				entities.push_back(ghost);
 				c = ' ';
 				break;
 			case ch_ladder:

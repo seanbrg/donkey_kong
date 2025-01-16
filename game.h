@@ -7,8 +7,7 @@
 #include "board.h"
 #include "mario.h"
 #include "hammer.h"
-#include "barrel.h"
-#include "ghost.h"
+#include "entity.h"
 
 /**
  * holds and manages the main game logic of the donkey kong game.
@@ -26,8 +25,7 @@ class Game
 	Mario mario;
 	Hammer hammer;
 	Board board;
-	std::list<Barrel> barrels;
-	std::list<Ghost> ghosts;
+	std::list<Entity*> entities;
 	std::vector<std::string> fileNames;
 
 public:
@@ -63,18 +61,11 @@ public:
 	void spawnBarrels(const Point& dk, bool thrown_twice = false);
 	
 	/**
-	 * updates the state of all barrels, including handling explosions.
+	 * updates the position of all entities.
 	 * @param alive: a reference to mario's alive status.
-	 * becomes false if mario dies from a barrel.
+	 * becomes false if mario dies from stepping on an entity.
 	 */
-	void rollBarrels(bool& alive);
-
-	/**
-	 * updates the position of all ghosts.
-	 * @param alive: a reference to mario's alive status.
-	 * becomes false if mario dies from a ghost.
-	 */
-	void moveGhosts(bool& alive);
+	void moveEntities(bool& alive);
 	
 	/**
 	 * resets the game state, including mario, barrels, and the board.
@@ -98,7 +89,7 @@ public:
 	 * displays the end-game window indicating victory or defeat.
 	 * @param victory: specifies whether the player won the game.
 	 */
-	void printEndGameWindow(bool victory) const;
+	void printEndGameWindow(bool victory, bool end=false) const;
 	
 	/**
 	 * pauses the game until ESC or 1 is hit. 1 ends the game.
