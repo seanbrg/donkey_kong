@@ -23,6 +23,7 @@ void Game::run()
 			board.reset();
 			board.print();
 
+			entities.clear();
 			entities = board.getEntities();
 
 			ShowConsoleCursor(false);
@@ -223,8 +224,10 @@ void Game::reset()
 {
 	hammer.unequip();
 	board.reset();
+
 	entities.clear();
 	entities = board.getEntities();
+
 	board.print();
 	printLegend();
 	mario.reset();
