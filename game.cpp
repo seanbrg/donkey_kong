@@ -108,7 +108,8 @@ void Game::run()
 					score += max(0, bonus_score);
 					reset();
 				}
-				printEndGameWindow(victory);
+				bool end = (lives == 0 || filename == *(fileNames.end() - 1));
+				printEndGameWindow(victory, end);
 			}
 			else break;
 
@@ -303,7 +304,11 @@ void Game::printEndGameWindow(bool victory, bool end) const
 		std::cout << " |                You died.                | ";
 
 	gotoxy(center_x - 22, center_y);
-	std::cout << " |             Your score: " << score;
+	if (end)
+		std::cout << " |            Final score: " << score;
+	else
+		std::cout << " |          Current score: " << score;
+
 	for (int i = log10(score + 1); i < 14; i++) std::cout << " ";
 	std::cout << " | ";
 	gotoxy(center_x - 22, center_y + 1);
