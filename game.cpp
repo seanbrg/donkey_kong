@@ -115,6 +115,7 @@ void Game::run()
 
 			if (lives == 0) break;
 		}
+		else break;
 	}
 }
 
@@ -192,7 +193,7 @@ void Game::moveEntities(bool& alive)
 				int explosion_x = entity_pos.getX();
 				int explosion_y = entity_pos.getY();
 				if (explosion_x - explosion_range <= mario_x && mario_x <= explosion_x + explosion_range) {
-					if (explosion_y - explosion_range <= mario_y && mario_y <= explosion_y + explosion_range) {
+					if (explosion_y - explosion_range <= mario_y && mario_y <= explosion_y) {
 						alive = false;
 						break;
 					}

@@ -90,6 +90,7 @@ int Board::load(const std::string& fileName)
 	bool flag_legend = false;
 	bool flag_hammer = false;
 	bool flag_once = true;	// false if anything appeared more than once
+	bool out_of_bounds = false;
 
 	int curr_row = 0;
 	int curr_col = 0;
@@ -99,7 +100,7 @@ int Board::load(const std::string& fileName)
 		if (c == '\n') {
 			if (curr_col < MAX_X) { // add spaces for missing columns
 				#pragma warning(suppress : 4996) // to allow strcpy
-				strcpy(originalStageBoard[curr_row] + curr_col, std::string(MAX_X - curr_col - 1, ' ').c_str());
+				strcpy(originalStageBoard[curr_row] + curr_col, std::string(MAX_X - curr_col, ' ').c_str());
 			}
 			++curr_row;
 			curr_col = 0;
@@ -111,32 +112,47 @@ int Board::load(const std::string& fileName)
 
 			switch (c) {
 			case ch_mario:
-				if (!flag_start) flag_start = true;
-				else flag_once = false;
-				start_pos = position;
-				c = ' ';
+				if (position.inBounds()) {
+					if (!flag_start) flag_start = true;
+					else flag_once = false;
+					start_pos = position;
+					c = ' ';
+				}
+				else out_of_bounds = true;
 				break;
 			case ch_hammer_dropped:
-				if (!flag_hammer) flag_hammer = true;
-				else flag_once = false;
-				hammer_pos = position;
-				c = ' ';
+				if (position.inBounds()) {
+					if (!flag_hammer) flag_hammer = true;
+					else flag_once = false;
+					hammer_pos = position;
+					c = ' ';
+				}
+				else out_of_bounds = true;
 				break;
 			case ch_legend_symbol:
-				if (!flag_legend) flag_legend = true;
-				else flag_once = false;
-				legend_pos = position;
-				c = ' ';
+				if (position.inBounds()) {
+					if (!flag_legend) flag_legend = true;
+					else flag_once = false;
+					legend_pos = position;
+					c = ' ';
+				}
+				else out_of_bounds = true;
 				break;
 			case ch_dk:
-				if (!flag_dk) flag_dk = true;
-				else flag_once = false;
-				dk_pos = position;
+				if (position.inBounds()) {
+					if (!flag_dk) flag_dk = true;
+					else flag_once = false;
+					dk_pos = position;
+				}
+				else out_of_bounds = true;
 				break;
 			case ch_pauline:
-				if (!flag_pauline) flag_pauline = true;
-				else flag_once = false;
-				pauline_pos = position;
+				if (position.inBounds()) {
+					if (!flag_pauline) flag_pauline = true;
+					else flag_once = false;
+					pauline_pos = position;
+				}
+				else out_of_bounds = true;
 				break;
 			case ch_ghost:
 				new_ghost = (EntityPtr)new Ghost(position, RIGHT, this);
@@ -157,33 +173,36 @@ int Board::load(const std::string& fileName)
 		}
 	}
 
-	int last_row = (curr_row <= MAX_Y - 1 ? curr_row : MAX_Y - 1);
-
-	// add a frame of 'Q' even if file didn't have one
-	#pragma warning(suppress : 4996) // to allow strcpy
-	strcpy(originalStageBoard[0], std::string(MAX_X, ch_border).c_str()); // first row
-	
-	#pragma warning(suppress : 4996) // to allow strcpy
-	strcpy(originalStageBoard[last_row], std::string(MAX_X, ch_border).c_str()); // last row
-
-	// first and last columns
-	for (int row = 0; row <= last_row; ++row) {
-		originalStageBoard[row][0] = ch_border;
-		originalStageBoard[row][MAX_X] = ch_border;
-	}
-
-	hammer_in_board = flag_hammer;
-	if (!flag_legend) legend_pos = Point(2, 1); // fix missing L
-
-	if (!flag_pauline || !flag_dk || !flag_start || !flag_once) {
+	if (!flag_pauline || !flag_dk || !flag_start || !flag_once || out_of_bounds) {
 		std::cerr << "Error: file " << fileName << " is invalid: ";
-		if (!flag_pauline) std::cout << std::endl << "No Pauline symbol in screen file";
-		if (!flag_dk) std::cout << std::endl << "No Donkey Kong symbol in screen file";
-		if (!flag_start) std::cout << std::endl << "No Mario symbol in screen file";
-		if (!flag_once) std::cout << std::endl << "A symbol has appeared more than once";
+		if (!flag_pauline) std::cout << std::endl << "No valid Pauline symbol found in screen file";
+		if (!flag_dk) std::cout << std::endl << "No valid Donkey Kong symbol found in screen file";
+		if (!flag_start) std::cout << std::endl << "No valid Mario symbol found in screen file";
+		if (!flag_once) std::cout << std::endl << "Essential game element exists more than once in file";
+		if (out_of_bounds) std::cout << std::endl << "Essential game element is in an invalid position";
 		std::cout << std::endl << "Press anything to continue to next file or return to main menu.";
 		_getch();
 		return EXIT_FAILURE;
 	}
-	return EXIT_SUCCESS;
+	else {
+		int last_row = (curr_row <= MAX_Y - 1 ? curr_row : MAX_Y - 1);
+
+		// add a frame of 'Q' even if file didn't have one
+		#pragma warning(suppress : 4996) // to allow strcpy
+		strcpy(originalStageBoard[0], std::string(MAX_X, ch_border).c_str()); // first row
+
+		#pragma warning(suppress : 4996) // to allow strcpy
+		strcpy(originalStageBoard[last_row], std::string(MAX_X, ch_border).c_str()); // last row
+
+		// first and last columns
+		for (int row = 0; row <= last_row; ++row) {
+			originalStageBoard[row][0] = ch_border;
+			originalStageBoard[row][MAX_X] = ch_border;
+		}
+
+		hammer_in_board = flag_hammer;
+		if (!flag_legend) legend_pos = Point(2, 1); // fix missing L
+
+		return EXIT_SUCCESS;
+	}
 }

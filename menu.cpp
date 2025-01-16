@@ -171,7 +171,7 @@ void Menu::mainMenu() {
     std::string menu =
         "(1) Start Game                                                                 \n"
         "(2) Game Settings (colors and difficulty)                                      \n"
-        "(3) Manually input screen files                                                \n"
+        "(3) Manually load screen files                                                 \n"
         "(8) Instructions and Controls                                                  \n"
         "(9) Exit                                                                       \n";
 
@@ -200,7 +200,7 @@ void Menu::fileInputMenu()
     system("cls");
 
     std::string instructions = 
-                "Write screen file names here to input them as replacement of the default stages.\n"
+                "Write screen file names here to load them as replacements of the default stages.\n"
                 "Files must be of .screen format and each must contain a single game stage\n"
                 "drawn with text, which must include all the necessary game elements.\n"
                 "Please ensure that the files are in the game directory before input.\n"
@@ -211,11 +211,11 @@ void Menu::fileInputMenu()
     if (colors) changeColor();
 
     if (!fileNames.empty()) {
-        std::cout << "\nCurrently inputted files:\n";
+        std::cout << "\nCurrently loaded files:\n";
         for (auto file : fileNames)
             std::cout << file << std::endl;
 
-        std::cout << "\nInput 'd' to cancel file input.\n";
+        std::cout << "\nInput 'd' to cancel loaded files.\n";
     }
     std::cout << "\nWaiting for input (input 'x' to return to main menu):\n";
 

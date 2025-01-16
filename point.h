@@ -48,4 +48,6 @@ public:
 	 * @return a new point that is next to this point in the given direction.
 	 */
 	Point neighbor(Key dir) const;
+
+	bool inBounds() { return ((0 < x) && (x < MAX_X) && (0 < y) && (y < MAX_Y)); }
 };

@@ -53,7 +53,7 @@ void Barrel::drawExplosion() const
 	Point pos = Entity::getPos();
 
 	for (int x = 0 - explosion_range; x <= explosion_range; x++) {
-		for (int y = 0 - explosion_range; y <= explosion_range; y++) {
+		for (int y = 0 - explosion_range; y <= 0; y++) {
 			Point pos_explosion = { pos.getX() + x, pos.getY() + y };
 			if (pBoard->getChar(pos_explosion) == ' ') {
 				pBoard->drawChar(ch_explosion, pos_explosion);
