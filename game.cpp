@@ -110,6 +110,7 @@ void Game::run()
 				}
 				printEndGameWindow(victory);
 			}
+			else break;
 
 			if (lives == 0) break;
 		}
