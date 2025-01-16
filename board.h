@@ -100,6 +100,6 @@ public:
 	Point getPauline() const { return pauline_pos; }
 
 
-	std::list<Entity*>& getEntities() { return entities; }
+	std::list<Entity*> getEntities() const { return entities; }
 };
 

@@ -25,7 +25,7 @@ public:
     * @param _dir: Initial direction of the ghost.
     * @param _board: Pointer to the game board.
     */
-    Ghost(const Point& _pos, Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
+    Ghost(Point _pos, Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
 
     /**
      * Moves the ghost 
@@ -35,5 +35,5 @@ public:
     /**
      * Draws the ghost on the board.
      */
-    void draw(char ch = ch_ghost) const override { Entity::draw(ch); };
+    void draw(char ch = ch_ghost) const override { Entity::draw(ch_ghost); };
 };

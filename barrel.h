@@ -25,7 +25,7 @@ public:
 	 * @param _dir: initial direction of the barrel.
 	 * @param _board: pointer to the game board.
 	 */
-	Barrel (const Point& _pos, Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
+	Barrel (Point _pos, Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
 
 	/**
 	 * moves the barrel based on its current state and the board.
@@ -35,7 +35,7 @@ public:
 	/**
 	 * draws the barrel on the board.
 	 */
-	void draw(char ch = ch_barrel) const override { Entity::draw(ch); };
+	void draw(char ch = ch_barrel) const override { Entity::draw(ch_barrel); };
 
 
 	/**

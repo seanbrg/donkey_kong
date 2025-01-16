@@ -103,5 +103,6 @@ public:
 	*/
 	void flushInput(char& input);
 
+	~Game();
 };
 

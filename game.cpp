@@ -106,6 +106,7 @@ void Game::run()
 					std::chrono::duration<double> duration = end_clk - start_clk;
 					int bonus_score = 5000 - 100 * (int)duration.count();
 					score += max(0, bonus_score);
+					reset();
 				}
 				printEndGameWindow(victory);
 			}
@@ -161,20 +162,19 @@ void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 void Game::moveEntities(bool& alive)
 {
 	Point mario_pos = mario.getPos();
-	auto entity = entities.begin(); // iterator over the barrels list
 
-	while (entity != entities.end()) {
+	for (auto entity = entities.begin(); entity != entities.end();) {
 		(*entity)->erase();
 		(*entity)->move(entities);
 
-		Point barrel_pos = (*entity)->getPos();
+		Point entity_pos = (*entity)->getPos();
 		Point below_mario = mario_pos.neighbor(DOWN);
 
-		if (barrel_pos == below_mario || barrel_pos == below_mario.neighbor(DOWN)) {
+		if (entity_pos == below_mario || entity_pos == below_mario.neighbor(DOWN)) {
 			score += 100;
 			printLegend();
 		}
-		else if (mario_pos == barrel_pos) {
+		else if (mario_pos == entity_pos) {
 			alive = false;
 			break;
 		}
@@ -187,8 +187,8 @@ void Game::moveEntities(bool& alive)
 
 				int mario_x = mario_pos.getX();
 				int mario_y = mario_pos.getY();
-				int explosion_x = barrel_pos.getX();
-				int explosion_y = barrel_pos.getY();
+				int explosion_x = entity_pos.getX();
+				int explosion_y = entity_pos.getY();
 				if (explosion_x - explosion_range <= mario_x && mario_x <= explosion_x + explosion_range) {
 					if (explosion_y - explosion_range <= mario_y && mario_y <= explosion_y + explosion_range) {
 						alive = false;
@@ -200,13 +200,19 @@ void Game::moveEntities(bool& alive)
 			if (barrel->exists()) { // a barrel stops existing the tick after its death
 				barrel->draw();
 				++barrel;
+				++entity;
 			}
 			else { // erased
 				if (barrel->isExploding())
-					board.restoreBoardExplosion(barrel_pos);
+					board.restoreBoardExplosion(entity_pos);
 
+				delete* entity;
 				entity = entities.erase(entity);
 			}
+		}
+		else {
+			(*entity)->draw();
+			++entity;
 		}
 	}
 }
@@ -215,7 +221,7 @@ void Game::reset()
 {
 	hammer.unequip();
 	board.reset();
-	entities.clear();
+	entities = board.getEntities();
 	board.print();
 	printLegend();
 	mario.reset();
@@ -241,6 +247,7 @@ void Game::checkHit()
 	while (entity != entities.end()) {
 		Point barrel_pos = (*entity)->getPos();
 		if (barrel_pos == hit0 || barrel_pos == hit1) {
+			delete *entity;
 			entity = entities.erase(entity);
 			score += 300;
 			hit = true;
@@ -342,4 +349,12 @@ void Game::flushInput(char& input)
 	FlushConsoleInputBuffer(hInput);
 
 	input = 0;
+}
+
+Game::~Game()
+{
+	for (auto& entity : entities) {
+		delete entity;
+	}
+	entities.clear();
 }

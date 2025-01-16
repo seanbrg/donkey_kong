@@ -81,7 +81,8 @@ int Board::load(const std::string& fileName)
 		_getch();
 		return EXIT_FAILURE;
 	}
-
+	
+	entities.clear();
 	// following flags are for checking if something has appeared:
 	bool flag_start = false;	
 	bool flag_pauline = false;
