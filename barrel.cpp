@@ -36,14 +36,13 @@ void Barrel::move(std::list<EntityPtr>& allEntities)
 		if (new_tile == ch_border)
 			active = false;
 
-		Entity::setPos(new_pos);
-
 		if (floor != ' ' && fall_counter > 0) {
 			if (fall_counter >= 8) {
 				explode = true;
 			}
 			fall_counter = 0;
 		}
+		if (!explode) Entity::setPos(new_pos);
 	}
 }
 
