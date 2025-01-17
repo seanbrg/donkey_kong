@@ -102,5 +102,17 @@ public:
 	* needed to "forget" any unused input from the previous screen/before reset.
 	*/
 	void flushInput(char& input);
+
+	/**
+	* resets the entities list of the current stage to its starting position
+	* based on the list of ghost locs saved in the board.
+	*/
+	void resetEntities();
+
+	/**
+	* destructor for game tells the list of entities to clear(), as the list
+	* contains smart vectors that need to be destroyed for the entities to be deleted
+	*/
+	~Game() { entities.clear(); }
 };
 

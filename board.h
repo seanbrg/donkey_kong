@@ -1,9 +1,9 @@
 #pragma once
+#include <iostream>
+#include <vector>
+
 #include "utils.h"
 #include "point.h"
-#include "entity.h"
-#include "ghost.h"
-#include <list>
 
 
 /**
@@ -20,7 +20,7 @@ class Board {
 	Point dk_pos;
 	Point pauline_pos;
 
-	std::list<EntityPtr> entities;
+	std::vector<Point> ghost_locs;
 
 	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario, hammer and entities)
 	char originalStageBoard[MAX_Y][MAX_X + 1]; // original board of current stage
@@ -116,9 +116,9 @@ public:
 	Point getPauline() const { return pauline_pos; }
 
 	/**
-	 * retrieves the list of entities currently on the board.
-	 * @return A list of shared pointers to entities.
+	 * retrieves the vector of all ghost starting positions in the current stage.
+	 * @return A vector of positions representing ghosts.
 	 */
-	std::list<EntityPtr> getEntities() const { return entities; }
+	const std::vector<Point>& getGhosts() const { return ghost_locs; }
 };
 

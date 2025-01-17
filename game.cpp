@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include "barrel.h"
+#include "ghost.h"
 
 using namespace keys;
 
@@ -22,9 +23,7 @@ void Game::run()
 		if (loaded == EXIT_SUCCESS) {
 			board.reset();
 			board.print();
-
-			entities.clear();
-			entities = board.getEntities();
+			resetEntities();
 
 			ShowConsoleCursor(false);
 
@@ -225,8 +224,7 @@ void Game::reset()
 	hammer.unequip();
 	board.reset();
 
-	entities.clear();
-	entities = board.getEntities();
+	resetEntities();
 
 	board.print();
 	printLegend();
@@ -358,4 +356,15 @@ void Game::flushInput(char& input)
 	FlushConsoleInputBuffer(hInput);
 
 	input = 0;
+}
+
+void Game::resetEntities()
+{
+	const std::vector<Point> ghost_locs = board.getGhosts();
+	entities.clear(); // EntityPtr are shared pointers with destructors for the entities
+
+	for (auto& pos : ghost_locs) {
+		EntityPtr new_ghost = (EntityPtr)new Ghost(pos, LEFT, &board);
+		entities.push_back(new_ghost);
+	}
 }

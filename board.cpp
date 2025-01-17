@@ -82,7 +82,7 @@ int Board::load(const std::string& fileName)
 		return EXIT_FAILURE;
 	}
 	
-	entities.clear();
+	ghost_locs.clear();
 	// following flags are for checking if something has appeared:
 	bool flag_start = false;	
 	bool flag_pauline = false;
@@ -108,7 +108,6 @@ int Board::load(const std::string& fileName)
 		}
 		if (curr_col <= MAX_X) {
 			Point position(curr_col, curr_row);
-			EntityPtr new_ghost;
 
 			switch (c) {
 			case ch_mario:
@@ -155,8 +154,7 @@ int Board::load(const std::string& fileName)
 				else out_of_bounds = true;
 				break;
 			case ch_ghost:
-				new_ghost = (EntityPtr)new Ghost(position, RIGHT, this);
-				entities.push_back(new_ghost);
+				ghost_locs.push_back(position);
 				c = ' ';
 				break;
 			case ch_ladder:
