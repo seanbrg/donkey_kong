@@ -6,7 +6,7 @@
 #include "game.h"
 
 void Menu::startGame() { 
-    if (!manual_files) findFiles();
+    if (!manual_files || fileNames.empty()) findFiles();
     Game game(fileNames, colors, difficulty);
 
     game.run();
@@ -224,7 +224,7 @@ void Menu::fileInputMenu()
     if (input == "x") {
         current_menu = 0;
     }
-    else if (input == "d") {
+    else if (input == "d" && !fileNames.empty()) {
         fileNames.clear();
     }
     else {
