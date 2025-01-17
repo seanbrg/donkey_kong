@@ -149,7 +149,7 @@ void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 	static Key next = LEFT;
 	if (thrown_twice) { // option for harder difficulty
 		EntityPtr barrel_left = (EntityPtr)new Barrel(dk, LEFT, &board);
-		EntityPtr barrel_right = (EntityPtr)new Barrel(dk, LEFT, &board);
+		EntityPtr barrel_right = (EntityPtr)new Barrel(dk, RIGHT, &board);
 
 		entities.push_back(barrel_left);
 		entities.push_back(barrel_right);
