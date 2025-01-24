@@ -124,7 +124,10 @@ void Game::run()
 				bool end = (lives == 0 || filename == *(fileNames.end() - 1));
 				printEndGameWindow(victory, end);
 
-				if (save_mode) steps_saver.saveSteps(filename);
+				if (save_mode) {
+					std::string saved_filename = filename.substr(0, filename.rfind('.')) + ".steps";
+					steps_saver.saveSteps(saved_filename);
+				}
 			}
 			else break;
 
