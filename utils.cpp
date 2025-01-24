@@ -60,3 +60,11 @@ void changeColor(char type)
 	}
 		SetConsoleTextAttribute(hConsole, color);
 }
+
+void resizeConsole()
+{
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r); //stores the console's current dimensions
+	MoveWindow(console, r.left, r.top, 80, 25, TRUE); // 80 width, 25 height
+}

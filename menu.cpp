@@ -7,7 +7,7 @@
 
 void Menu::startGame() { 
     if (!manual_files || fileNames.empty()) findFiles();
-    Game game(fileNames, colors, difficulty);
+    Game game(fileNames, colors, difficulty, save_mode);
 
     game.run();
     fileNames.clear();

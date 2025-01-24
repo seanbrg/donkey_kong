@@ -2,16 +2,21 @@
 #include <iostream>
 #include <conio.h> // for keyboard control
 
+#include "utils.h"
 #include "menu.h"
 
-int main()
-{	
-	HWND console = GetConsoleWindow();
-	RECT r;
-	GetWindowRect(console, &r); //stores the console's current dimensions
+int main(int argc, char** argv) {
+	resizeConsole();
 
-	MoveWindow(console, r.left, r.top, 80, 25, TRUE); // 80 width, 25 height
+	bool is_save = argc > 1 && std::string(argv[1]) == "-save";
+	bool is_load = argc > 1 && std::string(argv[1]) == "-load";
+	bool is_silent = is_load && argc > 2 && std::string(argv[2]) == "-silent";
 
-	Menu menu;
-	menu.display();
+	if (!is_load) {
+		Menu menu(is_save);
+		menu.display();
+	}
+	else {
+
+	}
 }

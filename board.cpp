@@ -72,14 +72,14 @@ void Board::print() const {
 	SetConsoleTextAttribute(hConsole, WHITE);
 }
 
-int Board::load(const std::string& fileName)
+bool Board::load(const std::string& fileName)
 {
 	std::ifstream screen_file(fileName);
 	if (!screen_file.is_open()) {
 		std::cerr << "Error: Unable to open the file: " << fileName << std::endl;
 		std::cout << "Press anything to return to main menu.";
 		_getch();
-		return EXIT_FAILURE;
+		return false;
 	}
 	
 	ghost_locs.clear();
@@ -180,7 +180,7 @@ int Board::load(const std::string& fileName)
 		if (out_of_bounds) std::cout << std::endl << "Essential game element is in an invalid position";
 		std::cout << std::endl << "Press anything to continue to next file or return to main menu.";
 		_getch();
-		return EXIT_FAILURE;
+		return false;
 	}
 	else {
 		int last_row = (curr_row <= MAX_Y - 1 ? curr_row : MAX_Y - 1);
@@ -201,6 +201,6 @@ int Board::load(const std::string& fileName)
 		hammer_in_board = flag_hammer;
 		if (!flag_legend) legend_pos = Point(2, 1); // fix missing L
 
-		return EXIT_SUCCESS;
+		return true;
 	}
 }

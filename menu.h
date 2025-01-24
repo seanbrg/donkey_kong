@@ -5,6 +5,7 @@
 class Menu {
     std::vector<std::string> fileNames;
 
+    bool save_mode;
     bool manual_files = false;
     int difficulty = 2; // game difficulty - 1 to 3
     bool colors = true;
@@ -15,6 +16,12 @@ class Menu {
                             // 9 = exit
 
 public:    
+
+    /*
+    * constructor
+    * @param _save: boolean parameter indicating save mode
+    */
+    Menu(bool _save=false) : save_mode(_save) {}
 
     /**
      * runs the menu logic by displaying the current menu.

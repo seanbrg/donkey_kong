@@ -19,6 +19,7 @@ class Game
 	int score = 0;
 	bool colors = true;
 	int difficulty = 2;
+	bool save_mode = false;
 	bool debug_mode = false; // turn on to make mario immortal
 							// WARNING: may cause unexpected behavior
 
@@ -35,7 +36,8 @@ public:
 	 * @param _colors: indicates if colors are being used.
 	 * @param _difficulty: specifies the difficulty level of the game.
 	 */
-	Game(std::vector<std::string>& _files, bool _clr, int _dif) : fileNames(_files), colors(_clr), difficulty(_dif) {}
+	Game(std::vector<std::string>& _files, bool _clr, int _dif, bool _sv)
+		: fileNames(_files), colors(_clr), difficulty(_dif), save_mode(_sv) {}
 
 	/**
 	 * runs the main game loop.

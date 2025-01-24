@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <chrono>
+#include "steps.h"
 #include "barrel.h"
 #include "ghost.h"
 
@@ -19,8 +20,7 @@ void Game::run()
 
 	for (const auto& filename : fileNames) {
 		board = Board(colors);
-		int loaded = board.load(filename);
-		if (loaded == EXIT_SUCCESS) {
+		if (board.load(filename)) {
 			board.reset();
 			board.print();
 			resetEntities();
@@ -36,8 +36,16 @@ void Game::run()
 			bool victory = false;
 			bool skip_ending = false; // for immediately ending the game if needed
 			Point pauline_pos = board.getPauline();
-			int frame = 0; // for controlling when a barrel spawns
+			size_t point_of_time = 0; // number of iterations since start
+			size_t frame = 0; // for controlling barrel spawn
 			char key = 0;  // for player input
+
+			Steps steps_saver(&point_of_time);
+			if (save_mode) {
+				long random_seed = static_cast<long>(std::chrono::system_clock::now().time_since_epoch().count());
+				steps_saver.setRandomSeed(random_seed);
+				srand(random_seed);
+			}
 
 			auto start_clk = std::chrono::high_resolution_clock::now();
 
@@ -48,9 +56,13 @@ void Game::run()
 				if (_kbhit()) {
 					key = _getch();
 
-					if (key == ESC)
+					if (key == ESC) {
 						pause(skip_ending);
-					if (skip_ending) break;
+						if (skip_ending) break;
+					}
+					else if (save_mode) {
+						steps_saver.addStep(point_of_time, (char)key);
+					}
 
 					keyPressed(key);
 				}
@@ -94,6 +106,7 @@ void Game::run()
 						frame = 0;
 					}
 					frame++;
+					point_of_time++;
 				}
 			}
 
@@ -110,6 +123,8 @@ void Game::run()
 				}
 				bool end = (lives == 0 || filename == *(fileNames.end() - 1));
 				printEndGameWindow(victory, end);
+
+				if (save_mode) steps_saver.saveSteps(filename);
 			}
 			else break;
 

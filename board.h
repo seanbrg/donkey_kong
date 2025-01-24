@@ -82,9 +82,9 @@ public:
 	/**
 	* loads the board layout from a file.
 	* @param fileName The name of the file containing the board layout.
-	* @return An integer indicating success (0) or failure (non-zero).
+	* @return boolean value indicating success or failure in opening the file.
 	*/
-	int load(const std::string& fileName);
+	bool load(const std::string& fileName);
 
 	/**
 	* gets the starting point of the player.

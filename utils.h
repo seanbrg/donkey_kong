@@ -23,6 +23,8 @@ void ShowConsoleCursor(bool showFlag);
 */
 void changeColor(char type = ' ');
 
+void resizeConsole();
+
 namespace keys {
 	enum Key { // defines key mappings for movement and control in the game.
 		LEFT = 'a',
