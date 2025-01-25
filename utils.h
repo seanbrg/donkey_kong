@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h> // for keyboard control
 #include <Windows.h> // for sleep
+#include <vector>
 
 /**
  * moves the console cursor to a specific (x, y) position on the screen.
@@ -23,7 +24,16 @@ void ShowConsoleCursor(bool showFlag);
 */
 void changeColor(char type = ' ');
 
+/*
+* resize the console to the standard game size of 80x25 (may not work for all environments).
+*/
 void resizeConsole();
+
+/*
+* find all .screen files of format "dkonk_*" in game directory and load them in lexicographic order.
+* @param fileNames: strings vector into which the valid .screen file names will be loaded.
+*/
+void findFiles(std::vector<std::string>& fileNames);
 
 namespace keys {
 	enum Key { // defines key mappings for movement and control in the game.

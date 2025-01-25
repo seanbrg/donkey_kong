@@ -6,7 +6,9 @@
 #include "game.h"
 
 void Menu::startGame() { 
-    if (!manual_files || fileNames.empty()) findFiles();
+    if (!manual_files || fileNames.empty())
+        findFiles(fileNames);
+
     Game game(fileNames, colors, difficulty, save_mode);
 
     game.run();
@@ -246,28 +248,4 @@ void Menu::fileInputMenu()
             Sleep(800);
         }
     }
-}
-
-void Menu::findFiles()
-{
-    // Iterate through files in the directory
-    for (const auto& entry : std::filesystem::directory_iterator(".")) {
-        if (entry.is_regular_file()) {
-            std::string filename = entry.path().filename().string();
-
-            // Check if the filename matches the desired pattern
-            if (filename.starts_with("dkong_") && filename.ends_with(".screen")) {
-                fileNames.push_back(filename);
-            }
-        }
-    }
-    if (!fileNames.empty()) {
-        std::sort(fileNames.begin(), fileNames.end());
-    }
-    else {
-        std::cout << "ERROR: No valid files found.";
-        Sleep(1000);
-    }
-
-
 }

@@ -3,19 +3,17 @@
 #include <fstream>
 #include "results.h"
 
-Results Results::loadResults(const std::string& filename)
+void Results::loadResults(const std::string& filename)
 {
 	std::ifstream results_file(filename);
-	Results results;
 	size_t size;
 	results_file >> size;
 	while (!results_file.eof() && size-- != 0) {
 		size_t iteration;
 		int result;
 		results_file >> iteration >> result;
-		results.addResult(iteration, static_cast<ResultValue>(result));
+		addResult(iteration, static_cast<ResultValue>(result));
 	}
-	return results;
 }
 
 void Results::saveResults(const std::string& filename) const {

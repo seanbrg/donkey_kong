@@ -12,7 +12,10 @@ private:
 
 public:
 
-	static Results loadResults(const std::string& filename);
+	bool operator==(const Results& other) const { return results == other.results; }
+
+
+	void loadResults(const std::string& filename);
 	
 	
 	void saveResults(const std::string& filename) const;

@@ -38,6 +38,9 @@ public:
      */
     void mainMenu();
 
+    /*
+    * displays and handles the file selection menu.
+    */
     void fileInputMenu();
 
     /**
@@ -50,9 +53,6 @@ public:
     * presents the game instructions and controls to the user.
     */
     void instructionsMenu();
-
-
-    void findFiles();
 };
 
 

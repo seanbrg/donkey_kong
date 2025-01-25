@@ -1,7 +1,7 @@
-#include "game.h"
 #include <Windows.h>
 #include <iostream>
 #include <chrono>
+#include "game.h"
 #include "steps.h"
 #include "results.h"
 #include "barrel.h"
@@ -19,9 +19,10 @@ void Game::run()
 		return;
 	}
 
-	for (const auto& filename : fileNames) {
-		board = Board(colors);
-		if (board.load(filename)) {
+	board = Board(colors);
+
+	for (const auto& screen_file : fileNames) {
+		if (board.load(screen_file)) {
 			board.reset();
 			board.print();
 			resetEntities();
@@ -46,6 +47,8 @@ void Game::run()
 			if (save_mode) {
 				long random_seed = static_cast<long>(std::chrono::system_clock::now().time_since_epoch().count());
 				steps_saver.setRandomSeed(random_seed);
+				steps_saver.setDifficulty(difficulty);
+				steps_saver.setColors(colors);
 				srand(random_seed);
 			}
 
@@ -66,7 +69,7 @@ void Game::run()
 						steps_saver.addStep(point_of_time, (char)key);
 					}
 
-					keyPressed(key);
+					input(key);
 				}
 
 
@@ -129,14 +132,14 @@ void Game::run()
 				}
 				if (save_mode) results_saver.addResult(score, Results::score);
 
-				bool end = (lives == 0 || filename == *(fileNames.end() - 1));
+				bool end = (lives == 0 || screen_file == *(fileNames.end() - 1));
 				printEndGameWindow(victory, end);
 
 				if (save_mode) {
-					std::string steps_filename = filename.substr(0, filename.rfind('.')) + ".steps";
-					std::string results_filename = filename.substr(0, filename.rfind('.')) + ".result";
+					std::string steps_filename = screen_file.substr(0, screen_file.rfind('.')) + ".steps";
+					std::string result_filename = screen_file.substr(0, screen_file.rfind('.')) + ".result";
 					steps_saver.saveSteps(steps_filename);
-					results_saver.saveResults(results_filename);
+					results_saver.saveResults(result_filename);
 				}
 			}
 			else break;
@@ -147,7 +150,7 @@ void Game::run()
 	}
 }
 
-void Game::keyPressed(char key)
+void Game::input(char key)
 {
 	char low_key = tolower(key);
 	if (low_key == 'w' || low_key == 'a' || low_key == 's' || low_key == 'd' || low_key == 'x') {

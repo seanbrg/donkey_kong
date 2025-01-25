@@ -1,25 +1,25 @@
 #include <fstream>
 #include "steps.h"
 
-Steps Steps::loadSteps(const std::string& filename) {
-	Steps steps;
+void Steps::loadSteps(const std::string& filename) {
 	std::ifstream steps_file(filename);
-	steps_file >> steps.randomSeed;
+	steps_file >> randomSeed;
+	steps_file >> difficulty;
+	steps_file >> colors;
 	size_t size;
 	steps_file >> size;
 	while (!steps_file.eof() && size-- != 0) {
 		size_t iteration;
 		char step;
 		steps_file >> iteration >> step;
-		steps.addStep(iteration, step);
+		addStep(iteration, step);
 	}
 	steps_file.close();
-	return steps;
 }
 
 void Steps::saveSteps(const std::string& filename) const {
 	std::ofstream steps_file(filename);
-	steps_file << randomSeed << '\n' << steps.size();
+	steps_file << randomSeed << '\n' << difficulty << "\n" << colors << "\n" << steps.size();
 	for (const auto& step : steps) {
 		steps_file << '\n' << step.first << ' ' << step.second;
 	}

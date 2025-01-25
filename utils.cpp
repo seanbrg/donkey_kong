@@ -1,5 +1,9 @@
+#include <iostream>
 #include "utils.h"
 #include <Windows.h>
+#include <filesystem>
+#include <vector>
+
 
 using namespace colors;
 
@@ -67,4 +71,26 @@ void resizeConsole()
 	RECT r;
 	GetWindowRect(console, &r); //stores the console's current dimensions
 	MoveWindow(console, r.left, r.top, 80, 25, TRUE); // 80 width, 25 height
+}
+
+void findFiles(std::vector<std::string>& fileNames)
+{
+	// Iterate through files in the directory
+	for (const auto& entry : std::filesystem::directory_iterator(".")) {
+		if (entry.is_regular_file()) {
+			std::string filename = entry.path().filename().string();
+
+			// Check if the filename matches the desired pattern
+			if (filename.starts_with("dkong_") && filename.ends_with(".screen")) {
+				fileNames.push_back(filename);
+			}
+		}
+	}
+	if (!fileNames.empty()) { // lexicographic sort
+		std::sort(fileNames.begin(), fileNames.end());
+	}
+	else {
+		std::cout << "ERROR: No valid files found.";
+		Sleep(1000);
+	}
 }
