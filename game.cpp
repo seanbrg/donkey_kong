@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include "steps.h"
+#include "results.h"
 #include "barrel.h"
 #include "ghost.h"
 
@@ -41,6 +42,7 @@ void Game::run()
 			char key = 0;  // for player input
 
 			Steps steps_saver(&point_of_time);
+			Results results_saver;
 			if (save_mode) {
 				long random_seed = static_cast<long>(std::chrono::system_clock::now().time_since_epoch().count());
 				steps_saver.setRandomSeed(random_seed);
@@ -104,6 +106,8 @@ void Game::run()
 						reset();
 						flushInput(key);
 						frame = 0;
+
+						if (save_mode) results_saver.addResult(point_of_time, Results::died);
 					}
 					frame++;
 					point_of_time++;
@@ -114,6 +118,8 @@ void Game::run()
 
 			if (!skip_ending) { // ending window
 				if (victory) {
+					if (save_mode) results_saver.addResult(point_of_time, Results::finished);
+
 					// duration counts in 0.1 seconds the length of the game.
 					// every 1 second below 6 minutes the game is won in is worth 100 bonus score
 					std::chrono::duration<double> duration = end_clk - start_clk;
@@ -121,12 +127,16 @@ void Game::run()
 					score += max(0, bonus_score);
 					reset();
 				}
+				if (save_mode) results_saver.addResult(score, Results::score);
+
 				bool end = (lives == 0 || filename == *(fileNames.end() - 1));
 				printEndGameWindow(victory, end);
 
 				if (save_mode) {
-					std::string saved_filename = filename.substr(0, filename.rfind('.')) + ".steps";
-					steps_saver.saveSteps(saved_filename);
+					std::string steps_filename = filename.substr(0, filename.rfind('.')) + ".steps";
+					std::string results_filename = filename.substr(0, filename.rfind('.')) + ".result";
+					steps_saver.saveSteps(steps_filename);
+					results_saver.saveResults(results_filename);
 				}
 			}
 			else break;
