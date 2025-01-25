@@ -6,9 +6,6 @@
 #include <list>
 #include <random>
 
-
-using namespace keys;
-
 class Board;
 
 /**
@@ -25,7 +22,7 @@ public:
     * @param _dir: Initial direction of the ghost.
     * @param _board: Pointer to the game board.
     */
-    Ghost(Point _pos, Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
+    Ghost(Point _pos, utils::Key _dir, Board* _board) : Entity(_pos, _dir, _board) {}
 
     /**
      * Moves the ghost 
@@ -35,5 +32,5 @@ public:
     /**
      * Draws the ghost on the board.
      */
-    void draw(char ch = ch_ghost) const override { Entity::draw(ch_ghost); };
+    void draw(char ch = utils::ch_ghost) const override { Entity::draw(utils::ch_ghost); };
 };

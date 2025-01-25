@@ -3,6 +3,8 @@
 #include "board.h"
 #include <cstdlib>
 
+using namespace utils;
+
 void Ghost::move(std::list<EntityPtr>& allEntities)
 {
     Key dir = Entity::getDir();
@@ -10,25 +12,25 @@ void Ghost::move(std::list<EntityPtr>& allEntities)
     Board* pBoard = Entity::getBoard();
     Point next_pos;
 
-    if (pBoard->getChar(pos.neighbor(DOWN)) == ch_blank) { // fall down logic for poorly done .screen files
-        next_pos = pos.neighbor(DOWN);
+    if (pBoard->getChar(pos.neighbor(Key::DOWN)) == ch_blank) { // fall down logic for poorly done .screen files
+        next_pos = pos.neighbor(Key::DOWN);
         Entity::setPos(next_pos);
     }
     else {
         double random = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
         if (random > SAME_DIR_PROB) {
-            dir = (dir == LEFT) ? RIGHT : LEFT;
+            dir = (dir == Key::LEFT) ? Key::RIGHT : Key::LEFT;
             Entity::setDir(dir);
         }
 
         next_pos = pos.neighbor(dir);
         char next_tile = pBoard->getChar(next_pos);
-        char below_tile = pBoard->getChar(next_pos.neighbor(DOWN));
+        char below_tile = pBoard->getChar(next_pos.neighbor(Key::DOWN));
 
         for (auto& entity : allEntities) {
             if (typeid(*entity) == typeid(Ghost)) {
                 if (entity.get() != this && entity->getPos() == next_pos) {
-                    dir = (dir == LEFT) ? RIGHT : LEFT;
+                    dir = (dir == Key::LEFT) ? Key::RIGHT : Key::LEFT;
                     Entity::setDir(dir);
                     return;
                 }
@@ -40,7 +42,7 @@ void Ghost::move(std::list<EntityPtr>& allEntities)
         }
         else {
             //change direction 
-            dir = (dir == LEFT) ? RIGHT : LEFT;
+            dir = (dir == Key::LEFT) ? Key::RIGHT : Key::LEFT;
             Entity::setDir(dir);
         }
     }

@@ -5,19 +5,17 @@
 #include "point.h"
 #include "board.h"
 
-using namespace keys;
-
 /**
  * represents mario - the player - and handles movement and interactions with the game board.
  */
 class Mario
 {
-	Point pos;				// current position
-	Key dir = STAY;			// direction of next movement
-	Key x_axis_dir = RIGHT; // direction of movement in the x-axis, has to be LEFT or RIGHT
-	Key jump_dir = STAY;	// direction of jump
-	int jump_counter = 0;	// phase of jump (from 2 to 0)
-	int fall_counter = 0;	// height of current fall
+	Point pos;							// current position
+	utils::Key dir = utils::Key::STAY;			// direction of next movement
+	utils::Key x_axis_dir = utils::Key::RIGHT;				// direction of movement in the x-axis, has to be LEFT or RIGHT
+	utils::Key jump_dir = utils::Key::STAY;				// direction of jump
+	int jump_counter = 0;				// phase of jump (from 2 to 0)
+	int fall_counter = 0;				// height of current fall
 	bool jumping = false;
 	bool climbing = false;
 	Board* board = nullptr;
@@ -40,7 +38,7 @@ public:
 	 * retrieves mario's direction of movement in the x axis.
 	 * @return the current direction in x axis (or last direction that existed).
 	 */
-	Key getXaxisDir() const { return x_axis_dir; }
+	utils::Key getXaxisDir() const { return x_axis_dir; }
 
 	/**
 	 * retrieves Mario's next position according to current movement direction.
@@ -52,12 +50,12 @@ public:
 	 * draws mario at his current position.
 	 * @param ch: the character used to represent mario on the board.
 	 */
-	void draw(char ch = ch_mario) const { board->drawChar(ch, pos);  }
+	void draw(char ch = utils::ch_mario) const { board->drawChar(ch, pos);  }
 	
 	/**
 	 * draws mario in his "dead" state.
 	 */
-	void drawDead() const { draw(ch_dead_mario); }
+	void drawDead() const { draw(utils::ch_dead_mario); }
 	
 	/**
 	 * erases mario from his current position on the board.
@@ -68,7 +66,7 @@ public:
 	 * processes a key press to change mario's movement direction.
 	 * @param key: the key pressed by the player.
 	 */
-	void keyPressed(Key key);
+	void keyPressed(utils::Key key);
 	
 	/**
 	 * moves mario based on his current state and checks for valid positions.

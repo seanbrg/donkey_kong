@@ -22,8 +22,8 @@ class Board {
 
 	std::vector<Point> ghost_locs;
 
-	char currentBoard[MAX_Y][MAX_X + 1]; // current board (without mario, hammer and entities)
-	char originalStageBoard[MAX_Y][MAX_X + 1]; // original board of current stage
+	char currentBoard[utils::MAX_Y][utils::MAX_X + 1]; // current board (without mario, hammer and entities)
+	char originalStageBoard[utils::MAX_Y][utils::MAX_X + 1]; // original board of current stage
 
 public:
 

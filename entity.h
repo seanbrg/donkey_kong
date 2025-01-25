@@ -13,7 +13,7 @@ using EntityPtr = std::shared_ptr<Entity>; // smart pointer that has a destructo
 class Entity
 {
     Point pos;
-    Key dir;
+    utils::Key dir;
     Board* pBoard;
 
 protected:
@@ -25,12 +25,12 @@ protected:
     /**
      * sets the direction of the entity to a new direction.
      */
-    void setDir(Key new_dir) { dir = new_dir; }
+    void setDir(utils::Key new_dir) { dir = new_dir; }
 
     /**
      * gets the current direction of the entity.
      */
-    Key getDir() const { return dir; }
+    utils::Key getDir() const { return dir; }
     /**
      * gets the pointer to the game board associated with the entity.
      */
@@ -40,7 +40,7 @@ public:
     /**
      * constructs an Entity object.
      */
-    Entity(Point _pos, Key _dir, Board* _board) : pos(_pos), dir(_dir), pBoard(_board) {}
+    Entity(Point _pos, utils::Key _dir, Board* _board) : pos(_pos), dir(_dir), pBoard(_board) {}
 
     /**
      * Moves the entity
@@ -65,6 +65,6 @@ public:
     /**
      * Sets the direction of the entity.
      */
-    void setDirection(Key newDir) { dir = newDir; }
+    void setDirection(utils::Key newDir) { dir = newDir; }
 
 };

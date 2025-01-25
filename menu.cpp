@@ -5,6 +5,8 @@
 #include "menu.h"
 #include "game.h"
 
+using namespace utils;
+
 void Menu::startGame() { 
     if (!manual_files || fileNames.empty())
         findFiles(fileNames);
@@ -19,22 +21,22 @@ void Menu::startGame() {
 void Menu::display() {
     system("cls"); // clear screen
 
-    while (current_menu != 9) {
+    while (current_menu != MenuType::EXIT) {
         switch (current_menu) { // display the current menu
-        case 1:
+        case MenuType::START:
             startGame();
-            current_menu = 0;
+            current_menu = MenuType::MAIN;
             break;
-        case 2:
+        case MenuType::SETTINGS:
             settingsMenu();
             break;
-        case 3:
+        case MenuType::INPUT:
             fileInputMenu();
             break;
-        case 8:
+        case MenuType::INSTRUCTIONS:
             instructionsMenu();
             break;
-        case 9: // exit
+        case MenuType::EXIT:
             break;
         default:
             mainMenu();
@@ -109,7 +111,7 @@ void Menu::settingsMenu()
         colors = !colors;
         break;
     case '9':
-        current_menu = 0; // return to main menu
+        current_menu = MenuType::MAIN;
         break;
     default:
         gotoxy(0, 14);
@@ -155,7 +157,7 @@ void Menu::instructionsMenu() {
     std::cout << controls;
 
     _getch(); // await input to return to main menu
-    current_menu = 0;
+    current_menu = MenuType::MAIN;
 }
 
 void Menu::mainMenu() {
@@ -173,7 +175,7 @@ void Menu::mainMenu() {
     std::string menu =
         "(1) Start Game                                                                 \n"
         "(2) Game Settings (colors and difficulty)                                      \n"
-        "(3) Manually load screen files                                                 \n"
+        "(3) Manually input screen files                                                 \n"
         "(8) Instructions and Controls                                                  \n"
         "(9) Exit                                                                       \n";
 
@@ -188,13 +190,27 @@ void Menu::mainMenu() {
     std::cout << "\n\Awaiting input:                         \n";
 
     choice = _getch();
-
-    while (choice != '1' && choice != '2' && choice != '3' && choice != '8' && choice != '9') { // wait for correct input
+    switch (choice) {
+    case '1':
+        current_menu = MenuType::START;
+        break;
+    case '2':
+        current_menu = MenuType::SETTINGS;
+        break;
+    case '3':
+        current_menu = MenuType::INPUT;
+        break;
+    case '8':
+        current_menu = MenuType::INSTRUCTIONS;
+        break;
+    case '9':
+        current_menu = MenuType::EXIT;
+        break;
+    default:
         gotoxy(0, 15);
         std::cout << "\nInvalid choice. Please try again.\n";
-        choice = _getch();
+        break;
     }
-    current_menu = choice - '0'; // update menu
 }
 
 void Menu::fileInputMenu()
@@ -224,7 +240,7 @@ void Menu::fileInputMenu()
     std::string input;
     std::cin >> input;
     if (input == "x") {
-        current_menu = 0;
+        current_menu = MenuType::MAIN;
     }
     else if (input == "d" && !fileNames.empty()) {
         fileNames.clear();

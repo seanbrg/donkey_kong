@@ -6,7 +6,7 @@
 #include "entity.h"
 #include "ghost.h"
 
-using namespace colors;
+using namespace utils;
 
 char Board::getChar(const Point& pos) const {
 	return currentBoard[pos.getY()][pos.getX()];
@@ -69,7 +69,7 @@ void Board::print() const {
 		if (i < MAX_Y - 1)
 			std::cout << '\n';
 	}
-	SetConsoleTextAttribute(hConsole, WHITE);
+	SetConsoleTextAttribute(hConsole, ch_blank);
 }
 
 bool Board::load(const std::string& fileName)

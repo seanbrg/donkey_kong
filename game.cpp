@@ -7,7 +7,7 @@
 #include "barrel.h"
 #include "ghost.h"
 
-using namespace keys;
+using namespace utils;
 
 void Game::run()
 {
@@ -59,7 +59,7 @@ void Game::run()
 				if (_kbhit()) {
 					key = _getch();
 
-					if (key == ESC) {
+					if ((Key)key == Key::ESC) {
 						pause(skip_ending);
 						if (skip_ending) break;
 					}
@@ -169,10 +169,10 @@ void Game::printLegend() const
 
 void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 {
-	static Key next = LEFT;
+	static Key next = Key::LEFT;
 	if (thrown_twice) { // option for harder difficulty
-		EntityPtr barrel_left = (EntityPtr)new Barrel(dk, LEFT, &board);
-		EntityPtr barrel_right = (EntityPtr)new Barrel(dk, RIGHT, &board);
+		EntityPtr barrel_left = (EntityPtr)new Barrel(dk, Key::LEFT, &board);
+		EntityPtr barrel_right = (EntityPtr)new Barrel(dk, Key::RIGHT, &board);
 
 		entities.push_back(barrel_left);
 		entities.push_back(barrel_right);
@@ -181,7 +181,7 @@ void Game::spawnBarrels(const Point& dk, bool thrown_twice)
 		EntityPtr barrel_next = (EntityPtr)new Barrel(dk, next, &board);
 
 		entities.push_back(barrel_next);
-		next = (next == LEFT) ? RIGHT : LEFT;
+		next = (next == Key::LEFT) ? Key::RIGHT : Key::LEFT;
 	}
 }
 
@@ -194,9 +194,9 @@ void Game::moveEntities(bool& alive)
 		(*entity)->move(entities);
 
 		Point entity_pos = (*entity)->getPos();
-		Point below_mario = mario_pos.neighbor(DOWN);
+		Point below_mario = mario_pos.neighbor(Key::DOWN);
 
-		if (mario.isJumping() && (entity_pos == below_mario || entity_pos == below_mario.neighbor(DOWN))) {
+		if (mario.isJumping() && (entity_pos == below_mario || entity_pos == below_mario.neighbor(Key::DOWN))) {
 			score += 100;
 			printLegend();
 		}
@@ -350,7 +350,7 @@ void Game::printEndGameWindow(bool victory, bool end) const
 
 
 	char key = 0;
-	while (key != ESC) { // wait for input
+	while ((Key)key != Key::ESC) { // wait for input
 		key = _getch();
 	}
 }
@@ -359,7 +359,7 @@ void Game::pause(bool& skip_ending)
 {
 	char key = 0;
 	printPauseWindow();
-	while (key != ESC && key != '1') { // wait for input
+	while ((Key)key != Key::ESC && key != '1') { // wait for input
 		key = _getch();
 	}
 	if (key == '1') // return to main menu immediately
@@ -387,7 +387,7 @@ void Game::resetEntities()
 	entities.clear(); // EntityPtr are shared pointers with destructors for the entities
 
 	for (auto& pos : ghost_locs) {
-		EntityPtr new_ghost = (EntityPtr)new Ghost(pos, LEFT, &board);
+		EntityPtr new_ghost = (EntityPtr)new Ghost(pos, Key::LEFT, &board);
 		entities.push_back(new_ghost);
 	}
 }

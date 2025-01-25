@@ -1,15 +1,15 @@
 #include "point.h"
 
-Point Point::neighbor(Key dir) const
+Point Point::neighbor(utils::Key dir) const
 {
 	switch (dir) {
-	case LEFT:
+	case utils::Key::LEFT:
 		return Point(x - 1, y);
-	case RIGHT:
+	case utils::Key::RIGHT:
 		return Point(x + 1, y);
-	case UP:
+	case utils::Key::UP:
 		return Point(x, y - 1);
-	case DOWN:
+	case utils::Key::DOWN:
 		return Point(x, y + 1);
 	default:
 		return *this;

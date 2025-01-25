@@ -5,15 +5,13 @@
 class Menu {
     std::vector<std::string> fileNames;
 
+    enum class MenuType { MAIN, START, SETTINGS, INPUT, INSTRUCTIONS, EXIT };
+
     bool save_mode;
     bool manual_files = false;
     int difficulty = 2; // game difficulty - 1 to 3
     bool colors = true;
-    int current_menu = 0;   // 0 = main menu
-                            // 1 = start game
-                            // 2 = settings
-                            // 8 = instructions
-                            // 9 = exit
+    MenuType current_menu = MenuType::MAIN;
 
 public:    
 

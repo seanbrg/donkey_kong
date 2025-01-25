@@ -6,7 +6,7 @@
 #include "gameLoader.h"
 
 int main(int argc, char** argv) {
-	resizeConsole();
+	utils::resizeConsole();
 
 	bool is_save = argc > 1 && std::string(argv[1]) == "-save";
 	bool is_load = argc > 1 && std::string(argv[1]) == "-load";

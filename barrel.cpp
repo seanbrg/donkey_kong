@@ -1,6 +1,8 @@
 #include "barrel.h"
 #include "board.h"
 
+using namespace utils;
+
 void Barrel::move(std::list<EntityPtr>& allEntities)
 {
 	if (explode) {
@@ -11,21 +13,21 @@ void Barrel::move(std::list<EntityPtr>& allEntities)
 		Point pos = Entity::getPos();
 		Key dir = Entity::getDir();
 		Point new_pos;
-		char floor = pBoard->getChar(pos.neighbor(DOWN));
+		char floor = pBoard->getChar(pos.neighbor(Key::DOWN));
 
 		switch (floor) {
 		case ch_floor_left:
-			dir = LEFT;
+			dir = Key::LEFT;
 			break;
 		case ch_floor_right:
-			dir = RIGHT;
+			dir = Key::RIGHT;
 			break;
 		}
 		Entity::setDir(dir);
 
 		if (floor == ' ') {  // fall
 			fall_counter++;
-			new_pos = pos.neighbor(DOWN);
+			new_pos = pos.neighbor(Key::DOWN);
 		}
 		else {
 			new_pos = pos.neighbor(dir);

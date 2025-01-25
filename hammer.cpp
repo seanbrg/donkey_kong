@@ -1,5 +1,7 @@
 #include "hammer.h"
 
+using namespace utils;
+
 bool Hammer::draw()
 {
 	if (equipped) {
@@ -18,7 +20,7 @@ bool Hammer::draw()
 			hitting = true;
 		}
 		else if (next_char == ch_blank || next_char == ch_ladder) {
-			char ch = (mario->getXaxisDir() == LEFT) ? ch_hammer_left : ch_hammer_right;
+			char ch = (mario->getXaxisDir() == Key::LEFT) ? ch_hammer_left : ch_hammer_right;
 			board->drawChar(ch, pos);
 		}
 	}

@@ -13,7 +13,7 @@ void GameLoader::run()
 {
 	namespace fs = std::filesystem;
 
-	findFiles(fileNames);
+	utils::findFiles(fileNames);
 
 	for (auto& screen_file : fileNames) {
 		system("cls"); // clear screen
@@ -51,7 +51,7 @@ void GameLoader::run()
 			board.print();
 			resetEntities();
 
-			ShowConsoleCursor(false);
+			utils::ShowConsoleCursor(false);
 
 			printLegend();
 
