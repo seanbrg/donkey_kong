@@ -123,14 +123,11 @@ void GameLoader::run()
 			results_tested.addResult(score, Results::score);
 
 			system("cls"); // clear screen
-			std::cout << "Loading of game " << steps_filename.substr(0, screen_file.rfind('.')) << " is done.\n";
-			if (silent_mode) {
-				results_tested.saveResults(prefix + "_test.result");
-				if (results_tested == results_record) {
+			std::cout << "Loading of game " << prefix << " is done.\n";
+
+			if (silent_mode && results_record.compare(results_tested))
 					std::cout << "Results verified successfully.\n";
-				}
-				else std::cout << "Results file is wrong.\n";
-			}
+
 			std::cout << "Press any key to continue.\n";
 			_getch();
 

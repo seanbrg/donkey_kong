@@ -12,7 +12,7 @@ private:
 
 public:
 
-	bool operator==(const Results& other) const { return results == other.results; }
+	bool compare(Results& other);
 
 
 	void loadResults(const std::string& filename);
@@ -25,12 +25,4 @@ public:
 	
 	
 	std::pair<size_t, ResultValue> popResult();
-	
-	
-	bool isFinishedBy(size_t iteration) const {
-		return results.empty() || results.back().first <= iteration;
-	}
-	
-	
-	size_t getNextDeathIteration() const;
 };
