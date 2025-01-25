@@ -9,7 +9,8 @@
 */
 class BigGhost : public Ghost
 {
-    static constexpr double LADDER_CLIMB_PROB = 0.5;
+    static constexpr double LADDER_CLIMB_PROB = 0.7; // probability of climbing a new ladder
+    static constexpr double DECIDE_DIR_PROB = 0.5; // for deciding a new direction after climbing
     bool climbing = false;
 
 public:

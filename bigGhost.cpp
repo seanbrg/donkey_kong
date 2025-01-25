@@ -18,7 +18,7 @@ void BigGhost::move(std::list<EntityPtr>& allEntities)
         Entity::setPos(next_pos);
     }
     else {
-        double random = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        double random = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
 
         if (climbing) {
             next_pos = pos.neighbor(dir);
@@ -30,7 +30,7 @@ void BigGhost::move(std::list<EntityPtr>& allEntities)
             if ((dir == Key::UP && next_tile == ch_blank) ||
                 (dir == Key::DOWN && below_tile != ch_ladder)) {
                 climbing = false;
-                dir = (random > LADDER_CLIMB_PROB) ? Key::RIGHT : Key::LEFT;
+                dir = (random > DECIDE_DIR_PROB) ? Key::RIGHT : Key::LEFT;
                 Entity::setDir(dir);
             }
         }
