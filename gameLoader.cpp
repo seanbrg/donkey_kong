@@ -18,8 +18,9 @@ void GameLoader::run()
 	for (auto& screen_file : fileNames) {
 		system("cls"); // clear screen
 
-		std::string steps_filename = screen_file.substr(0, screen_file.rfind('.')) + ".steps";
-		std::string result_filename = screen_file.substr(0, screen_file.rfind('.')) + ".result";
+		std::string prefix = screen_file.substr(0, screen_file.rfind('.'));
+		std::string steps_filename = prefix + ".steps";
+		std::string result_filename = prefix + ".result";
 		
 		if (!fs::exists(steps_filename)) {
 			std::cout << "Missing file " << steps_filename << "!\nPress any button to continue\n";
@@ -62,7 +63,7 @@ void GameLoader::run()
 			Point pauline_pos = board.getPauline();
 			size_t frame = 0; // for controlling barrel spawn
 
-			while (lives > 0 && !victory && !steps_record.isEmpty()) {
+			while ((lives > 0 && !victory) || !steps_record.isEmpty()) {
 				Point mario_pos = mario.getPos();
 				mario.draw();
 
@@ -124,6 +125,7 @@ void GameLoader::run()
 			system("cls"); // clear screen
 			std::cout << "Loading of game " << steps_filename.substr(0, screen_file.rfind('.')) << " is done.\n";
 			if (silent_mode) {
+				results_tested.saveResults(prefix + "_test.result");
 				if (results_tested == results_record) {
 					std::cout << "Results verified successfully.\n";
 				}
