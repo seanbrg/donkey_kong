@@ -4,6 +4,9 @@
 #include "board.h"
 #include "mario.h"
 
+/*
+* represents a hammer held by mario in the game and handles most of its functionality
+*/
 class Hammer
 {
 	Point pos;

@@ -8,7 +8,7 @@ class Entity;
 using EntityPtr = std::shared_ptr<Entity>; // smart pointer that has a destructor
 
 /**
- * class representing a generic entity in the game.
+ * represents a generic entity in the game.
  */
 class Entity
 {

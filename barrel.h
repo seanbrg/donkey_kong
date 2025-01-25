@@ -7,7 +7,7 @@
 class Board;
 
 /**
- * class representing a barrel in the game.
+ * represents a barrel in the game.
  * the barrel can move, fall, explode, and interact with the board.
  */
 class Barrel : public Entity {

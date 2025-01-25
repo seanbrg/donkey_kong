@@ -2,6 +2,10 @@
 #include <iostream>
 #include <vector>
 
+/*
+* handles the display of various game menus and handles launching the
+* donkey kong game with various options.
+*/
 class Menu {
     std::vector<std::string> fileNames;
 

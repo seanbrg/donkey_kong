@@ -48,5 +48,8 @@ public:
 	 */
 	Point neighbor(utils::Key dir) const;
 
-	bool inBounds() { return ((0 < x) && (x < utils::MAX_X) && (0 < y) && (y < utils::MAX_Y)); }
+	/*
+	* checks whether this point is inside the game's boundaries.
+	*/
+	bool inBounds() { return ((utils::MIN_X < x) && (x < utils::MAX_X) && (utils::MIN_Y < y) && (y < utils::MAX_Y)); }
 };

@@ -12,7 +12,6 @@
 /**
  * holds and manages the main game logic of the donkey kong game.
  */
-
 class Game
 {
 private:

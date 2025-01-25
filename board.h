@@ -7,7 +7,7 @@
 
 
 /**
- * class representing the game board.
+ * represents the game board.
  * handles the board's state, display, and interactions with the game stage.
  */
 class Board {

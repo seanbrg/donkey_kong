@@ -9,7 +9,7 @@
 class Board;
 
 /**
- * Represents a ghost in the game.
+ * represents a ghost in the game.
  */
 class Ghost : public Entity {
 private:

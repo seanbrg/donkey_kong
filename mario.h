@@ -10,12 +10,12 @@
  */
 class Mario
 {
-	Point pos;							// current position
-	utils::Key dir = utils::Key::STAY;			// direction of next movement
-	utils::Key x_axis_dir = utils::Key::RIGHT;				// direction of movement in the x-axis, has to be LEFT or RIGHT
+	Point pos;											// current position
+	utils::Key dir = utils::Key::STAY;					// direction of next movement
+	utils::Key x_axis_dir = utils::Key::RIGHT;			// direction of movement in the x-axis: LEFT or RIGHT
 	utils::Key jump_dir = utils::Key::STAY;				// direction of jump
-	int jump_counter = 0;				// phase of jump (from 2 to 0)
-	int fall_counter = 0;				// height of current fall
+	int jump_counter = 0;								// phase of jump (from 2 to 0)
+	int fall_counter = 0;								// height of current fall
 	bool jumping = false;
 	bool climbing = false;
 	Board* board = nullptr;

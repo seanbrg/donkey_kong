@@ -4,9 +4,12 @@
 #include <Windows.h> // for sleep
 #include <vector>
 
+/*
+* namespace containing various necessary constants and enum classes for the donkey kong game
+*/
 namespace utils {
 
-	enum class Key : char { // defines key mappings for movement and control in the game.
+	enum class Key : char { // key mappings (as char) for movement and control in the game.
 		LEFT = 'a',
 		RIGHT = 'd',
 		UP = 'w',
@@ -16,7 +19,7 @@ namespace utils {
 	};
 
 
-	enum class Color : unsigned short { // defines the color mappings for console output.
+	enum class Color : unsigned short { // mappings (as unsigned short) for console output.
 			RED = FOREGROUND_RED,
 			BRIGHT_RED = FOREGROUND_RED | FOREGROUND_INTENSITY,
 			ORANGE = FOREGROUND_RED | FOREGROUND_GREEN,
@@ -30,6 +33,7 @@ namespace utils {
 
 
 	// constants for game boundaries and elements:
+
 	static constexpr int MIN_X = 0;
 	static constexpr int MIN_Y = 0;
 	static constexpr int MAX_X = 79;
@@ -37,6 +41,7 @@ namespace utils {
 	static const int explosion_range = 2;
 
 	// printed characters of all game elements:
+
 	static const char ch_blank = ' ';
 	static const char ch_border = 'Q';
 	static const char ch_ladder = 'H';
@@ -57,7 +62,7 @@ namespace utils {
 	static const char ch_hammer_animation1 = '-';
 	static const char ch_hammer_animation2 = '+';
 
-	static const int mario_max_fall_height = 5;
+	static const int mario_max_fall_height = 5; // maximum fall height before death
 
 	/**
 	 * moves the console cursor to a specific (x, y) position on the screen.

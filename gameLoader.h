@@ -2,6 +2,9 @@
 #include "game.h"
 #include "steps.h"
 
+/*
+* handles loading and playing of donkey kong games from pre-recorded files.
+*/
 class GameLoader : public Game
 {
 private:
