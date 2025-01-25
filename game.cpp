@@ -52,8 +52,6 @@ void Game::run()
 				srand(random_seed);
 			}
 
-			auto start_clk = std::chrono::high_resolution_clock::now();
-
 			while (lives > 0 && !victory) {
 				Point mario_pos = mario.getPos();
 
@@ -117,16 +115,10 @@ void Game::run()
 				}
 			}
 
-			auto end_clk = std::chrono::high_resolution_clock::now();
-
 			if (!skip_ending) { // ending window
 				if (victory) {
 					if (save_mode) results_saver.addResult(point_of_time, Results::finished);
-
-					// duration counts in 0.1 seconds the length of the game.
-					// every 1 second below 6 minutes the game is won in is worth 100 bonus score
-					std::chrono::duration<double> duration = end_clk - start_clk;
-					int bonus_score = 5000 - 100 * (int)duration.count();
+					int bonus_score = 5000 - 10 * (point_of_time / difficulty);
 					score += max(0, bonus_score);
 					reset();
 				}

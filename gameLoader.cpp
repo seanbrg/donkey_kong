@@ -1,7 +1,6 @@
 #include <filesystem>
 #include <Windows.h>
 #include <iostream>
-#include <chrono>
 #include "gameLoader.h"
 #include "game.h"
 #include "steps.h"
@@ -63,11 +62,7 @@ void GameLoader::run()
 			Point pauline_pos = board.getPauline();
 			size_t frame = 0; // for controlling barrel spawn
 
-			auto start_clk = std::chrono::high_resolution_clock::now();
-
 			while (lives > 0 && !victory && !steps_record.isEmpty()) {
-				point_of_time++;
-
 				Point mario_pos = mario.getPos();
 				mario.draw();
 
@@ -108,23 +103,19 @@ void GameLoader::run()
 					if (!alive) { // lower life and reset board
 						lives--;
 						mario.drawDead();
-						Sleep(1200);
+						if (!silent_mode) Sleep(1200);
 						reset();
 						frame = 0;
 						results_tested.addResult(point_of_time, Results::died);
 					}
 					frame++;
+					point_of_time++;
 				}
 			}
 
-			auto end_clk = std::chrono::high_resolution_clock::now();
-
 			if (victory) {
 				results_tested.addResult(point_of_time, Results::finished);
-				// duration counts in 0.1 seconds the length of the game.
-				// every 1 second below 6 minutes the game is won in is worth 100 bonus score
-				std::chrono::duration<double> duration = end_clk - start_clk;
-				int bonus_score = 5000 - 100 * (int)duration.count();
+				int bonus_score = 5000 - 10 * (point_of_time / difficulty);
 				score += max(0, bonus_score);
 				reset();
 			}
@@ -132,11 +123,11 @@ void GameLoader::run()
 
 			system("cls"); // clear screen
 			std::cout << "Loading of game " << steps_filename.substr(0, screen_file.rfind('.')) << " is done.\n";
-			if (fs::exists(result_filename)) {
+			if (silent_mode) {
 				if (results_tested == results_record) {
 					std::cout << "Results verified successfully.\n";
 				}
-				else std::cout << "ERROR: Results file wrong.\n";
+				else std::cout << "Results file is wrong.\n";
 			}
 			std::cout << "Press any key to continue.\n";
 			_getch();
@@ -144,4 +135,7 @@ void GameLoader::run()
 			if (lives == 0) break;
 		}
 	}
+
+	system("cls"); // clear screen
+	std::cout << "File loading done.\nExiting...\n\n";
 }
