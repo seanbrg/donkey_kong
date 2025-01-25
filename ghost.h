@@ -12,7 +12,7 @@ class Board;
  * represents a ghost in the game.
  */
 class Ghost : public Entity {
-private:
+protected:
     static constexpr double SAME_DIR_PROB = 0.95;
 
 public:

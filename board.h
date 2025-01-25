@@ -21,6 +21,7 @@ class Board {
 	Point pauline_pos;
 
 	std::vector<Point> ghost_locs;
+	std::vector<Point> big_ghost_locs;
 
 	char currentBoard[utils::MAX_Y][utils::MAX_X + 1]; // current board (without mario, hammer and entities)
 	char originalStageBoard[utils::MAX_Y][utils::MAX_X + 1]; // original board of current stage
@@ -120,5 +121,11 @@ public:
 	 * @return A vector of positions representing ghosts.
 	 */
 	const std::vector<Point>& getGhosts() const { return ghost_locs; }
+
+	/**
+	 * retrieves the vector of all big ghost starting positions in the current stage.
+	 * @return A vector of positions representing big ghosts.
+	 */
+	const std::vector<Point>& getBigGhosts() const { return big_ghost_locs; }
 };
 

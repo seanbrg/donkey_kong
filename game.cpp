@@ -6,6 +6,7 @@
 #include "results.h"
 #include "barrel.h"
 #include "ghost.h"
+#include "bigGhost.h"
 
 using namespace utils;
 
@@ -384,10 +385,15 @@ void Game::flushInput(char& input)
 void Game::resetEntities()
 {
 	const std::vector<Point> ghost_locs = board.getGhosts();
+	const std::vector<Point> big_ghost_locs = board.getBigGhosts();
 	entities.clear(); // EntityPtr are shared pointers with destructors for the entities
 
 	for (auto& pos : ghost_locs) {
 		EntityPtr new_ghost = (EntityPtr)new Ghost(pos, Key::LEFT, &board);
 		entities.push_back(new_ghost);
+	}
+	for (auto& pos : big_ghost_locs) {
+		EntityPtr new_big_ghost = (EntityPtr)new BigGhost(pos, Key::LEFT, &board);
+		entities.push_back(new_big_ghost);
 	}
 }

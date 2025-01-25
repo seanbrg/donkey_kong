@@ -7,6 +7,7 @@
 #include "results.h"
 #include "barrel.h"
 #include "ghost.h"
+#include "bigGhost.h"
 
 
 void GameLoader::run()

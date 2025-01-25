@@ -28,8 +28,8 @@ void Ghost::move(std::list<EntityPtr>& allEntities)
         char below_tile = pBoard->getChar(next_pos.neighbor(Key::DOWN));
 
         for (auto& entity : allEntities) {
-            if (typeid(*entity) == typeid(Ghost)) {
-                if (entity.get() != this && entity->getPos() == next_pos) {
+            if (auto ghost = dynamic_cast<Ghost*>(entity.get())) {
+                if (ghost != this && entity->getPos() == next_pos) {
                     dir = (dir == Key::LEFT) ? Key::RIGHT : Key::LEFT;
                     Entity::setDir(dir);
                     return;

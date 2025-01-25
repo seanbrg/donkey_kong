@@ -157,6 +157,10 @@ bool Board::load(const std::string& fileName)
 				ghost_locs.push_back(position);
 				c = ' ';
 				break;
+			case ch_big_ghost:
+				big_ghost_locs.push_back(position);
+				c = ' ';
+				break;
 			case ch_ladder:
 			case ch_floor_flat:
 			case ch_floor_left:
