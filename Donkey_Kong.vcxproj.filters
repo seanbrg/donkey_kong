@@ -13,90 +13,114 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Entity Headers">
+      <UniqueIdentifier>{4bb2aad3-f4e4-446b-a246-f15f1f4cfaf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entity Sources">
+      <UniqueIdentifier>{ca3573ec-6ef0-47b4-9093-26bd5648956c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Functionality Headers">
+      <UniqueIdentifier>{2bd92304-4a2f-4d77-b9f1-08f08fe20add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Functionality Sources">
+      <UniqueIdentifier>{9ba352dd-2715-478f-a778-58888d718a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility Sources">
+      <UniqueIdentifier>{f00c9dc4-91eb-4588-b5f3-2f02c6e7728a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility Headers">
+      <UniqueIdentifier>{5bc38bbf-d16d-48cd-96dc-86b9a6f96723}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="board.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mario.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="point.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="barrel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ghost.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hammer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="bigGhost.h">
+      <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
-    <ClInclude Include="steps.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="results.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ghost.h">
+      <Filter>Header Files\Entity Headers</Filter>
     </ClInclude>
     <ClInclude Include="gameLoader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="hammer.h">
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="mario.h">
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\Utility Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
+      <Filter>Header Files\Utility Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="results.h">
+      <Filter>Header Files\Utility Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="steps.h">
+      <Filter>Header Files\Utility Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="board.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mario.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="point.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="barrel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entity Sources</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="bigGhost.cpp">
+      <Filter>Source Files\Entity Sources</Filter>
     </ClCompile>
     <ClCompile Include="ghost.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hammer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entity Sources</Filter>
     </ClCompile>
     <ClCompile Include="entity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entity Sources</Filter>
     </ClCompile>
-    <ClCompile Include="steps.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="board.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
     </ClCompile>
-    <ClCompile Include="results.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
     </ClCompile>
     <ClCompile Include="gameLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Functionality Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="hammer.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="mario.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files\Utility Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="point.cpp">
+      <Filter>Source Files\Utility Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="steps.cpp">
+      <Filter>Source Files\Utility Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="results.cpp">
+      <Filter>Source Files\Utility Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

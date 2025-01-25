@@ -19,16 +19,16 @@ namespace utils {
 	};
 
 
-	enum class Color : unsigned short { // mappings (as unsigned short) for console output.
-			RED = FOREGROUND_RED,
-			BRIGHT_RED = FOREGROUND_RED | FOREGROUND_INTENSITY,
-			ORANGE = FOREGROUND_RED | FOREGROUND_GREEN,
-			BRIGHT_YELLOW = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
-			BLUE = FOREGROUND_BLUE,
-			BRIGHT_BLUE = FOREGROUND_BLUE | FOREGROUND_INTENSITY,
-			PINK = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
-			GREEN = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
-			WHITE = (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE)
+	enum class Color : unsigned short { // color mappings (as unsigned short) for console output.
+		RED = FOREGROUND_RED,
+		BRIGHT_RED = FOREGROUND_RED | FOREGROUND_INTENSITY,
+		ORANGE = FOREGROUND_RED | FOREGROUND_GREEN,
+		BRIGHT_YELLOW = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
+		BLUE = FOREGROUND_BLUE,
+		BRIGHT_BLUE = FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+		PINK = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+		GREEN = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
+		WHITE = (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE)
 	};
 
 
@@ -56,6 +56,7 @@ namespace utils {
 	static const char ch_dead_mario = '_';
 	static const char ch_explosion = '*';
 	static const char ch_ghost = 'x';
+	static const char ch_big_ghost = 'X';
 	static const char ch_hammer_dropped = 'p';
 	static const char ch_hammer_left = 'q';
 	static const char ch_hammer_right = 'p';

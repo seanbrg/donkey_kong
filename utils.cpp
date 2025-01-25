@@ -53,6 +53,7 @@ namespace utils {
 			color = Color::ORANGE;
 			break;
 		case ch_ghost:
+		case ch_big_ghost:
 		case 'e': // easy (for the menu)
 			color = Color::GREEN;
 			break;
