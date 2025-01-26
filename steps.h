@@ -7,7 +7,6 @@
 * handles the creation or loading of a .steps file which records all moves made in a single game.
 */
 class Steps {
-	size_t* point_of_time;
 	bool colors;
 	int difficulty;
 	long randomSeed = 0; // used for making the rand() inside donkey kong games deterministic
@@ -17,10 +16,9 @@ public:
 
 	/*
 	* constructor for Steps object
-	* @param _pot: pointer to a point_of_time iterator from a game being saved.
 	* @param _diff: difficulty of the game being saved.
 	*/
-	Steps(size_t* _pot = 0, int _diff = 2) : point_of_time(_pot), difficulty(_diff) {}
+	Steps(int _diff = 2) : difficulty(_diff) {}
 
 	/*
 	* load this object's contents from a file.

@@ -75,6 +75,9 @@
     <ClInclude Include="steps.h">
       <Filter>Header Files\Utility Headers</Filter>
     </ClInclude>
+    <ClInclude Include="donkeyKong.h">
+      <Filter>Header Files\Functionality Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="barrel.cpp">
@@ -121,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="results.cpp">
       <Filter>Source Files\Utility Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="donkeyKong.cpp">
+      <Filter>Source Files\Functionality Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

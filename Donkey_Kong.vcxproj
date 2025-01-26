@@ -136,6 +136,7 @@
     <ClInclude Include="barrel.h" />
     <ClInclude Include="bigGhost.h" />
     <ClInclude Include="board.h" />
+    <ClInclude Include="donkeyKong.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gameLoader.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="barrel.cpp" />
     <ClCompile Include="bigGhost.cpp" />
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="donkeyKong.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameLoader.cpp" />

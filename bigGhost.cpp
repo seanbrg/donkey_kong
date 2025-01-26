@@ -70,7 +70,7 @@ void BigGhost::move(std::list<EntityPtr>& allEntities)
                 }
             }
 
-            if (below_tile != ch_blank) {
+            if (below_tile != ch_blank && (next_tile == ch_blank || next_tile == ch_ladder)) {
                 Entity::setPos(next_pos);
             }
             else {

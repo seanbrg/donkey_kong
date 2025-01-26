@@ -8,6 +8,7 @@
 #include "barrel.h"
 #include "ghost.h"
 #include "bigGhost.h"
+#include "donkeyKong.h"
 
 
 void GameLoader::run()
@@ -59,12 +60,15 @@ void GameLoader::run()
 			mario.setBoard(&board);
 			hammer.setBoard(&board);
 			hammer.setMario(&mario);
+			donkeyKong = DonkeyKong(board.getDK(), &board, difficulty == 3);
 
 			bool victory = false;
+			bool end_of_steps = steps_record.isEmpty();
+			int extra_steps_counter = 80;
 			Point pauline_pos = board.getPauline();
 			size_t frame = 0; // for controlling barrel spawn
 
-			while ((lives > 0 && !victory) || !steps_record.isEmpty()) {
+			while (lives > 0 && !victory && !end_of_steps) {
 				Point mario_pos = mario.getPos();
 				mario.draw();
 
@@ -92,7 +96,7 @@ void GameLoader::run()
 						alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
 						if (alive) {
 							if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
-								spawnBarrels(board.getDK(), difficulty == 3); // double throw for hard diff
+								donkeyKong.spawnBarrels(entities);
 							}
 
 							if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
@@ -112,6 +116,9 @@ void GameLoader::run()
 					}
 					frame++;
 					point_of_time++;
+
+					end_of_steps = steps_record.isEmpty() && (extra_steps_counter == 0);
+					if (steps_record.isEmpty()) extra_steps_counter--;
 				}
 			}
 
@@ -125,12 +132,13 @@ void GameLoader::run()
 
 			system("cls"); // clear screen
 			std::cout << "Loading of game " << prefix << " is done.\n";
-
+			std::cout << "Current score: " << score << "\n";
 			if (silent_mode && results_record.compare(results_tested))
-					std::cout << "Results verified successfully.\n";
+					std::cout << "Results file verified successfully.\n";
 
 			std::cout << "Press any key to continue.\n";
 			_getch();
+			point_of_time = 0;
 
 			if (lives == 0) break;
 		}

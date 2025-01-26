@@ -7,6 +7,7 @@
 #include "barrel.h"
 #include "ghost.h"
 #include "bigGhost.h"
+#include "donkeyKong.h"
 
 using namespace utils;
 
@@ -35,6 +36,7 @@ void Game::run()
 			mario.setBoard(&board);
 			hammer.setBoard(&board);
 			hammer.setMario(&mario);
+			donkeyKong = DonkeyKong(board.getDK(), &board, difficulty == 3);
 
 			bool victory = false;
 			bool skip_ending = false; // for immediately ending the game if needed
@@ -43,7 +45,7 @@ void Game::run()
 			size_t frame = 0; // for controlling barrel spawn
 			char key = 0;  // for player input
 
-			Steps steps_saver(&point_of_time);
+			Steps steps_saver;
 			Results results_saver;
 			if (save_mode) {
 				long random_seed = static_cast<long>(std::chrono::system_clock::now().time_since_epoch().count());
@@ -91,7 +93,7 @@ void Game::run()
 						alive = checkMarioDeath(); // check if mario moved into a ghost/barrel
 						if (alive) {
 							if (frame % (20 - difficulty * 3) == 0) { // spawn barrels at fixed intervals
-								spawnBarrels(board.getDK(), difficulty == 3); // double throw for hard diff
+								donkeyKong.spawnBarrels(entities);
 							}
 
 							if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
@@ -137,6 +139,7 @@ void Game::run()
 			}
 			else break;
 
+			point_of_time = 0;
 			if (lives == 0) break;
 		}
 		else break;
@@ -166,24 +169,6 @@ void Game::printLegend() const
 	std::cout << "SCORE: " << score;
 	if (colors)
 		changeColor(' ');
-}
-
-void Game::spawnBarrels(const Point& dk, bool thrown_twice)
-{
-	static Key next = Key::LEFT;
-	if (thrown_twice) { // option for harder difficulty
-		EntityPtr barrel_left = (EntityPtr)new Barrel(dk, Key::LEFT, &board);
-		EntityPtr barrel_right = (EntityPtr)new Barrel(dk, Key::RIGHT, &board);
-
-		entities.push_back(barrel_left);
-		entities.push_back(barrel_right);
-	}
-	else { // default
-		EntityPtr barrel_next = (EntityPtr)new Barrel(dk, next, &board);
-
-		entities.push_back(barrel_next);
-		next = (next == Key::LEFT) ? Key::RIGHT : Key::LEFT;
-	}
 }
 
 void Game::moveEntities(bool& alive)

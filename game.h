@@ -8,6 +8,7 @@
 #include "mario.h"
 #include "hammer.h"
 #include "entity.h"
+#include "donkeyKong.h"
 
 /**
  * holds and manages the main game logic of the donkey kong game.
@@ -28,6 +29,7 @@ protected:
 	Mario mario;
 	Hammer hammer;
 	Board board;
+	DonkeyKong donkeyKong;
 	std::list<EntityPtr> entities;
 	std::vector<std::string> fileNames;
 
