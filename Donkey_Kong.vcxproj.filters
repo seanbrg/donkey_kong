@@ -134,5 +134,11 @@
     <None Include="dkong_02.screen" />
     <None Include="dkong_01.screen" />
     <None Include="dkong_03.screen" />
+    <None Include="dkong_01.result" />
+    <None Include="dkong_01.steps" />
+    <None Include="dkong_02.result" />
+    <None Include="dkong_02.steps" />
+    <None Include="dkong_03.result" />
+    <None Include="dkong_03.steps" />
   </ItemGroup>
 </Project>

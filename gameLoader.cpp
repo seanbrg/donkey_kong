@@ -50,6 +50,7 @@ void GameLoader::run()
 			continue;
 		else { // successfully loaded .screen file: core game loop
 			board.reset();
+			if (silent_mode) board.print_switch = false; // do not print the board at all in silent mode
 			board.print();
 			resetEntities();
 
@@ -132,7 +133,8 @@ void GameLoader::run()
 
 			system("cls"); // clear screen
 			std::cout << "Loading of game " << prefix << " is done.\n";
-			std::cout << "Current score: " << score << "\n";
+
+			if (!silent_mode) std::cout << "Current score: " << score << "\n";
 			if (silent_mode && results_record.compare(results_tested))
 					std::cout << "Results file verified successfully.\n";
 

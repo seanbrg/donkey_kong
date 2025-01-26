@@ -13,26 +13,30 @@ char Board::getChar(const Point& pos) const {
 }
 
 void Board::drawChar(char c, const Point& pos) const {
-	gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
-	if (colors)
-		changeColor(c);
+	if (print_switch) {
+		gotoxy(pos.getX() + MIN_X, pos.getY() + MIN_Y);
+		if (colors)
+			changeColor(c);
 
-	std::cout << c;
+		std::cout << c;
+	}
 }
 
 void Board::restoreChar(const Point& pos) const {
-	int x = pos.getX();
-	int y = pos.getY();
+	if (print_switch) {
+		int x = pos.getX();
+		int y = pos.getY();
 
-	gotoxy(x + MIN_X, y + MIN_Y);
+		gotoxy(x + MIN_X, y + MIN_Y);
 
-	//get char of current pos
-	char current_char = currentBoard[y][x];
+		//get char of current pos
+		char current_char = currentBoard[y][x];
 
-	if (colors)
-		changeColor(current_char);
+		if (colors)
+			changeColor(current_char);
 
-	std::cout << current_char;
+		std::cout << current_char;
+	}
 }
 
 void Board::restoreBoardExplosion(const Point& explosion) const
@@ -53,23 +57,25 @@ void Board::reset()
 }
 
 void Board::print() const {
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); 
+	if (print_switch) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	for (int i = 0; i < MAX_Y; i++) {
-		gotoxy(MIN_X, MIN_Y + i);  
+		for (int i = 0; i < MAX_Y; i++) {
+			gotoxy(MIN_X, MIN_Y + i);
 
-		for (int j = 0; j < MAX_X + 1; j++) {
-			char current_char = currentBoard[i][j];
-			if (colors)
-				changeColor(current_char);
+			for (int j = 0; j < MAX_X + 1; j++) {
+				char current_char = currentBoard[i][j];
+				if (colors)
+					changeColor(current_char);
 
-			std::cout << current_char;
+				std::cout << current_char;
+			}
+
+			if (i < MAX_Y - 1)
+				std::cout << '\n';
 		}
-
-		if (i < MAX_Y - 1)
-			std::cout << '\n';
+		SetConsoleTextAttribute(hConsole, ch_blank);
 	}
-	SetConsoleTextAttribute(hConsole, ch_blank);
 }
 
 bool Board::load(const std::string& fileName)

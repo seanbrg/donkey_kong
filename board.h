@@ -28,6 +28,8 @@ class Board {
 
 public:
 
+	bool print_switch = true; // turn on/off printing from outside
+
 	/**
 	 * constructor to initialize the board.
 	 * @param _colors: color mode (for printing in color).
