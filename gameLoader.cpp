@@ -75,12 +75,13 @@ void GameLoader::run()
 
 				mario.draw();
 				hammer.draw();
+
 				if (steps_record.isNextStep(point_of_time)) {
 					char key = steps_record.popStep();
 					input(key);
 				}
 
-				if (!silent_mode) Sleep(230 - difficulty * 50); // game speed
+				if (!silent_mode) Sleep(230 - difficulty * 50); // game speed formula
 
 				if (mario_pos == pauline_pos) { // victory condition
 					victory = true;
@@ -92,7 +93,7 @@ void GameLoader::run()
 					hammer.erase();
 					bool alive = mario.move(); // death by fall damage?
 
-					if (mario_pos == hammer.getPos())
+					if (mario_pos == hammer.getPos() && !hammer.isEquipped())
 						hammer.equip();
 
 					if (alive) {

@@ -60,6 +60,7 @@ void Game::run()
 
 				mario.draw();
 				hammer.draw();
+
 				if (_kbhit()) {
 					key = _getch();
 
@@ -75,7 +76,7 @@ void Game::run()
 				}
 
 
-				Sleep(230 - difficulty * 50); // game speed
+				Sleep(230 - difficulty * 50); // game speed formula
 
 				if (mario_pos == pauline_pos) { // victory condition
 					victory = true;
@@ -87,7 +88,7 @@ void Game::run()
 					hammer.erase();
 					bool alive = mario.move(); // death by fall damage?
 
-					if (mario_pos == hammer.getPos())
+					if (mario_pos == hammer.getPos() && !hammer.isEquipped())
 						hammer.equip();
 
 					if (alive) {
@@ -186,13 +187,14 @@ void Game::moveEntities(bool& alive)
 		Point entity_pos = (*entity)->getPos();
 		Point below_mario = mario_pos.neighbor(Key::DOWN);
 
-		if (mario.isJumping() && (entity_pos == below_mario || entity_pos == below_mario.neighbor(Key::DOWN))) {
-			score += 100;
-			printLegend();
-		}
-		else if (mario_pos == entity_pos) {
+		if (mario_pos == entity_pos) {
 			alive = false;
 			break;
+		}
+		else if (mario.isJumping() && (entity_pos == below_mario || 
+			entity_pos == below_mario.neighbor(Key::DOWN))) {
+			score += 100;
+			printLegend();
 		}
 
 		Barrel* barrel = dynamic_cast<Barrel*>((*entity).get());

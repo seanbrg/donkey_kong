@@ -97,6 +97,6 @@ public:
 	/*
 	* @return true if mario is currently jumping, false otherwise.
 	*/	
-	bool isJumping() { return jumping; }
+	bool isJumping() { return jump_counter > 0 || jumping; }
 };
 

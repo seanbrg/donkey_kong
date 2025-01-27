@@ -68,6 +68,11 @@ public:
 	* @return whether or not the hammer is currently hitting.
 	*/
 	bool isHitting() { return key_hit; }
+
+	/*
+	* @return whether or not the hammer is currently equipped.
+	*/
+	bool isEquipped() { return equipped; }
 	
 	/*
 	* draw the hammer, either in its current position or in a specific position for a hit animation.
