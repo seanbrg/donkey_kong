@@ -69,10 +69,22 @@ public:
 	*/
 	bool isHitting() { return key_hit; }
 	
+	/*
+	* draw the hammer, either in its current position or in a specific position for a hit animation.
+	* @param draw_pos: the location of the drawing, only used when the hammer is hitting for animations.
+	* @param ch: the char to draw, only used for hit animations, otherwise uses ch_hammer_dropped.
+	*/
 	void draw(Point draw_pos = {0,0}, char ch = utils::ch_hammer_dropped) const;
 
+
+	/*
+	* sets the hit animation of the hammer to begin.
+	*/
 	void keyPressed() { if (!mario->isFalling() && !hitting && equipped) key_hit = true; }
 
+	/*
+	* erase the hammer from its previous position on the board.
+	*/
 	void erase();
 };
 
