@@ -191,11 +191,6 @@ void Game::moveEntities(bool& alive)
 			alive = false;
 			break;
 		}
-		else if (mario.isJumping() && (entity_pos == below_mario || 
-			entity_pos == below_mario.neighbor(Key::DOWN))) {
-			score += 100;
-			printLegend();
-		}
 
 		Barrel* barrel = dynamic_cast<Barrel*>((*entity).get());
 		if (barrel) {
