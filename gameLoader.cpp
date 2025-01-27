@@ -42,7 +42,8 @@ void GameLoader::run()
 		steps_record.loadSteps(steps_filename); // .steps initialization
 		results_record.loadResults(result_filename);
 		difficulty = steps_record.getDifficulty();
-		srand(steps_record.getRandomSeed());
+		long random_seed = steps_record.getRandomSeed();
+		srand(random_seed);
 
 		board = Board(steps_record.getColors());
 
