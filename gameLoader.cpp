@@ -72,8 +72,9 @@ void GameLoader::run()
 
 			while (lives > 0 && !victory && !end_of_steps) {
 				Point mario_pos = mario.getPos();
-				mario.draw();
 
+				mario.draw();
+				hammer.draw();
 				if (steps_record.isNextStep(point_of_time)) {
 					char key = steps_record.popStep();
 					input(key);
@@ -101,10 +102,12 @@ void GameLoader::run()
 								donkeyKong.spawnBarrels(entities);
 							}
 
-							if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
+							if (hammer.isHitting()) {
+								hammer.hit();
+								checkHit();
+							}
 
 							moveEntities(alive);
-
 						}
 					}
 

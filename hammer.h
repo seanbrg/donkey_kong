@@ -10,10 +10,10 @@
 class Hammer
 {
 	Point pos;
-	Point hit;
+	Point hit_pos;
 	bool equipped = false;
-	bool key_hit = false;
 	bool hitting = false;
+	bool key_hit = false;
 
 	Board* board = nullptr;
 	Mario* mario = nullptr;
@@ -32,7 +32,7 @@ public:
 	 * if used when the hammer is actually hitting, it should be one position next to the hammer.
 	 * @return the current position of the hammer.
 	 */
-	Point getHit() const { return hit; }
+	Point getHit() const { return hit_pos; }
 
 	/**
 	 * assigns the board to the hammer and initializes its position.
@@ -57,14 +57,19 @@ public:
 	/*
 	* sets the hammer to be not equipped by mario.
 	*/
-	void unequip() { 
-		equipped = false; 
-		hitting = false;
-		key_hit = false;
-		pos = board->getHammer();
-	}
+	void unequip();
 
-	bool draw();
+	/*
+	* handle the mechanic of hitting the hammer, including drawing the animation.
+	*/
+	void hit();
+
+	/*
+	* @return whether or not the hammer is currently hitting.
+	*/
+	bool isHitting() { return key_hit; }
+	
+	void draw(Point draw_pos = {0,0}, char ch = utils::ch_hammer_dropped) const;
 
 	void keyPressed() { if (!mario->isFalling() && !hitting && equipped) key_hit = true; }
 

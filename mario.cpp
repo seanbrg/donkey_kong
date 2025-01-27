@@ -14,7 +14,7 @@ void Mario::keyPressed(Key key)
 		dir = key;
 	}
 	else if (key == Key::UP && board->getChar(pos.neighbor(Key::DOWN)) != ' ') {
-		jump_counter = 2; // jump
+		jump_counter = 2; // iterator for jumping logic
 		jump_dir = (dir == Key::STAY) ? Key::UP : dir; // set direction of jump
 		jumping = true;
 	}
@@ -29,26 +29,28 @@ bool Mario::move()
 {
 	Point new_pos;
 
+	// stop fall/death by fall damage
 	if (board->getChar(pos.neighbor(Key::DOWN)) != ' ' && fall_counter > 0) {
 		if (fall_counter >= mario_max_fall_height)
 			return false;
 		fall_counter = 0;
 	}
 
-	if (jump_counter > 0) { // jumping logic
+	// jump logic: jump_counter iterates from 2 to 0 to calculate jump positions
+	if (jump_counter) { // jumping logic
 		new_pos = pos.neighbor(jump_dir);
-		if (jump_dir != Key::UP) // jump counter iterates from 2 to 0 to calculate jump positions
+		if (jump_dir != Key::UP) // move up or sideways
 			new_pos = (jump_counter == 2) ? new_pos.neighbor(Key::UP) : new_pos.neighbor(Key::DOWN);
 		jump_counter--;
 	}
 	else {
-		if (board->getChar(pos.neighbor(Key::DOWN)) == ' ') {  // fall
+		if (board->getChar(pos.neighbor(Key::DOWN)) == ' ') {  // fall down
 			fall_counter++;
 			new_pos = pos.neighbor(Key::DOWN);
 		}
 		else {
 			jumping = false;
-			new_pos = pos.neighbor(dir);
+			new_pos = pos.neighbor(dir); // continue moving in previous direction
 		}
 	}
 

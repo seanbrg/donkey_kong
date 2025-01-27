@@ -59,6 +59,7 @@ void Game::run()
 				Point mario_pos = mario.getPos();
 
 				mario.draw();
+				hammer.draw();
 				if (_kbhit()) {
 					key = _getch();
 
@@ -96,10 +97,12 @@ void Game::run()
 								donkeyKong.spawnBarrels(entities);
 							}
 
-							if (hammer.draw()) checkHit(); // check hit if hammer is currently hitting
+							if (hammer.isHitting()) {
+								hammer.hit();
+								checkHit();
+							}
 
 							moveEntities(alive);
-
 						}
 					}
 
@@ -113,6 +116,7 @@ void Game::run()
 
 						if (save_mode) results_saver.addResult(point_of_time, Results::died);
 					}
+
 					frame++;
 					point_of_time++;
 				}
@@ -354,7 +358,7 @@ void Game::pause(bool& skip_ending)
 	board.print(); // redraw board over the pause menu
 	printLegend();
 	mario.draw();
-	hammer.draw();
+	hammer.draw(hammer.getPos());
 	for (auto& entity : entities)
 		entity->draw();
 }
