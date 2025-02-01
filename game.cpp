@@ -54,6 +54,7 @@ void Game::run()
 				steps_saver.setColors(colors);
 				srand(random_seed);
 			}
+			else srand(time(nullptr)); // initialize randomizer
 
 			while (lives > 0 && !victory) {
 				Point mario_pos = mario.getPos();
